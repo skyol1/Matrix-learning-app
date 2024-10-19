@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="ButtonMenu.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Matrix.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UCInverznaMatica.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UCMatice.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UCNasobokMatice.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UCRozdielMatic.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UCSucetMatic.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UCSucinMatic.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UCTransponovanaMatica.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ButtonMenu.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Matrix.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UCInverznaMatica.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UCMatice.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UCNasobokMatice.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UCRozdielMatic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UCSucetMatic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UCSucinMatic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UCTransponovanaMatica.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

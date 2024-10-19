@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="MaticeApp.UCInverznaMatica"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaticeApp"
+             mc:Ignorable="d" 
+             d:DesignHeight="2000" d:DesignWidth="800">
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="8,10,10,50">
+                
+                <TextBlock FontSize="30" Margin="320,0,0,0">
+                    <Bold>Inverzná matica</Bold>
+                </TextBlock>
+
+                <TextBlock TextWrapping="Wrap">
+                    Inverzná matica je špeciálny druh matice, ktorá pri násobení s pôvodnou maticou poskytne jednotkovú maticu. <LineBreak/>
+                    Inverzná matica existuje len pre štvorcové matice a to iba v prípade, že ich determinant nie je nula.
+                </TextBlock>
+                <TextBlock FontSize="24" Margin="0,10,0,10">
+                    <Bold>Definícia</Bold>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap">
+                    Nech <Bold>A</Bold> je štvorcová matica typu <Italic>n</Italic>×<Italic>n</Italic>. 
+                    Potom maticu <Bold>B</Bold> nazývame inverzná matica k matici <Bold>A</Bold>, 
+                    ak <Bold>A</Bold> · <Bold>B</Bold> = <Bold>B</Bold> · <Bold>A</Bold> = 
+                    <Bold>E</Bold><Run BaselineAlignment="Subscript" FontSize="12" FontStyle="Italic">n</Run>. 
+                    Oznacujeme <Bold>A</Bold><Run BaselineAlignment="TextTop" FontSize="12">-1</Run>.
+                </TextBlock>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

@@ -1,0 +1,47 @@
+﻿<Window x:Class="MaticeApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MaticeApp"
+        mc:Ignorable="d"
+        Title="MainWindow" 
+        Height="600" Width="800" 
+        d:DesignHeight="2000" d:DesignWidth="800"
+        MinHeight="600" MinWidth="800"
+        Background="#FFE6E6E6">
+    <Grid>
+
+        <Border x:Name="PanelOpenMenu" Background="#FF974EDA" Width="40" Height="40" 
+                VerticalAlignment="Top" HorizontalAlignment="Left" 
+                CornerRadius="0,5,5,0" MouseEnter="PanelOpenMenu_MouseEnter" Panel.ZIndex="1">
+            <Path Data="M10,10 L30,20 L10,30 L10,10 Z" Fill="#FF7133AB"/>
+        </Border>
+
+        <StackPanel x:Name="PanelMenu" Width="250" VerticalAlignment="Top" HorizontalAlignment="Left" 
+                    Visibility="Collapsed" MouseLeave="MenuList_MouseLeave" Panel.ZIndex="1">
+            
+            <local:ButtonMenu ButtonText="Matice"               UserControlName="UCMatice"              HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
+            <local:ButtonMenu ButtonText="Súčet matíc"          UserControlName="UCSucetMatic"          HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
+            <local:ButtonMenu ButtonText="Rozdiel matíc"        UserControlName="UCRozdielMatic"        HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
+            <local:ButtonMenu ButtonText="Súčin matice a čísla" UserControlName="UCNasobokMatice"       HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
+            <local:ButtonMenu ButtonText="Súčin matíc"          UserControlName="UCSucinMatic"          HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
+            <local:ButtonMenu ButtonText="Inverzná matica"      UserControlName="UCInverznaMatica"      HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
+            <local:ButtonMenu ButtonText="Transponovaná matica" UserControlName="UCTransponovanaMatica" HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
+            <local:ButtonMenu ButtonText="Úpravy matic"         UserControlName="UCEditMatice"          HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
+            <local:ButtonMenu ButtonText="Determinant"          UserControlName="UCDeterminant"         HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
+            <local:ButtonMenu ButtonText="Použitie"             UserControlName="UCPouzitie"            HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
+
+        </StackPanel>
+
+        <local:UCMatice                 x:Name="UCMatice"               Visibility="Visible"/>
+        <local:UCSucetMatic             x:Name="UCSucetMatic"           Visibility="Collapsed"/>
+        <local:UCRozdielMatic           x:Name="UCRozdielMatic"         Visibility="Collapsed"/>
+        <local:UCNasobokMatice          x:Name="UCNasobokMatice"        Visibility="Collapsed"/>
+        <local:UCSucinMatic             x:Name="UCSucinMatic"           Visibility="Collapsed"/>
+        <local:UCInverznaMatica         x:Name="UCInverznaMatica"       Visibility="Collapsed"/>
+        <local:UCTransponovanaMatica    x:Name="UCTransponovanaMatica"  Visibility="Collapsed"/>
+        
+
+    </Grid>
+</Window>

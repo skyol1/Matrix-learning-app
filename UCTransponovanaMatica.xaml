@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="MaticeApp.UCTransponovanaMatica"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaticeApp"
+             mc:Ignorable="d" 
+             d:DesignHeight="2000" d:DesignWidth="800">
+    <Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel Margin="8,10,10,50">
+        <TextBlock TextAlignment="Center" FontSize="24" FontWeight="Bold">Transponovaná matica</TextBlock>
+
+
+        <TextBlock FontSize="16">Definícia</TextBlock>
+        <TextBlock>
+        Transponovaná matica je matica, ktorá vznikne výmenou riadkov a stĺpcov pôvodnej matice.<LineBreak/>
+        Inými slovami, prvky v riadkoch pôvodnej matice sa stanú prvkami v stĺpcoch transponovanej matice, a naopak.<LineBreak/>
+        Ak máme maticu <Bold>A</Bold> veľkosti <Italic>m</Italic>×<Italic>n</Italic>, jej transponovaná matica 
+        <Bold>A<Run BaselineAlignment="TextTop"  FontSize="8" Text="T" FontStyle="Italic"/></Bold> 
+        bude veľkosti <Italic>n</Italic>×<Italic>m</Italic> a platí, že:
+        (<Bold>A<Run BaselineAlignment="TextTop"  FontSize="8" FontStyle="Italic">T</Run></Bold>)<Run BaselineAlignment="Subscript" FontSize="8" FontStyle="Italic">ij</Run>
+        = <Bold>A</Bold><Run BaselineAlignment="Subscript" FontSize="8" FontStyle="Italic">ji</Run>
+        </TextBlock>
+        <Grid HorizontalAlignment="Left" Margin="10,10,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">
+            <Bold>A</Bold> =
+            </TextBlock>
+            <local:Matrix Grid.Column="1" x:Name="matrix1"/>
+            <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="20,0,10,0">
+            <Bold>A<Run BaselineAlignment="TextTop"  FontSize="8" FontStyle="Italic">T</Run></Bold> =
+            </TextBlock>
+            <local:Matrix Grid.Column="3" x:Name="matrix2"/>
+        </Grid>
+        
+        
+        <TextBlock FontSize="16">
+        Príklad:
+        </TextBlock>
+        <Grid HorizontalAlignment="Left" Margin="10,10,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">
+            <Bold>A</Bold> =
+            </TextBlock>
+            <local:Matrix Grid.Column="1" x:Name="matrix3"/>
+            <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="20,0,10,0">
+            <Bold>A<Run BaselineAlignment="TextTop"  FontSize="8" FontStyle="Italic">T</Run></Bold> =
+            </TextBlock>
+            <local:Matrix Grid.Column="3" x:Name="matrix4"/>
+        </Grid>
+        
+        
+    </StackPanel>
+    </ScrollViewer>
+    </Grid>
+</UserControl>

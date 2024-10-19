@@ -1,0 +1,198 @@
+﻿<UserControl x:Class="MaticeApp.UCMatice"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaticeApp"
+             mc:Ignorable="d"
+             d:Background="#FFE6E6E6"
+             d:DesignHeight="2000" d:DesignWidth="800">
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="8,10,10,50">
+
+                <TextBlock FontSize="30" HorizontalAlignment="Left" Width="770" TextAlignment="Center">
+                    <Bold>Matica</Bold>
+                </TextBlock>
+
+                <TextBlock FontSize="24" Margin="0,10,0,10">
+                    <Bold>Definícia</Bold>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap">
+                    Matica je obdĺžnikové usporiadanie čísel v radoch a stĺpcoch. <LineBreak/>
+                    Každé číslo v matici sa nazýva prvok. <LineBreak/>
+                    Matice sa označujú veľkými písmenami (napr. <Run FontWeight="SemiBold" >A</Run>) a môžu mať rôzne veľkosti, 
+                    ktoré označujeme ako rozmery (napr. matica 2×3 má 2 riadky a 3 stĺpce). <LineBreak/>
+                    Každý prvok matice je označený malým písmenom 
+                    (napr. <Italic>a<Run BaselineAlignment="Subscript" Text="ij" FontSize="12" /></Italic>), 
+                    kde index <Italic>i</Italic> znamená riadok prvku a index <Italic>j</Italic> znamená stĺpec. <LineBreak/>
+                    Maticu typu <Italic>m</Italic>×<Italic>n</Italic> sa označujeme:
+                    <Run FontWeight="SemiBold" >A</Run> = (<Italic>a<Run BaselineAlignment="Subscript" Text="ij" FontSize="12" /></Italic>)
+                    kde <Italic>i</Italic> = 1,...,<Italic>m</Italic>, <Italic>j</Italic> = 1,...,<Italic>n</Italic>, alebo
+                </TextBlock>
+
+                <Grid HorizontalAlignment="Left" Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">
+                        <Run FontWeight="SemiBold" >A</Run> =
+                    </TextBlock>
+                    <local:Matrix Grid.Column="1" x:Name="matrix1"/>
+                </Grid>
+            
+            
+                <TextBlock FontSize="24" Margin="0,30,0,0">
+                    <Bold>Hlavná diagonála</Bold>
+                </TextBlock>
+                <Grid HorizontalAlignment="Left" Margin="0,10,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <local:Matrix x:Name="matrix2" Grid.Column="0" Margin="20,0,0,0"/>
+                    <local:Matrix x:Name="matrix3" Grid.Column="1" Margin="30,0,0,0"/>
+                    <local:Matrix x:Name="matrix4" Grid.Column="2" Margin="30,0,0,0"/>
+                </Grid> 
+
+
+                <TextBlock FontSize="24" Margin="0,20,0,0">
+                    <Bold>Vedl’ajšia diagonála</Bold>
+                </TextBlock>
+                <Grid HorizontalAlignment="Left" Margin="0,10,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <local:Matrix x:Name="matrix5" Grid.Column="0" Margin="20,0,0,0"/>
+                    <local:Matrix x:Name="matrix6" Grid.Column="1" Margin="30,0,0,0"/>
+                    <local:Matrix x:Name="matrix7" Grid.Column="2" Margin="30,0,0,0"/>
+                </Grid>
+            
+            
+                <TextBlock FontSize="24" Margin="0,20,0,10">
+                    <Bold>Štvorcová matica</Bold>
+                </TextBlock>
+                <TextBlock>
+                    Maticu typu <Italic>m</Italic>×<Italic>n</Italic> 
+                    sa nazýva štvorcová, ak <Italic>m</Italic> = <Italic>n</Italic>:
+                    2×2, 3×3, 4×4, ... , n×n.
+                </TextBlock>
+
+
+                <TextBlock FontSize="24" Margin="0,30,0,10">
+                    <Bold>Riadkový vektor / stĺpcový vektor</Bold>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap">
+                    Riadkový vektor je matica, ktorá má jeden riadok a viacero stĺpcov; <LineBreak/>
+                    Stĺpcový vektor je matica, ktorá má jeden stĺpec a viacero riadkov.
+                </TextBlock>
+                <Grid HorizontalAlignment="Left" Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                        Riadkový vektor
+                    </TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">
+                        <Run FontWeight="SemiBold" >r</Run> =
+                    </TextBlock>
+                    <local:Matrix x:Name="matrix8" Grid.Row="1" Grid.Column="1"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="20,0,0,0">
+                        Stĺpcový vektor
+                    </TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Margin="30,0,10,0">
+                        <Run FontWeight="SemiBold" >c</Run> =
+                    </TextBlock>
+                    <local:Matrix x:Name="matrix9" Grid.Row="1" Grid.Column="3"/>
+                </Grid>
+            
+            
+                <TextBlock FontSize="24" Margin="0,30,0,10">
+                    <Bold>Nulová matica</Bold>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap">
+                    Nulová matica je typ matice, v ktorej sú všetky prvky rovné nule:
+                </TextBlock>
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center">
+                        <Run FontWeight="SemiBold" >0</Run> =
+                    </TextBlock>
+                    <local:Matrix Grid.Column="1" x:Name="matrix10" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                </Grid>
+
+                <TextBlock FontSize="24" Margin="0,30,0,10">
+                    <Bold>Trojuholníková matica</Bold> 
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap">
+                    Trojuholníková matica je typ <Run FontWeight="SemiBold">štvorcovej</Run> matice, 
+                    kde sú všetky prvky nad alebo pod hlavnou diagonálou rovné nule.<LineBreak/>
+                    Existujú dva hlavné typy trojuholníkových matíc:
+                </TextBlock>
+                <Grid Margin="0,10,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                
+                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                        Horná trojuholníková matica
+                    </TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="20,0,0,0">
+                        Dolná trojuholníková matica
+                    </TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">
+                        <Run FontWeight="SemiBold" >A</Run> =
+                    </TextBlock>
+                    <local:Matrix Grid.Row="1" Grid.Column="1" x:Name="matrix11"/>
+                    <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Margin="30,0,10,0">
+                        <Run FontWeight="SemiBold" >B</Run> =
+                    </TextBlock>
+                    <local:Matrix Grid.Row="1" Grid.Column="3" x:Name="matrix12"/>
+                </Grid>
+
+
+                <TextBlock FontSize="24" Margin="0,30,0,10">
+                     <Bold>Jednotková matica</Bold>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap">
+                    Jednotková matica je špeciálny typ štvorcovej matice, ktorá má 
+                    na hlavnej diagonále všetky prvky rovné 1 a všetky ostatné prvky sú rovné 0.
+                </TextBlock>
+                <Grid HorizontalAlignment="Left" Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">
+                        <Run FontWeight="SemiBold" >E</Run> =
+                    </TextBlock>
+                    <local:Matrix Grid.Column="1" x:Name="matrix13"/>
+                </Grid>
+            
+            
+            
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

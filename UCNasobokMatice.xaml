@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="MaticeApp.UCNasobokMatice"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaticeApp"
+             mc:Ignorable="d" 
+             d:Background="#FFE6E6E6"
+             d:DesignHeight="2000" d:DesignWidth="800">
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="8,10,10,50">
+
+                <TextBlock FontSize="30" HorizontalAlignment="Left" Width="770" TextAlignment="Center">
+                    <Bold>Násobok matice</Bold>
+                </TextBlock>
+
+                <TextBlock TextWrapping="Wrap">
+                    Násobenie matice číslom, známe aj ako skalárne násobenie, je operácia, pri ktorej 
+                    každý prvok matice vynásobíme daným reálnym číslom (skalárom).
+                </TextBlock>
+
+                <TextBlock FontSize="24" Margin="0,10,0,10">
+                    <Bold>Definícia</Bold>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap">
+                    Nech <Italic>k</Italic> je reálne císlo a nech <Bold>A</Bold> = 
+                    (<Italic>a<Run BaselineAlignment="Subscript" Text="ij" FontSize="8" /></Italic>)
+                    je matica typu <Italic>m</Italic>×<Italic>n</Italic>. 
+                    Maticu B = (<Italic>b<Run BaselineAlignment="Subscript" Text="ij" FontSize="8" /></Italic>) typu <Italic>m</Italic>×<Italic>n</Italic> 
+                    nazývame k-násobok matice <Bold>A</Bold>, píšeme <Bold>B</Bold> = <Italic>k</Italic> · <Bold>A</Bold>, 
+                    ak <Italic>b<Run BaselineAlignment="Subscript" Text="ij" FontSize="8" /></Italic> = 
+                    <Italic>ka<Run BaselineAlignment="Subscript" Text="ij" FontSize="8" /></Italic> pre každé 
+                    <Italic>i</Italic> = 1, . . . , <Italic>m</Italic> a <Italic>j</Italic> = 1, . . . , <Italic>n</Italic>. <LineBreak/>
+                    Príklad:
+                </TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,0">
+                        <Bold>A</Bold> =
+                    </TextBlock>
+                    <local:Matrix Grid.Column="1" x:Name="matrix1"/>
+                    <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="5,0,5,0">
+                        <Bold>B</Bold> = 3 ⋅ <Bold>A</Bold> =
+                    </TextBlock>
+                    <local:Matrix Grid.Column="3" x:Name="matrix2"/>
+                    <TextBlock Grid.Column="4" VerticalAlignment="Center" Margin="5,0,5,0">
+                        =
+                    </TextBlock>
+                    <local:Matrix Grid.Column="5" x:Name="matrix3"/>
+                </Grid>
+                <TextBlock FontSize="16">
+                    Vlastnosti:
+                </TextBlock>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
