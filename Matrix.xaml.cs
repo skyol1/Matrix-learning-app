@@ -145,7 +145,7 @@ namespace MaticeApp
 
 
         private Rectangle? _highlightRectangle;
-        public void Highlight(int rowA, int colA, int rowB, int colB)
+        public void Highlight(int rowA, int colA, int rowB, int colB, Color color = Color.FromArgb(50, 255, 0, 0))
         {
             // Remove the previous highlight if it exists
             if (_highlightRectangle != null)
@@ -175,7 +175,7 @@ namespace MaticeApp
             {
                 Stroke = Brushes.Red, // Color of the highlight border
                 StrokeThickness = 2,
-                Fill = new SolidColorBrush(Color.FromArgb(50, 255, 0, 0)), // Semi-transparent fill
+                Fill = new SolidColorBrush(color), // Semi-transparent fill
                 Width = width,
                 Height = height,
                 IsHitTestVisible = false // Make sure the highlight doesn't block interaction
