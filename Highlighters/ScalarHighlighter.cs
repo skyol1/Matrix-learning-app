@@ -17,7 +17,7 @@ namespace MaticeApp.Highlighters
         {
             RemoveHighlight();
         }
-        public override void Highlight(int row, int column)
+        public override void Highlight(uint row, uint column)
         {
             AddHighlight(highlightColor);
         }

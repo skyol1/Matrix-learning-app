@@ -8,8 +8,8 @@ namespace MaticeApp.Highlighters
 {
     public class SingleElementHighlighter : MatrixHighlihgter
     {
-        public SingleElementHighlighter(Matrix dstMatrix, Color highlightColor) : base(dstMatrix, highlightColor) { }
-        public override void Highlight(int row, int column)
+        public SingleElementHighlighter(IMatrix dstMatrix, Color highlightColor) : base(dstMatrix, highlightColor) { }
+        public override void Highlight(uint row, uint column)
         {
             AddHighlight(row, column, row, column, highlightColor);
             base.Highlight(row, column);

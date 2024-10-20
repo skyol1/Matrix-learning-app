@@ -6,11 +6,11 @@ namespace MaticeApp.Highlighters
 {
     public class MatrixHighlihgter:BaseHighlighter
     {
-        protected Matrix dstMatrix;
+        protected IMatrix dstMatrix;
 
-        public MatrixHighlihgter(Matrix dstMatrix, Color color): base(color) { this.dstMatrix = dstMatrix; }
+        public MatrixHighlihgter(IMatrix dstMatrix, Color color): base(color) { this.dstMatrix = dstMatrix; }
 
-        public override void Highlight(int row, int column)
+        public override void Highlight(uint row, uint column)
         {
             foreach (var highlighter in dstMatrix.highlighters)
                 if (!highlighter.isHighlighted)
@@ -24,7 +24,7 @@ namespace MaticeApp.Highlighters
                     highlighter.ClearHighlight();
         }
 
-        protected void AddHighlight(int rowA, int colA, int rowB, int colB, Color color)
+        protected void AddHighlight(uint rowA, uint colA, uint rowB, uint colB, Color color)
         {
             if (_highlightRectangle != null) return;
 
@@ -61,13 +61,13 @@ namespace MaticeApp.Highlighters
             Canvas.SetTop(_highlightRectangle, top);
 
             // Add the rectangle to the highlight canvas
-            dstMatrix.HighlightCanvas.Children.Add(_highlightRectangle);
+            dstMatrix.GetHighlightCanvas().Children.Add(_highlightRectangle);
             isHighlighted = true;
         }
         protected void RemoveHighlight()
         {
             if (_highlightRectangle == null) return;
-            dstMatrix.HighlightCanvas.Children.Remove(_highlightRectangle);
+            dstMatrix.GetHighlightCanvas().Children.Remove(_highlightRectangle);
             _highlightRectangle = null;
             isHighlighted = false;
         }

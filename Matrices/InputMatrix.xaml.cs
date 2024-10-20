@@ -8,29 +8,34 @@ using MaticeApp.Highlighters;
 
 namespace MaticeApp
 {
-    /// <summary>
-    /// Interaction logic for Matrix.xaml
-    /// </summary>
-    public partial class Matrix : UserControl
+    public partial class InputMatrix : IMatrix
     {
-        public List<IHighlightable> highlighters = new List<IHighlightable>();
-        public double RowHeight = 30; // Constant row height
-        public double CellWidth = 55; // Constant column width
-        public int rows {  get;private set; }
-        public int columns { get; private set; }
+        public List<IHighlightable> highlighters { get; set; }
+        public double RowHeight { get; set; } = 30; // Constant row height
+        public double CellWidth { get; set; } = 55; // Constant column width
+        public uint RowsCount {  get;private set; }
+        public uint ColumnsCount { get; private set; }
+        public Action onInputChanged;
+        private const int MaxInput= 10;
 
-        public Matrix()
+        public InputMatrix()
         {
             InitializeComponent();
+            highlighters = new List<IHighlightable>();
+        }
+        public Canvas GetHighlightCanvas()
+        {
+            return HighlightCanvas;
         }
 
-        public void SetMatrix(int rows, int columns, string[,] matrixValues, bool autoWidth)
+
+        public void SetMatrix(uint rows, uint columns, bool autoWidth)
         {
             MatrixGrid.Children.Clear();
             MatrixGrid.RowDefinitions.Clear();
             MatrixGrid.ColumnDefinitions.Clear();
-            this.rows = rows;
-            this.columns = columns;
+            this.RowsCount = rows;
+            this.ColumnsCount = columns;
             // Define rows and columns for the matrix grid
             for (int i = 0; i < rows; i++)
             {
@@ -56,9 +61,12 @@ namespace MaticeApp
                         Background= new SolidColorBrush(Color.FromArgb(10, 0, 0, 0))
                     };
 
-                    TextBlock textBlock = CreateRichText(matrixValues[i, j]);
-
-                    border.Child = textBlock;
+                    TextBox textBox = new TextBox
+                    {
+                        Text = 0.ToString()
+                    };
+                    textBox.TextChanged += OnInputTextChanged;
+                    border.Child = textBox;
                     Grid.SetRow(border, i);
                     Grid.SetColumn(border, j);
                     MatrixGrid.Children.Add(border);
@@ -161,11 +169,11 @@ namespace MaticeApp
 
         private void MatrixGrid_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            for (int i = 0; i < rows; i++)
+            for (uint i = 0; i < RowsCount; i++)
             {
-                for (int j = 0; j < columns; j++)
+                for (uint j = 0; j < ColumnsCount; j++)
                 {
-                    if (MatrixGrid.Children[i * columns + j].IsMouseOver)
+                    if (MatrixGrid.Children[(int)((i * ColumnsCount) + j)].IsMouseOver)
                     {
                         foreach (var highlighter in highlighters)
                         {
@@ -183,6 +191,24 @@ namespace MaticeApp
             {
                 highlighter.ClearHighlight();
             }
+        }
+        private void OnInputTextChanged(object sender, TextChangedEventArgs e)
+        {
+            double tmp;
+            foreach (var textbox in MatrixGrid.Children)
+            {
+                if (!double.TryParse(((textbox as Border).Child as TextBox).Text, out tmp)) return;
+            }
+            if (onInputChanged != null)
+            {
+                onInputChanged();
+            }
+        }
+        public void Randomize()
+        {
+            var rnd = new Random();
+            foreach (var textbox in MatrixGrid.Children)
+                ((textbox as Border).Child as TextBox).Text = (rnd.Next()%MaxInput).ToString();
         }
     }
 }

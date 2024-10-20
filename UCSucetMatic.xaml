@@ -139,7 +139,7 @@
                         <Italic>k</Italic><Run FontWeight="SemiBold">A</Run> + <Italic>k</Italic><Run FontWeight="SemiBold">B</Run>
                     </TextBlock>
                 </Grid>
-                
+                <local:MatrixCalculator x:Name="matrixCalculator"></local:MatrixCalculator>
             </StackPanel>
         </ScrollViewer>
     </Grid>

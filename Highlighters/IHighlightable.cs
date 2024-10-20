@@ -9,7 +9,7 @@ namespace MaticeApp.Highlighters
     public interface IHighlightable
     {
         bool isHighlighted { get; }
-        public void Highlight(int row, int column);
+        public void Highlight(uint row, uint column);
         public void ClearHighlight();
     }
 }

@@ -118,7 +118,6 @@
                     </TextBlock>
                     <local:Matrix Grid.Column="7" x:Name="matrix4"/>
                 </Grid>
-
                 <TextBlock FontSize="24" Margin="0,30,0,10">
                     <Bold>Vlástnosti:</Bold>
                 </TextBlock>
@@ -199,7 +198,7 @@
                         <Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="TextTop" FontWeight="SemiBold" FontSize="14" FontStyle="Italic">T</Run>
                     </TextBlock>
                 </Grid>
-
+                <local:MatrixCalculator x:Name="matrixCalculator"></local:MatrixCalculator>
             </StackPanel>
         </ScrollViewer>
     </Grid>

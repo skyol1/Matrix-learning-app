@@ -18,7 +18,7 @@ namespace MaticeApp.Highlighters
         {
             this.highlightColor = highlightColor;
         }
-        public abstract void Highlight(int row, int column);
+        public abstract void Highlight(uint row, uint column);
         public abstract void ClearHighlight();
     }
 }

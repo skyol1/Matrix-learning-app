@@ -10,7 +10,7 @@
     <Compile Update="ButtonMenu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Matrix.xaml.cs">
+    <Compile Update="Matrices\MatrixCalculator.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UCDeterminanty.xaml.cs">
@@ -48,7 +48,7 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Matrix.xaml">
+    <Page Update="Matrices\MatrixCalculator.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UCDeterminanty.xaml">
