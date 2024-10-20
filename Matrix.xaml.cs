@@ -13,7 +13,7 @@ namespace MaticeApp
     /// </summary>
     public partial class Matrix : UserControl
     {
-        public List<BaseHighlighter> highlighters = new List<BaseHighlighter>();
+        public List<IHighlightable> highlighters = new List<IHighlightable>();
         public double RowHeight = 30; // Constant row height
         public double CellWidth = 55; // Constant column width
         public int rows {  get;private set; }

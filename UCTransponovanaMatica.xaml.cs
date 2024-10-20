@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaticeApp.Highlighters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -60,6 +61,8 @@ namespace MaticeApp
                 { "3", "6" }
             };
             matrix4.SetMatrix(3, 2, matrixData, true);
+            matrix3.highlighters.Add(new TransposeHighlightConnector(new SingleElementHighlighter(matrix4, Color.FromArgb(40, 255, 0, 0))));
+            matrix4.highlighters.Add(new TransposeHighlightConnector(new SingleElementHighlighter(matrix3, Color.FromArgb(40, 255, 0, 0))));
         }
     }
 }

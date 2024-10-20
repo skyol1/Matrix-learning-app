@@ -48,7 +48,7 @@
                     </TextBlock>
                     <local:Matrix Grid.Column="1" x:Name="matrix1"/>
                     <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="5,0,5,0">
-                        <Bold>B</Bold> =<Run x:Name="Scalar"> 3 </Run>⋅ <Bold>A</Bold> =
+                        <Bold>B</Bold> =<Run x:Name="Scalar" > 3 </Run>⋅ <Bold>A</Bold> =
                     </TextBlock>
                     <local:Matrix Grid.Column="3" x:Name="matrix2"/>
                     <TextBlock Grid.Column="4" VerticalAlignment="Center" Margin="5,0,5,0">

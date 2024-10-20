@@ -6,14 +6,14 @@ using System.Windows.Shapes;
 
 namespace MaticeApp.Highlighters
 {
-    public abstract class BaseHighlighter
+    public abstract class BaseHighlighter: IHighlightable
     {
         
         public Color highlightColor;
         
         protected Rectangle? _highlightRectangle;
-        public bool isHighlighted {  get;protected set; }
-        
+        public bool isHighlighted { get; protected set; }
+
         public BaseHighlighter(Color highlightColor)
         {
             this.highlightColor = highlightColor;
