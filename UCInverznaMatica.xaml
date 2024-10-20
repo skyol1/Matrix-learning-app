@@ -5,28 +5,44 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaticeApp"
              mc:Ignorable="d" 
+             d:Background="#FFE6E6E6"
              d:DesignHeight="2000" d:DesignWidth="800">
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="8,10,10,50">
                 
-                <TextBlock FontSize="30" Margin="320,0,0,0">
+                <TextBlock FontSize="30" HorizontalAlignment="Left" Width="770" TextAlignment="Center">
                     <Bold>Inverzná matica</Bold>
                 </TextBlock>
 
-                <TextBlock TextWrapping="Wrap">
-                    Inverzná matica je špeciálny druh matice, ktorá pri násobení s pôvodnou maticou poskytne jednotkovú maticu. <LineBreak/>
-                    Inverzná matica existuje len pre štvorcové matice a to iba v prípade, že ich determinant nie je nula.
+                <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                    Inverzná matica je matica, ktorá v kombinácii s pôvodnou maticou vedie k jednotkovej matici. 
+                    Ak je <Run FontWeight="SemiBold">A</Run> štvorcová matica, jej inverznú maticu označujeme ako 
+                    <Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="TextTop" FontSize="14">-1</Run>, a platí: <LineBreak/>
+                    <Run FontWeight="SemiBold">A</Run> · <Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="TextTop" FontSize="14">-1</Run> =
+                    <Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="TextTop" FontSize="14">-1</Run>  · <Run FontWeight="SemiBold">A</Run> = 
+                    <Run FontWeight="SemiBold">E</Run><Run BaselineAlignment="Subscript" FontSize="17" FontStyle="Italic">n</Run> <LineBreak/>
+                    kde <Run FontWeight="SemiBold">E</Run> je jednotková matica. 
+                    Inverzná matica existuje len pre štvorcové matice, ktoré sú regulárne (t.j. majú nenulový determinant).
                 </TextBlock>
+                
                 <TextBlock FontSize="24" Margin="0,10,0,10">
                     <Bold>Definícia</Bold>
                 </TextBlock>
+                
                 <TextBlock TextWrapping="Wrap">
-                    Nech <Bold>A</Bold> je štvorcová matica typu <Italic>n</Italic>×<Italic>n</Italic>. 
-                    Potom maticu <Bold>B</Bold> nazývame inverzná matica k matici <Bold>A</Bold>, 
-                    ak <Bold>A</Bold> · <Bold>B</Bold> = <Bold>B</Bold> · <Bold>A</Bold> = 
-                    <Bold>E</Bold><Run BaselineAlignment="Subscript" FontSize="12" FontStyle="Italic">n</Run>. 
-                    Oznacujeme <Bold>A</Bold><Run BaselineAlignment="TextTop" FontSize="12">-1</Run>.
+                    Nech <Run FontWeight="SemiBold">A</Run> je štvorcová matica typu <Italic>n</Italic>×<Italic>n</Italic>. 
+                    Potom maticu <Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="TextTop" FontSize="14">-1</Run>
+                    nazývame inverzná matica k matici <Run FontWeight="SemiBold">A</Run>, ak <LineBreak/>
+                    <Run FontWeight="SemiBold">A</Run> · <Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="TextTop" FontSize="14">-1</Run> =
+                    <Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="TextTop" FontSize="14">-1</Run>  · <Run FontWeight="SemiBold">A</Run> = 
+                    <Run FontWeight="SemiBold">E</Run><Run BaselineAlignment="Subscript" FontSize="17" FontStyle="Italic">n</Run> <LineBreak/>
+                    kde <Run FontWeight="SemiBold">E</Run><Run BaselineAlignment="Subscript" FontSize="17" FontStyle="Italic">n</Run> je jednotková matica
+                    rovnakého rozmeru <Italic>n</Italic>×<Italic>n</Italic>. <LineBreak/>
+                    <Bold>Podmienka existencie inverznej matice:</Bold> <LineBreak/>
+                    Inverzná matica existuje iba pre štvorcové matice, ktoré majú nenulový determinant. 
+                    Ak je determinant matice <Run FontWeight="SemiBold">A</Run> nulový, tak je singulárna a nemá inverznú maticu. 
+                    Naopak, ak je determinant matice <Run FontWeight="SemiBold">A</Run> nenulový, tak je regulárna a inverznú maticu má.
                 </TextBlock>
             </StackPanel>
         </ScrollViewer>

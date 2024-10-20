@@ -15,26 +15,30 @@
                     <Bold>Násobok matice</Bold>
                 </TextBlock>
 
-                <TextBlock TextWrapping="Wrap">
-                    Násobenie matice číslom, známe aj ako skalárne násobenie, je operácia, pri ktorej 
+                <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                    Násobenie matice číslom (skalárne násobenie) je operácia, pri ktorej 
                     každý prvok matice vynásobíme daným reálnym číslom (skalárom).
                 </TextBlock>
 
                 <TextBlock FontSize="24" Margin="0,10,0,10">
                     <Bold>Definícia</Bold>
                 </TextBlock>
+                
                 <TextBlock TextWrapping="Wrap">
-                    Nech <Italic>k</Italic> je reálne císlo a nech <Bold>A</Bold> = 
-                    (<Italic>a<Run BaselineAlignment="Subscript" Text="ij" FontSize="8" /></Italic>)
+                    Nech <Italic>k</Italic> je reálne císlo a nech <Run FontWeight="SemiBold">A</Run> = 
+                    (<Italic>a<Run BaselineAlignment="Subscript" Text="ij" FontSize="14" /></Italic>)
                     je matica typu <Italic>m</Italic>×<Italic>n</Italic>. 
-                    Maticu B = (<Italic>b<Run BaselineAlignment="Subscript" Text="ij" FontSize="8" /></Italic>) typu <Italic>m</Italic>×<Italic>n</Italic> 
-                    nazývame k-násobok matice <Bold>A</Bold>, píšeme <Bold>B</Bold> = <Italic>k</Italic> · <Bold>A</Bold>, 
-                    ak <Italic>b<Run BaselineAlignment="Subscript" Text="ij" FontSize="8" /></Italic> = 
-                    <Italic>ka<Run BaselineAlignment="Subscript" Text="ij" FontSize="8" /></Italic> pre každé 
-                    <Italic>i</Italic> = 1, . . . , <Italic>m</Italic> a <Italic>j</Italic> = 1, . . . , <Italic>n</Italic>. <LineBreak/>
+                    Maticu B = (<Italic>b<Run BaselineAlignment="Subscript" Text="ij" FontSize="14" /></Italic>) 
+                    typu <Italic>m</Italic>×<Italic>n</Italic> 
+                    nazývame k-násobok matice <Run FontWeight="SemiBold">A</Run>, píšeme 
+                    <Run FontWeight="SemiBold">B</Run> = <Italic>k</Italic> · <Run FontWeight="SemiBold">A</Run>, 
+                    ak <Italic>b<Run BaselineAlignment="Subscript" Text="ij" FontSize="14" /></Italic> = 
+                    <Italic>ka<Run BaselineAlignment="Subscript" Text="ij" FontSize="14" /></Italic> pre každé 
+                    <Italic>i</Italic> = 1,..., <Italic>m</Italic> a <Italic>j</Italic> = 1,..., <Italic>n</Italic>. <LineBreak/>
                     Príklad:
                 </TextBlock>
-                <Grid>
+                
+                <Grid Margin="0,10,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -43,22 +47,93 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,0">
-                        <Bold>A</Bold> =
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">
+                        <Run FontWeight="SemiBold">A</Run> =
                     </TextBlock>
                     <local:Matrix Grid.Column="1" x:Name="matrix1"/>
-                    <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="5,0,5,0">
-                        <Bold>B</Bold> =<Run x:Name="Scalar" > 3 </Run>⋅ <Bold>A</Bold> =
+                    <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="20,0,10,0">
+                        <Run FontWeight="SemiBold">B</Run> = <Run x:Name="Scalar"> 3 </Run> ⋅ <Run FontWeight="SemiBold">A</Run> =
                     </TextBlock>
                     <local:Matrix Grid.Column="3" x:Name="matrix2"/>
-                    <TextBlock Grid.Column="4" VerticalAlignment="Center" Margin="5,0,5,0">
+                    <TextBlock Grid.Column="4" VerticalAlignment="Center" Margin="10,0,10,0">
                         =
                     </TextBlock>
                     <local:Matrix Grid.Column="5" x:Name="matrix3"/>
                 </Grid>
-                <TextBlock FontSize="16">
-                    Vlastnosti:
+                
+                <TextBlock FontSize="24" Margin="0,30,0,10">
+                    <Bold>Vlástnosti:</Bold>
                 </TextBlock>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,10,0">
+                        1.
+                    </TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,10">
+                        <Run FontWeight="SemiBold">Asociatívnosť:</Run> <LineBreak/>
+                        Ak násobíme maticu dvoma skalármi, môžeme najprv vynásobiť skaláre a potom maticu, 
+                        alebo maticu najprv vynásobiť jedným skalárom a výsledok následne druhým. <LineBreak/>
+                        (<Italic>c</Italic> ⋅ <Italic>d</Italic>)<Run FontWeight="SemiBold">A</Run> =
+                        <Italic>c</Italic>(<Italic>d</Italic><Run FontWeight="SemiBold">A</Run>)
+                    </TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,10,0">
+                        2.
+                    </TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,10">
+                        <Run FontWeight="SemiBold">Distributívnosť voči sčítaniu matíc:</Run> <LineBreak/>
+                        Ak skalár násobí súčet matíc, môžeme násobiť každú maticu 
+                        zvlášť tým istým skalárom a následne sčítať výsledky. <LineBreak/>
+                        <Italic>c</Italic>(<Run FontWeight="SemiBold">A</Run> + <Run FontWeight="SemiBold">B</Run>) =
+                        <Italic>c</Italic><Run FontWeight="SemiBold">A</Run> + <Italic>c</Italic><Run FontWeight="SemiBold">B</Run>
+                    </TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,0,10,0">
+                        3.
+                    </TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,10">
+                        <Run FontWeight="SemiBold">Distributívnosť voči sčítaniu skalárov:</Run> <LineBreak/>
+                        Ak sčítame dva skaláre a potom vynásobíme maticu, výsledok bude rovnaký, 
+                        ako keby sme maticu násobili každým skalárom zvlášť a následne sčítali. <LineBreak/>
+                        (<Italic>c</Italic> + <Italic>d</Italic>)<Run FontWeight="SemiBold">A</Run> =
+                        <Italic>c</Italic><Run FontWeight="SemiBold">A</Run> + <Italic>d</Italic><Run FontWeight="SemiBold">A</Run>
+                    </TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="0" Margin="0,0,10,0">
+                        4.
+                    </TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,10">
+                        <Run FontWeight="SemiBold">Neutrálny prvok:</Run> <LineBreak/>
+                        Násobenie matice jednotkou nezmení jej hodnotu. <LineBreak/>
+                        1 ⋅ <Run FontWeight="SemiBold">A</Run> = <Run FontWeight="SemiBold">A</Run>
+                    </TextBlock>
+                    <TextBlock Grid.Row="4" Grid.Column="0" Margin="0,0,10,0">
+                        5.
+                    </TextBlock>
+                    <TextBlock Grid.Row="4" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,10">
+                        <Run FontWeight="SemiBold">Nulová matica:</Run> <LineBreak/>
+                        Ak ľubovoľnú maticu vynásobíme nulou, dostaneme nulovú maticu. <LineBreak/>
+                        0 ⋅ <Run FontWeight="SemiBold">A</Run> = <Run FontWeight="SemiBold">0</Run>
+                    </TextBlock>
+                    <TextBlock Grid.Row="5" Grid.Column="0" Margin="0,0,10,0">
+                        6.
+                    </TextBlock>
+                    <TextBlock Grid.Row="5" Grid.Column="1" TextWrapping="Wrap">
+                        <Run FontWeight="SemiBold">Násobenie opačným číslom:</Run> <LineBreak/>
+                        Vynásobením matice číslom -1 dostaneme opačnú maticu, kde 
+                        každý prvok je nahradený svojím opačným číslom. <LineBreak/>
+                        (-1) ⋅ <Run FontWeight="SemiBold">A</Run> = -<Run FontWeight="SemiBold">A</Run>
+                    </TextBlock>
+                </Grid>
             </StackPanel>
         </ScrollViewer>
     </Grid>
