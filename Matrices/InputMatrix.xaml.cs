@@ -63,7 +63,9 @@ namespace MaticeApp
 
                     TextBox textBox = new TextBox
                     {
-                        Text = 0.ToString()
+                        Text = 0.ToString(),
+                        FontSize = 18,
+                        TextAlignment= TextAlignment.Center
                     };
                     textBox.TextChanged += OnInputTextChanged;
                     border.Child = textBox;
