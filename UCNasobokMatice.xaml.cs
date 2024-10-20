@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaticeApp.Highlighters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,6 +49,10 @@ namespace MaticeApp
                 { "9", "12" }
             };
             matrix3.SetMatrix(2, 2, matrixData, true);
+            matrix1.highlighters.Add(new SingleElementHighlighter(matrix2, Color.FromArgb(50, 0, 0, 255)));
+            matrix2.highlighters.Add(new SingleElementHighlighter(matrix3, Color.FromArgb(50, 255, 0, 0)));
+            matrix3.highlighters.Add(new SingleElementHighlighter(matrix1, Color.FromArgb(50, 255, 0, 0)));
+
         }
     }
 }

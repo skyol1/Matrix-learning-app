@@ -3,6 +3,8 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Diagnostics;
+using MaticeApp.Highlighters;
 
 namespace MaticeApp
 {
@@ -11,8 +13,11 @@ namespace MaticeApp
     /// </summary>
     public partial class Matrix : UserControl
     {
-        private const double RowHeight = 30; // Constant row height
-        private const double CellWidth = 55; // Constant column width
+        public List<BaseHighlighter> highlighters = new List<BaseHighlighter>();
+        public double RowHeight = 30; // Constant row height
+        public double CellWidth = 55; // Constant column width
+        public int rows {  get;private set; }
+        public int columns { get; private set; }
 
         public Matrix()
         {
@@ -24,7 +29,8 @@ namespace MaticeApp
             MatrixGrid.Children.Clear();
             MatrixGrid.RowDefinitions.Clear();
             MatrixGrid.ColumnDefinitions.Clear();
-
+            this.rows = rows;
+            this.columns = columns;
             // Define rows and columns for the matrix grid
             for (int i = 0; i < rows; i++)
             {
@@ -33,7 +39,7 @@ namespace MaticeApp
 
             for (int j = 0; j < columns; j++)
             {
-                MatrixGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                MatrixGrid.ColumnDefinitions.Add(new ColumnDefinition {Width= new GridLength(CellWidth) });
             }
 
             // Set the values in the grid
@@ -46,7 +52,8 @@ namespace MaticeApp
                         BorderBrush = new SolidColorBrush(Color.FromArgb(40, 0, 0, 0)),
                         BorderThickness = new Thickness(1),
                         CornerRadius = new CornerRadius(5),
-                        Margin = new Thickness(1)
+                        Margin = new Thickness(1),
+                        Background= new SolidColorBrush(Color.FromArgb(10, 0, 0, 0))
                     };
 
                     TextBlock textBlock = CreateRichText(matrixValues[i, j]);
@@ -60,6 +67,7 @@ namespace MaticeApp
 
             // Calculate and set the UserControl's height based on the number of rows
             Height = rows * RowHeight;
+            Width = columns * CellWidth+10;
 
             // Update the arc sizes for the brackets
             double arcSize = (Height * 0.45);
@@ -144,54 +152,37 @@ namespace MaticeApp
 
 
 
-        private Rectangle? _highlightRectangle;
-        public void Highlight(int rowA, int colA, int rowB, int colB, Color color = Color.FromArgb(50, 255, 0, 0))
-        {
-            // Remove the previous highlight if it exists
-            if (_highlightRectangle != null)
-            {
-                MatrixGrid.Children.Remove(_highlightRectangle);
-            }
-
-            // Ensure rowA <= rowB and colA <= colB
-            if (rowA > rowB || colA > colB)
-            {
-                var tempRow = rowA;
-                var tempCol = colA;
-                rowA = rowB;
-                colA = colB;
-                rowB = tempRow;
-                colB = tempCol;
-            }
-
-            // Calculate the position and size of the rectangle
-            double top = rowA * RowHeight;
-            double left = colA * CellWidth;
-            double height = (rowB - rowA + 1) * RowHeight;
-            double width = (colB - colA + 1) * CellWidth;
-
-            // Create the rectangle for highlighting
-            _highlightRectangle = new Rectangle
-            {
-                Stroke = Brushes.Red, // Color of the highlight border
-                StrokeThickness = 2,
-                Fill = new SolidColorBrush(color), // Semi-transparent fill
-                Width = width,
-                Height = height,
-                IsHitTestVisible = false // Make sure the highlight doesn't block interaction
-            };
-
-            // Position the rectangle over the diagonal
-            Canvas.SetLeft(_highlightRectangle, left);
-            Canvas.SetTop(_highlightRectangle, top);
-
-            // Add the rectangle to the highlight canvas
-            HighlightCanvas.Children.Add(_highlightRectangle);
-        }
+        
 
         private void LeftBracket_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             translateTransformLeftBracket.X = LeftBracket.ActualWidth;
+        }
+
+        private void MatrixGrid_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    if (MatrixGrid.Children[i * columns + j].IsMouseOver)
+                    {
+                        foreach (var highlighter in highlighters)
+                        {
+                            highlighter.ClearHighlight();
+                            highlighter.Highlight(i, j);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void MatrixGrid_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            foreach (var highlighter in highlighters)
+            {
+                highlighter.ClearHighlight();
+            }
         }
     }
 }

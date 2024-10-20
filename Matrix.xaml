@@ -41,7 +41,7 @@
         </Viewbox>
 
         <!-- Matrix Grid in the Center -->
-        <Grid x:Name="MatrixGrid" Grid.Column="1" Margin="1,0,0,0"/>
+        <Grid x:Name="MatrixGrid" Grid.Column="1" Margin="1,0,0,0" Background="#00000000" MouseMove="MatrixGrid_MouseMove" MouseLeave="MatrixGrid_MouseLeave"/>
 
         <!-- Canvas for Highlight -->
         <Canvas x:Name="HighlightCanvas" Grid.Column="1" IsHitTestVisible="False"/>

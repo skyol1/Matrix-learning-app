@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,8 +11,10 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MaticeApp.Highlighters;
 
 namespace MaticeApp
 {
@@ -47,6 +50,7 @@ namespace MaticeApp
                 { "(1⋅5+2⋅7)", "(1⋅6+2⋅8)" },
                 { "(3⋅5+4⋅7)", "(3⋅6+4⋅8)" }
             };
+            matrix3.CellWidth = 90;
             matrix3.SetMatrix(2, 2, matrixData, false);
 
             matrixData = new string[,]
@@ -55,6 +59,11 @@ namespace MaticeApp
                 { "43", "50" }
             };
             matrix4.SetMatrix(2, 2, matrixData, true);
+
+            matrix1.highlighters.Add(new RowHighlighter(matrix2, Color.FromArgb(50, 0, 0, 255)));
+            matrix2.highlighters.Add(new SingleElementHighlighter(matrix3, Color.FromArgb(50, 255, 0, 0)));
+            matrix3.highlighters.Add(new SingleElementHighlighter(matrix4, Color.FromArgb(50, 255, 0, 0)));
+            matrix4.highlighters.Add(new ColumnHighlighter(matrix1, Color.FromArgb(50, 0, 255, 0)));
         }
     }
 }
