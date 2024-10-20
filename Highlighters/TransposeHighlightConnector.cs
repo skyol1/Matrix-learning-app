@@ -9,9 +9,9 @@ namespace MaticeApp.Highlighters
 {
     public class TransposeHighlightConnector : IHighlightable
     {
-        private BaseHighlighter connectedHighlighter;
+        private IHighlightable connectedHighlighter;
         public bool isHighlighted { get; protected set; }
-        public TransposeHighlightConnector(BaseHighlighter connectedHighlighter){ this.connectedHighlighter = connectedHighlighter; }
+        public TransposeHighlightConnector(IHighlightable connectedHighlighter){ this.connectedHighlighter = connectedHighlighter; }
         public void ClearHighlight()
         {
             if (!isHighlighted || !connectedHighlighter.isHighlighted) return;
