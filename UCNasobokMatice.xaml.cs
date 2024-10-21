@@ -34,21 +34,21 @@ namespace MaticeApp
                 { "1", "2" },
                 { "3", "4" }
             };
-            matrix1.SetMatrix(2, 2, matrixData, true);
+            matrix1.SetMatrix(matrixData, true);
 
             matrixData = new string[,]
             {
                 { "3⋅1", "3⋅2" },
                 { "3⋅3", "3⋅4" }
             };
-            matrix2.SetMatrix(2, 2, matrixData, true);
+            matrix2.SetMatrix(matrixData, true);
 
             matrixData = new string[,]
             {
                 { "3", "6" },
                 { "9", "12" }
             };
-            matrix3.SetMatrix(2, 2, matrixData, true);
+            matrix3.SetMatrix(matrixData, true);
             matrix1.highlighters.Add(new SingleElementHighlighter(matrix2, Color.FromArgb(50, 255, 0, 0)));
             matrix2.highlighters.Add(new SingleElementHighlighter(matrix3, Color.FromArgb(50, 255, 0, 0)));
             matrix3.highlighters.Add(new SingleElementHighlighter(matrix1, Color.FromArgb(50, 0, 255, 0)));

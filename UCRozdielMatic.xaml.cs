@@ -34,28 +34,28 @@ namespace MaticeApp
                 { "1", "2" },
                 { "3", "4" }
             };
-            matrix1.SetMatrix(2, 2, matrixData, true);
+            matrix1.SetMatrix(matrixData, true);
 
             matrixData = new string[,]
             {
                 { "9", "8" },
                 { "7", "6" }
             };
-            matrix2.SetMatrix(2, 2, matrixData, true);
+            matrix2.SetMatrix(matrixData, true);
 
             matrixData = new string[,]
             {
                 { "1-9", "2-8" },
                 { "3-7", "4-6" }
             };
-            matrix3.SetMatrix(2, 2, matrixData, true);
+            matrix3.SetMatrix(matrixData, true);
 
             matrixData = new string[,]
             {
                 { "-8", "-6" },
                 { "-4", "-2" }
             };
-            matrix4.SetMatrix(2, 2, matrixData, true);
+            matrix4.SetMatrix(matrixData, true);
 
             matrix1.highlighters.Add(new SingleElementHighlighter(matrix2, Color.FromArgb(50, 0, 0, 255)));
             matrix2.highlighters.Add(new SingleElementHighlighter(matrix3, Color.FromArgb(50, 255, 0, 0)));

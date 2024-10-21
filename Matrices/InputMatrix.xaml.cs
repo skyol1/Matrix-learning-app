@@ -27,8 +27,6 @@ namespace MaticeApp
         {
             return HighlightCanvas;
         }
-
-
         public void SetMatrix(uint rows, uint columns, bool autoWidth)
         {
             MatrixGrid.Children.Clear();
@@ -65,7 +63,9 @@ namespace MaticeApp
                     {
                         Text = 0.ToString(),
                         FontSize = 18,
-                        TextAlignment= TextAlignment.Center
+                        TextAlignment= TextAlignment.Center,
+                        MaxLength = 4
+
                     };
                     textBox.TextChanged += OnInputTextChanged;
                     border.Child = textBox;
@@ -95,12 +95,6 @@ namespace MaticeApp
                 Width = (columns * 55) + 8;
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
         private TextBlock CreateRichText(string text)
         {
             TextBlock textBlock = new TextBlock
@@ -160,10 +154,6 @@ namespace MaticeApp
             return textBlock;
         }
 
-
-
-        
-
         private void LeftBracket_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             translateTransformLeftBracket.X = LeftBracket.ActualWidth;
@@ -211,6 +201,11 @@ namespace MaticeApp
             var rnd = new Random();
             foreach (var textbox in MatrixGrid.Children)
                 ((textbox as Border).Child as TextBox).Text = (rnd.Next()%MaxInput).ToString();
+        }
+        public void Clear()
+        {
+            foreach (var textbox in MatrixGrid.Children)
+                ((textbox as Border).Child as TextBox).Text = "0";
         }
     }
 }

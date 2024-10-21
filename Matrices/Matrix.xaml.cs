@@ -29,28 +29,28 @@ namespace MaticeApp
             return HighlightCanvas;
         }
 
-        public void SetMatrix(uint rows, uint columns, string[,] matrixValues, bool autoWidth)
+        public void SetMatrix(string[,] matrixValues, bool autoWidth)
         {
             MatrixGrid.Children.Clear();
             MatrixGrid.RowDefinitions.Clear();
             MatrixGrid.ColumnDefinitions.Clear();
-            this.RowsCount = rows;
-            this.ColumnsCount = columns;
+            this.RowsCount = (uint)matrixValues.GetUpperBound(0)+1;
+            this.ColumnsCount = (uint)matrixValues.GetUpperBound(1)+1;
             // Define rows and columns for the matrix grid
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < RowsCount; i++)
             {
                 MatrixGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(RowHeight) });
             }
 
-            for (int j = 0; j < columns; j++)
+            for (int j = 0; j < ColumnsCount; j++)
             {
                 MatrixGrid.ColumnDefinitions.Add(new ColumnDefinition {Width= new GridLength(CellWidth) });
             }
 
             // Set the values in the grid
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < RowsCount; i++)
             {
-                for (int j = 0; j < columns; j++)
+                for (int j = 0; j < ColumnsCount; j++)
                 {
                     Border border = new Border
                     {
@@ -71,8 +71,8 @@ namespace MaticeApp
             }
 
             // Calculate and set the UserControl's height based on the number of rows
-            Height = rows * RowHeight;
-            Width = columns * CellWidth+10;
+            Height = RowsCount * RowHeight;
+            Width = ColumnsCount * CellWidth+10;
 
             // Update the arc sizes for the brackets
             double arcSize = (Height * 0.45);
@@ -87,7 +87,7 @@ namespace MaticeApp
             // Scale the UserControl's width based on the number of columns if needed
             if(autoWidth)
             {
-                Width = (columns * 55) + 8;
+                Width = (ColumnsCount * 55) + 8;
             }
         }
 

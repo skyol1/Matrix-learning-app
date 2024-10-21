@@ -36,7 +36,7 @@ namespace MaticeApp
                 { "⋮", "⋮", "⋱", "⋮"},
                 { "a_m1_", "a_m2_", "...", "a_mn_"}
             };
-            matrix1.SetMatrix(4, 4, matrixData, true);
+            matrix1.SetMatrix(matrixData, true);
 
             matrixData = new string[,]
             {
@@ -45,14 +45,14 @@ namespace MaticeApp
                 { "⋮", "⋮", "⋱", "⋮" },
                 { "a_1n_", "a_2n_", "...", "a_mn_" }
             };
-            matrix2.SetMatrix(4, 4, matrixData, true);
+            matrix2.SetMatrix(matrixData, true);
 
             matrixData = new string[,]
             {
                 { "1", "2", "3" },
                 { "4", "5", "6" }
             };
-            matrix3.SetMatrix(2, 3, matrixData, true);
+            matrix3.SetMatrix(matrixData, true);
 
             matrixData = new string[,]
             {
@@ -60,7 +60,7 @@ namespace MaticeApp
                 { "2", "5" },
                 { "3", "6" }
             };
-            matrix4.SetMatrix(3, 2, matrixData, true);
+            matrix4.SetMatrix(matrixData, true);
             matrix3.highlighters.Add(new TransposeHighlightConnector(new SingleElementHighlighter(matrix4, Color.FromArgb(40, 255, 0, 0))));
             matrix4.highlighters.Add(new TransposeHighlightConnector(new SingleElementHighlighter(matrix3, Color.FromArgb(40, 255, 0, 0))));
         }
