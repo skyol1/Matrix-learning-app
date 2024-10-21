@@ -13,6 +13,9 @@
     <Compile Update="Matrices\MatrixCalculator.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Matrices\MatrixSLR.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UCDeterminanty.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -49,6 +52,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Matrices\MatrixCalculator.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Matrices\MatrixSLR.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UCDeterminanty.xaml">

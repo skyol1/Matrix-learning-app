@@ -8,17 +8,199 @@
              d:Background="#FFE6E6E6"
              d:DesignHeight="2000" d:DesignWidth="800">
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="73*"/>
+            <RowDefinition Height="177*"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.RowSpan="2">
             <StackPanel Margin="8,10,10,50">
-                
+
                 <TextBlock FontSize="30" HorizontalAlignment="Left" Width="770" TextAlignment="Center">
                     <Bold>Riadkovo ekvivalentné operácie</Bold>
                 </TextBlock>
 
-                <TextBlock Margin="0,10,0,0">
-                    
+                <TextBlock Margin="0,10,0,0" TextWrapping="Wrap">
+                    Riadkové ekvivalentné operácie sú operácie, ktoré vykonávame na riadkoch matice s cieľom zjednodušiť ju, 
+                    pričom nemeníme množinu riešení systému rovníc, ktoré táto matica reprezentuje. 
+                    Tieto operácie sú základom Gaussovej eliminácie a Gauss-Jordanovej eliminácie.
                 </TextBlock>
+
+                <TextBlock FontSize="24" Margin="0,10,0,10">
+                    <Bold>Definícia</Bold>
+                </TextBlock>
+
+                <TextBlock TextWrapping="Wrap">
+                    Existujú tri základné riadkové operácie:
+                </TextBlock>
+
+                <Grid Margin="0,10,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,10,0">
+                        1.
+                    </TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="1" TextWrapping="Wrap">
+                        <Run FontWeight="SemiBold">Vzájomná výmena dvoch riadkov:</Run> <LineBreak/>
+                        (<Italic>R<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic> ↔
+                        <Italic>R<Run BaselineAlignment="Subscript" FontSize="17">j</Run></Italic>)
+                    </TextBlock>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,10,0">
+                        2.
+                    </TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="1" TextWrapping="Wrap">
+                        <Run FontWeight="SemiBold">Vynásobenie niektorého riadka nenulovým číslom:</Run> <LineBreak/>
+                        Každý prvok riadku  sa násobí konštantou <Italic>k</Italic> ≠ 0: <LineBreak/>
+                        (<Italic>R<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic> →
+                        <Italic>kR<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic>)
+                    </TextBlock>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,0,10,0">
+                        3.
+                    </TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="Wrap">
+                        <Run FontWeight="SemiBold">Pripočítanie k-násobku jedného riadka k inému riadku:</Run> <LineBreak/>
+                        K riadku <Italic>R<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic>
+                        pripočítame násobok iného riadku 
+                        <Italic>R<Run BaselineAlignment="Subscript" FontSize="17">j</Run></Italic>,
+                        kde <Italic>k</Italic> je konštanta: <LineBreak/>
+                        (<Italic>R<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic> →
+                        <Italic>R<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic> +
+                        <Italic>kR<Run BaselineAlignment="Subscript" FontSize="17">j</Run></Italic>)
+                    </TextBlock>
+
+                </Grid>
+
+                <TextBlock Margin="0,20,0,10">
+                    <Run FontWeight="SemiBold">Príklad:</Run>
+                </TextBlock>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Grid Grid.Column="0" VerticalAlignment="Center" Margin="10,0,20,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" FontWeight="Thin" 
+                                   VerticalAlignment="Center" Margin="0,0,15,0">
+                            {
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="3" ScaleY="4.5"/>
+                                    <TranslateTransform X="0" Y="-59"/>
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right">
+                            2
+                        </TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="5,0,10,0">
+                            x<Run BaselineAlignment="Subscript" FontSize="14">1</Run>
+                        </TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="3" HorizontalAlignment="Right">
+                            +4
+                        </TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" Margin="5,0,10,0">
+                            x<Run BaselineAlignment="Subscript" FontSize="14">2</Run>
+                        </TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Right">
+                            -2
+                        </TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="6" HorizontalAlignment="Center" Margin="5,0,10,0">
+                            x<Run BaselineAlignment="Subscript" FontSize="14">3</Run>
+                        </TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="7" HorizontalAlignment="Center">
+                            =
+                        </TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="8" HorizontalAlignment="Left" Margin="5,0,5,0">
+                            2
+                        </TextBlock>
+
+                        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right">
+                            4
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Margin="5,0,10,0">
+                            x<Run BaselineAlignment="Subscript" FontSize="14">1</Run>
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right">
+                            +9
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" Margin="5,0,10,0">
+                            x<Run BaselineAlignment="Subscript" FontSize="14">2</Run>
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="5" HorizontalAlignment="Right">
+                            -3
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="6" HorizontalAlignment="Center" Margin="5,0,5,0">
+                            x<Run BaselineAlignment="Subscript" FontSize="14">3</Run>
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="7" HorizontalAlignment="Center">
+                            =
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="8" HorizontalAlignment="Left" Margin="5,0,10,0">
+                            8
+                        </TextBlock>
+
+                        <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right">
+                            -2
+                        </TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" Margin="5,0,10,0">
+                            x<Run BaselineAlignment="Subscript" FontSize="14">1</Run>
+                        </TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="3" HorizontalAlignment="Right">
+                            -3
+                        </TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center" Margin="5,0,10,0">
+                            x<Run BaselineAlignment="Subscript" FontSize="14">2</Run>
+                        </TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="5" HorizontalAlignment="Right">
+                            7
+                        </TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="6" HorizontalAlignment="Center" Margin="5,0,5,0">
+                            x<Run BaselineAlignment="Subscript" FontSize="14">3</Run>
+                        </TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="7" HorizontalAlignment="Center">
+                            =
+                        </TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="8" HorizontalAlignment="Left" Margin="5,0,10,0">
+                            10
+                        </TextBlock>
+
+                    </Grid>
+
+                    <local:Matrix Grid.Column="1" VerticalAlignment="Center" x:Name="matrix1"/>
+                </Grid>
                 
+                
+
             </StackPanel>
         </ScrollViewer>
     </Grid>

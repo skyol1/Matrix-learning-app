@@ -59,7 +59,7 @@
 
 
                 <TextBlock FontSize="24" Margin="0,20,0,0">
-                    <Bold>Vedl’ajšia diagonála</Bold>
+                    <Bold>Vedľajšia diagonála</Bold>
                 </TextBlock>
                 <Grid HorizontalAlignment="Left" Margin="0,10,0,10">
                     <Grid.ColumnDefinitions>

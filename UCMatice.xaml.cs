@@ -39,18 +39,31 @@ namespace MaticeApp
 
             matrixData = new string[,]
             {
-                { "a_11_", "a_12_", "a_13_", "a_14_" },
-                { "a_21_", "a_22_", "a_23_", "a_24_" },
-                { "a_31_", "a_32_", "a_33_", "a_34_" },
-                { "a_41_", "a_42_", "a_43_", "a_44_" }
+                { "a_11_", "a_12_", "a_13_" },
+                { "a_21_", "a_22_", "a_23_" },
+                { "a_31_", "a_32_", "a_33_" }
             };
             matrix2.SetMatrix(matrixData, true);
-            matrix3.SetMatrix( matrixData, true);
-            matrix4.SetMatrix(matrixData, true);
             matrix5.SetMatrix(matrixData, true);
+
+            matrixData = new string[,]
+            {
+                { "a_11_", "a_12_", "a_13_", "a_14_" },
+                { "a_21_", "a_22_", "a_23_", "a_24_" },
+                { "a_31_", "a_32_", "a_33_", "a_34_" }
+            };
+            matrix3.SetMatrix(matrixData, true);
             matrix6.SetMatrix(matrixData, true);
+
+            matrixData = new string[,]
+            {
+                { "a_11_", "a_12_", "a_13_" },
+                { "a_21_", "a_22_", "a_23_" },
+                { "a_31_", "a_32_", "a_33_" },
+                { "a_41_", "a_42_", "a_43_" }
+            };
+            matrix4.SetMatrix(matrixData, true);
             matrix7.SetMatrix(matrixData, true);
-            //matrix2.HighlightDiagonal(0, 0, 2, 2);
 
             matrixData = new string[,]
             {

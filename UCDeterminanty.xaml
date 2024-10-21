@@ -166,7 +166,7 @@
                     </TextBlock>
                     <TextBlock Grid.Row="6" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,10">
                         <Run FontWeight="SemiBold">Rovnaké riadky/stĺpce:</Run> <LineBreak/>
-                        Ak matica <Run FontWeight="SemiBold">A</Run> má dva rovnaké riadky (st´lpce), tak
+                        Ak matica <Run FontWeight="SemiBold">A</Run> má dva rovnaké riadky (stĺpce), tak
                         |<Run FontWeight="SemiBold">A</Run>| = 0.
                     </TextBlock>
 
@@ -191,7 +191,7 @@
                     <TextBlock Grid.Row="8" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,10">
                         <Run FontWeight="SemiBold">Násobenie riadku:</Run> <LineBreak/>
                         Ak vynásobíte riadok číslom <Italic>k</Italic>, determinant sa vynásobí týmto číslom. <LineBreak/>
-                        Ak (<Italic>R<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic> ←
+                        Ak (<Italic>R<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic> →
                         <Italic>kR<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic>)
                         tak |<Run FontWeight="SemiBold">A</Run><Run FontWeight="ExtraBold">′</Run>| =
                         <Italic>k</Italic>|<Run FontWeight="SemiBold">A</Run>|
@@ -203,7 +203,7 @@
                     <TextBlock Grid.Row="9" Grid.Column="1" TextWrapping="Wrap">
                         <Run FontWeight="SemiBold">Súčet riadkov:</Run> <LineBreak/>
                         Ak k riadku pripočítate násobok iného riadku, determinant sa nezmení. <LineBreak/>
-                        Ak (<Italic>R<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic> ←
+                        Ak (<Italic>R<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic> →
                         <Italic>R<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic> +
                         <Italic>kR<Run BaselineAlignment="Subscript" FontSize="17">j</Run></Italic>)
                         tak |<Run FontWeight="SemiBold">A</Run><Run FontWeight="ExtraBold">′</Run>| =

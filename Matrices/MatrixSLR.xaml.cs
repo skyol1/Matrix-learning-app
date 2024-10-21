@@ -16,25 +16,13 @@ using System.Windows.Shapes;
 namespace MaticeApp
 {
     /// <summary>
-    /// Interaction logic for UCRiadkoveOperacie.xaml
+    /// Interaction logic for MatrixSLR.xaml
     /// </summary>
-    public partial class UCRiadkoveOperacie : UserControl
+    public partial class MatrixSLR : UserControl
     {
-        public UCRiadkoveOperacie()
+        public MatrixSLR()
         {
             InitializeComponent();
-            SetMatrices();
-        }
-
-        private void SetMatrices()
-        {
-            string[,] matrixData =
-            {
-                { "2", "4", "-2", "2"  },
-                { "4", "9", "-3", "8"  },
-                { "-2", "-3", "7", "10"  }
-            };
-            matrix1.SetMatrix(matrixData, true);
         }
     }
 }
