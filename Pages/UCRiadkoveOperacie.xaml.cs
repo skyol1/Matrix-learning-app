@@ -34,7 +34,7 @@ namespace MaticeApp
                 { "4", "9", "-3", "8"  },
                 { "-2", "-3", "7", "10"  }
             };
-            matrix1.SetMatrix(matrixData, true);
+            matrix1.SetMatrix(matrixData);
         }
     }
 }

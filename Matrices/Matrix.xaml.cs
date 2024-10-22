@@ -14,9 +14,9 @@ namespace MaticeApp
     public partial class Matrix : IMatrix
     {
         public List<IHighlightable> highlighters { get; set; }
-        public double RowHeight{get;set; } = 30;
-        public double CellWidth { get; set; } = 55 ;
-        public uint RowsCount {  get;private set; }
+        public int RowHeight{ get; set; } = 30;
+        public int CellWidth { get; set; } = 55 ;
+        public uint RowsCount {  get; private set; }
         public uint ColumnsCount { get; private set; }
 
         public Matrix()
@@ -29,7 +29,7 @@ namespace MaticeApp
             return HighlightCanvas;
         }
 
-        public void SetMatrix(string[,] matrixValues, bool autoWidth)
+        public void SetMatrix(string[,] matrixValues)
         {
             MatrixGrid.Children.Clear();
             MatrixGrid.RowDefinitions.Clear();
@@ -39,13 +39,17 @@ namespace MaticeApp
             // Define rows and columns for the matrix grid
             for (int i = 0; i < RowsCount; i++)
             {
-                MatrixGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(RowHeight) });
+                MatrixGrid.RowDefinitions.Add(new RowDefinition { });
             }
 
             for (int j = 0; j < ColumnsCount; j++)
             {
-                MatrixGrid.ColumnDefinitions.Add(new ColumnDefinition {Width= new GridLength(CellWidth) });
+                MatrixGrid.ColumnDefinitions.Add(new ColumnDefinition { });
             }
+
+            Height = RowsCount * RowHeight;
+            MatrixGrid.Width = ColumnsCount * CellWidth;
+
 
             // Set the values in the grid
             for (int i = 0; i < RowsCount; i++)
@@ -57,8 +61,8 @@ namespace MaticeApp
                         BorderBrush = new SolidColorBrush(Color.FromArgb(40, 0, 0, 0)),
                         BorderThickness = new Thickness(1),
                         CornerRadius = new CornerRadius(5),
-                        Margin = new Thickness(1),
-                        Background= new SolidColorBrush(Color.FromArgb(10, 0, 0, 0))
+                        Margin = new Thickness(0.5),
+                        Background= new SolidColorBrush(Color.FromArgb(5, 0, 0, 0))
                     };
 
                     TextBlock textBlock = CreateRichText(matrixValues[i, j]);
@@ -70,10 +74,6 @@ namespace MaticeApp
                 }
             }
 
-            // Calculate and set the UserControl's height based on the number of rows
-            Height = RowsCount * RowHeight;
-            Width = ColumnsCount * CellWidth+10;
-
             // Update the arc sizes for the brackets
             double arcSize = (Height * 0.45);
             double arcHeight = (Height * 0.75);
@@ -84,18 +84,9 @@ namespace MaticeApp
             RightArc.Size = new Size(arcSize, arcHeight);
             RightArc.Point = new Point(0, Height / 2);
 
-            // Scale the UserControl's width based on the number of columns if needed
-            if(autoWidth)
-            {
-                Width = (ColumnsCount * 55) + 8;
-            }
+            Width = 2 * LeftBracket.Width + MatrixGrid.Width;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
         private TextBlock CreateRichText(string text)
         {
             TextBlock textBlock = new TextBlock
@@ -154,9 +145,6 @@ namespace MaticeApp
 
             return textBlock;
         }
-
-
-
         
 
         private void LeftBracket_SizeChanged(object sender, SizeChangedEventArgs e)

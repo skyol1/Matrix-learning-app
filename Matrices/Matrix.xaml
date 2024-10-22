@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaticeApp"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             Height="120" Width="200">
+             mc:Ignorable="d"
+             d:Background="#FFE6E6E6"
+             d:DesignHeight="200" d:DesignWidth="200"
+             Height="90" Width="181">
 
     <Grid>
         <!-- Define a grid for the layout of the brackets and the matrix -->
@@ -41,7 +42,7 @@
         </Viewbox>
 
         <!-- Matrix Grid in the Center -->
-        <Grid x:Name="MatrixGrid" Grid.Column="1" Margin="1,0,0,0" Background="#00000000" MouseMove="MatrixGrid_MouseMove" MouseLeave="MatrixGrid_MouseLeave"/>
+        <Grid x:Name="MatrixGrid" Grid.Column="1" Margin="1,0,0,0" MouseMove="MatrixGrid_MouseMove" MouseLeave="MatrixGrid_MouseLeave"/>
 
         <!-- Canvas for Highlight -->
         <Canvas x:Name="HighlightCanvas" Grid.Column="1" IsHitTestVisible="False"/>

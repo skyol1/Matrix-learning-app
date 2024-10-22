@@ -17,11 +17,11 @@ using System.Windows.Shapes;
 namespace MaticeApp
 {
     /// <summary>
-    /// Interaction logic for UCRozdielMatic.xaml
+    /// Interaction logic for UCNasobokMatice.xaml
     /// </summary>
-    public partial class UCRozdielMatic : UserControl
+    public partial class UCNasobokMatice : UserControl
     {
-        public UCRozdielMatic()
+        public UCNasobokMatice()
         {
             InitializeComponent();
             SetMatrices();
@@ -34,34 +34,27 @@ namespace MaticeApp
                 { "1", "2" },
                 { "3", "4" }
             };
-            matrix1.SetMatrix(matrixData, true);
+            matrix1.SetMatrix(matrixData);
 
             matrixData = new string[,]
             {
-                { "9", "8" },
-                { "7", "6" }
+                { "3⋅1", "3⋅2" },
+                { "3⋅3", "3⋅4" }
             };
-            matrix2.SetMatrix(matrixData, true);
+            matrix2.SetMatrix(matrixData);
 
             matrixData = new string[,]
             {
-                { "1-9", "2-8" },
-                { "3-7", "4-6" }
+                { "3", "6" },
+                { "9", "12" }
             };
-            matrix3.SetMatrix(matrixData, true);
+            matrix3.SetMatrix(matrixData);
 
-            matrixData = new string[,]
-            {
-                { "-8", "-6" },
-                { "-4", "-2" }
-            };
-            matrix4.SetMatrix(matrixData, true);
-
-            matrix1.highlighters.Add(new SingleElementHighlighter(matrix2, Color.FromArgb(50, 0, 0, 255)));
+            matrix1.highlighters.Add(new SingleElementHighlighter(matrix2, Color.FromArgb(50, 255, 0, 0)));
             matrix2.highlighters.Add(new SingleElementHighlighter(matrix3, Color.FromArgb(50, 255, 0, 0)));
-            matrix3.highlighters.Add(new SingleElementHighlighter(matrix4, Color.FromArgb(50, 255, 0, 0)));
-            matrix4.highlighters.Add(new SingleElementHighlighter(matrix1, Color.FromArgb(50, 0, 255, 0)));
-            matrixCalculator.SetupCalculator(MatrixCalculator.Operation.Subtract);
+            matrix3.highlighters.Add(new SingleElementHighlighter(matrix1, Color.FromArgb(50, 0, 255, 0)));
+            matrix3.highlighters.Add(new ScalarHighlighter(Scalar, Color.FromArgb(50, 0, 0, 255)));
+
         }
     }
 }

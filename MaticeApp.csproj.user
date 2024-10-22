@@ -16,31 +16,31 @@
     <Compile Update="Matrices\MatrixSLR.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UCDeterminanty.xaml.cs">
+    <Compile Update="Pages\UCDeterminanty.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UCInverznaMatica.xaml.cs">
+    <Compile Update="Pages\UCInverznaMatica.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UCMatice.xaml.cs">
+    <Compile Update="Pages\UCMatice.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UCNasobokMatice.xaml.cs">
+    <Compile Update="Pages\UCNasobokMatice.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UCRiadkoveOperacie.xaml.cs">
+    <Compile Update="Pages\UCRiadkoveOperacie.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UCRozdielMatic.xaml.cs">
+    <Compile Update="Pages\UCRozdielMatic.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UCSucetMatic.xaml.cs">
+    <Compile Update="Pages\UCSucetMatic.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UCSucinMatic.xaml.cs">
+    <Compile Update="Pages\UCSucinMatic.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UCTransponovanaMatica.xaml.cs">
+    <Compile Update="Pages\UCTransponovanaMatica.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -57,31 +57,31 @@
     <Page Update="Matrices\MatrixSLR.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UCDeterminanty.xaml">
+    <Page Update="Pages\UCDeterminanty.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UCInverznaMatica.xaml">
+    <Page Update="Pages\UCInverznaMatica.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UCMatice.xaml">
+    <Page Update="Pages\UCMatice.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UCNasobokMatice.xaml">
+    <Page Update="Pages\UCNasobokMatice.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UCRiadkoveOperacie.xaml">
+    <Page Update="Pages\UCRiadkoveOperacie.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UCRozdielMatic.xaml">
+    <Page Update="Pages\UCRozdielMatic.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UCSucetMatic.xaml">
+    <Page Update="Pages\UCSucetMatic.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UCSucinMatic.xaml">
+    <Page Update="Pages\UCSucinMatic.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UCTransponovanaMatica.xaml">
+    <Page Update="Pages\UCTransponovanaMatica.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

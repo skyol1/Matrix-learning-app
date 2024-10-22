@@ -6,8 +6,8 @@ namespace MaticeApp
     public interface IMatrix
     {
         List<IHighlightable> highlighters { get; }
-        double RowHeight { get; }
-        double CellWidth {  get; }
+        int RowHeight { get; }
+        int CellWidth {  get; }
         uint RowsCount { get; }
         uint ColumnsCount { get; }
         Canvas GetHighlightCanvas();

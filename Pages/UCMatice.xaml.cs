@@ -35,7 +35,7 @@ namespace MaticeApp
                 { "⋮", "⋮", "⋱", "⋮"},
                 { "a_m1_", "a_m2_", "...", "a_mn_"}
             };
-            matrix1.SetMatrix(matrixData, true);
+            matrix1.SetMatrix(matrixData);
 
             matrixData = new string[,]
             {
@@ -43,8 +43,8 @@ namespace MaticeApp
                 { "a_21_", "a_22_", "a_23_" },
                 { "a_31_", "a_32_", "a_33_" }
             };
-            matrix2.SetMatrix(matrixData, true);
-            matrix5.SetMatrix(matrixData, true);
+            matrix2.SetMatrix(matrixData);
+            matrix5.SetMatrix(matrixData);
 
             matrixData = new string[,]
             {
@@ -52,8 +52,8 @@ namespace MaticeApp
                 { "a_21_", "a_22_", "a_23_", "a_24_" },
                 { "a_31_", "a_32_", "a_33_", "a_34_" }
             };
-            matrix3.SetMatrix(matrixData, true);
-            matrix6.SetMatrix(matrixData, true);
+            matrix3.SetMatrix(matrixData);
+            matrix6.SetMatrix(matrixData);
 
             matrixData = new string[,]
             {
@@ -62,14 +62,14 @@ namespace MaticeApp
                 { "a_31_", "a_32_", "a_33_" },
                 { "a_41_", "a_42_", "a_43_" }
             };
-            matrix4.SetMatrix(matrixData, true);
-            matrix7.SetMatrix(matrixData, true);
+            matrix4.SetMatrix(matrixData);
+            matrix7.SetMatrix(matrixData);
 
             matrixData = new string[,]
             {
                 { "r_1_", "r_2_", "...", "r_n_" }
             };
-            matrix8.SetMatrix(matrixData, true);
+            matrix8.SetMatrix(matrixData);
 
             matrixData = new string[,]
             {
@@ -78,7 +78,7 @@ namespace MaticeApp
                 { "⋮" },
                 { "c_n_" },
             };
-            matrix9.SetMatrix(matrixData, true);
+            matrix9.SetMatrix(matrixData);
 
             matrixData = new string[,]
             {
@@ -87,7 +87,7 @@ namespace MaticeApp
                 { "⋮", "⋮", "⋱", "⋮"},
                 { "0", "0", "...", "0" }
             };
-            matrix10.SetMatrix(matrixData, true);
+            matrix10.SetMatrix(matrixData);
 
             matrixData = new string[,]
             {
@@ -97,7 +97,7 @@ namespace MaticeApp
                 { "⋮", "⋮", "⋮", "⋱", "⋮"},
                 { "0", "0", "0", "...", "a_nn_"}
             };
-            matrix11.SetMatrix(matrixData, true);
+            matrix11.SetMatrix(matrixData);
 
             matrixData = new string[,]
             {
@@ -107,7 +107,7 @@ namespace MaticeApp
                 { "⋮", "⋮", "⋮", "⋱", "⋮"},
                 { "b_n1_", "b_n2_", "b_n3_", "...", "b_nn_"}
             };
-            matrix12.SetMatrix(matrixData, true);
+            matrix12.SetMatrix(matrixData);
 
             matrixData = new string[,]
             {
@@ -117,7 +117,7 @@ namespace MaticeApp
                 { "⋮", "⋮", "⋮", "⋱", "⋮"},
                 { "0", "0", "0", "...", "1"}
             };
-            matrix13.SetMatrix(matrixData, true);
+            matrix13.SetMatrix(matrixData);
         }
     }
 }

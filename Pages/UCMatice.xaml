@@ -111,7 +111,7 @@
                     <TextBlock Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="20,0,0,0">
                         Stĺpcový vektor
                     </TextBlock>
-                    <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Margin="30,0,10,0">
+                    <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Margin="30,0,0,0">
                         <Run FontWeight="SemiBold" >c</Run> =
                     </TextBlock>
                     <local:Matrix x:Name="matrix9" Grid.Row="1" Grid.Column="3"/>
@@ -169,6 +169,7 @@
                         <Run FontWeight="SemiBold" >B</Run> =
                     </TextBlock>
                     <local:Matrix Grid.Row="1" Grid.Column="3" x:Name="matrix12"/>
+
                 </Grid>
 
 

@@ -54,8 +54,8 @@ namespace MaticeApp
         }
         private void SetupAddSubtract()
         {
-            matrix1.SetMatrix(matrixAColumns, matrixARows, true);
-            matrix2.SetMatrix(matrixAColumns, matrixARows, true);
+            matrix1.SetMatrix(matrixAColumns, matrixARows);
+            matrix2.SetMatrix(matrixAColumns, matrixARows);
 
             matrix1.highlighters.Add(new SingleElementHighlighter(matrix2, Color.FromArgb(40, 255, 0, 0)));
             matrix2.highlighters.Add(new SingleElementHighlighter(matrix3, Color.FromArgb(40, 0, 0, 255)));
@@ -68,7 +68,7 @@ namespace MaticeApp
             for (int i = 0; i < matrixAColumns; i++)
                 for (int j = 0; j < matrixARows; j++)
                     matrixData[i, j] = "0";
-            matrix3.SetMatrix(matrixData, true);
+            matrix3.SetMatrix(matrixData);
 
             switch (selectedOperation)
             {
@@ -82,8 +82,8 @@ namespace MaticeApp
         }
         private void SetupMultiply()
         {
-            matrix1.SetMatrix(matrixAColumns, matrixARows, true);
-            matrix2.SetMatrix(matrixBColumns, matrixBRows, true);
+            matrix1.SetMatrix(matrixAColumns, matrixARows);
+            matrix2.SetMatrix(matrixBColumns, matrixBRows);
 
             RightRows.IsReadOnly = true;
             RightColumns.IsReadOnly = false;
@@ -92,7 +92,7 @@ namespace MaticeApp
             for (int i = 0; i < matrixAColumns; i++)
                 for (int j = 0; j < matrixBRows; j++)
                     matrixData[i, j] = "0";
-            matrix3.SetMatrix(matrixData, true);
+            matrix3.SetMatrix(matrixData);
 
             OperationSymbol.Text = "*";
             matrix1.highlighters.Add(new RowHighlighter(matrix2, Color.FromArgb(50, 0, 0, 255)));
@@ -118,7 +118,7 @@ namespace MaticeApp
                 case Operation.Multiply:
                     result = MultiplyMatrix(input1, input2); break;
             }
-            matrix3.SetMatrix(ToStringData(result),true);
+            matrix3.SetMatrix(ToStringData(result));
         }
 
         private double[,] AddMatrix(double[,] matrixA, double[,] matrixB)
