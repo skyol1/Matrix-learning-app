@@ -21,7 +21,8 @@ namespace MaticeApp
         public MainWindow()
         {
             InitializeComponent();
-            _currentUserControl = UCMatice; // Set initial UserControl
+            _currentUserControl = Calculator; // Set initial UserControl
+
         }
         
         

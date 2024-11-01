@@ -5,86 +5,200 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaticeApp"
              mc:Ignorable="d" 
-             d:DesignHeight="2000" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+             d:Background="Gray"
+             d:DesignHeight="800" d:DesignWidth="700">
+    <Border BorderThickness="4" CornerRadius="10" BorderBrush="Brown" HorizontalAlignment="Left">
+        <StackPanel HorizontalAlignment="Left" Margin="10,5,10,10">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <Grid Margin="0,0,0,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" Margin="0,0,0,10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Button Margin="0,0,0,0" Grid.Column="0" Width="220" x:Name="RandomizeLeftButton" Click="RandomizeLeftButton_Click">Randomize left input</Button>
-            <Button Margin="40,0,0,0" Grid.Column="1" Width="220" x:Name="RandomizeRightButton" Click="RandomizeRightButton_Click">Randomize right input</Button>
-            <Button Margin="40,0,0,0" Grid.Column="2" Width="145" x:Name="ClearButton" Click="ClearButton_Click">Clear all inputs</Button>
-        </Grid>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0">Left columns:</TextBlock>
-                <TextBox x:Name="LeftColumns" Grid.Column="1" Width="30" Text="3" HorizontalAlignment="Left" 
-                         Margin="10,5,5,5" TextChanged="LeftColumns_TextChanged" MaxLength="1"/>
-            </Grid>
-            <Grid Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0">Left rows:</TextBlock>
-                <TextBox x:Name="LeftRows" Grid.Column="1" Width="30" Text="3" HorizontalAlignment="Left" 
-                         Margin="10,5,5,5" TextChanged="LeftRows_TextChanged" MaxLength="1"/>
-            </Grid>
-            <Grid Grid.Column="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0">Right columns:</TextBlock>
-                <TextBox x:Name="RightColumns" Grid.Column="1" Width="30" Text="3" HorizontalAlignment="Left" 
-                         Margin="10,5,5,5" TextChanged="RightColumns_TextChanged" MaxLength="1"/>
-            </Grid>
-            <Grid Grid.Column="3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0">Right rows:</TextBlock>
-                <TextBox x:Name="RightRows" Grid.Column="1" Width="30" Text="3" HorizontalAlignment="Left" 
-                         Margin="10,5,5,5" TextChanged="RightRows_TextChanged" MaxLength="1"/>
-            </Grid>
-        </Grid>
-        <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <local:InputMatrix Grid.Column="0" x:Name="matrix1"/>
-                <TextBlock Grid.Column="1" x:Name="OperationSymbol" VerticalAlignment="Center" Margin="10,0,10,0">
-                </TextBlock>
-                <local:InputMatrix Grid.Row="0" Grid.Column="2" x:Name="matrix2"/>
-                <TextBlock Grid.Column="3" VerticalAlignment="Center" Margin="10,0,10,0">
-                =
-                </TextBlock>
-                <local:Matrix Grid.Column="4" x:Name="matrix3" />
-            </Grid>
-        </ScrollViewer>
-    </Grid>
+                    <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center">
+                            Matica <Run FontWeight="SemiBold">A</Run>
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="0" FontSize="16" Text="riadky"/>
+                        <TextBlock Grid.Row="1" Grid.Column="2" FontSize="16" Text="stľpce"/>
+                        <local:TextBoxInputMatrixSize Grid.Row="2" Grid.Column="0" Width="35" Height="30" Text="3"
+                             x:Name="TextBoxInputMatrixARow" TextChanged="TextBoxInputMatrixARow_TextChanged" Valid="True"/>
+                        <TextBlock Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Bottom" Margin="-3,0,-3,-1" FontSize="30" Text="×"/>
+                        <local:TextBoxInputMatrixSize Grid.Row="2" Grid.Column="2" Width="35" Height="30" Text="3"
+                             x:Name="TextBoxInputMatrixAColumn" TextChanged="TextBoxInputMatrixAColumn_TextChanged" Valid="True"/>
+                    </Grid>
+
+                    <local:InputMatrix Grid.Row="1" Grid.Column="0" x:Name="inputMatrix1" HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center" Margin="0,20,0,20"/>
+
+                    <StackPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="ButtonClearA" Click="ButtonClearA_Click" >Vymazať</Button>
+                            <Button x:Name="ButtonRandomA" Click="ButtonRandomA_Click" Margin="5,0,0,0">Náhodná</Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
+                            <Button x:Name="ButtonIdentityA" Click="ButtonIdentityA_Click">Jednotková</Button>
+                            <Button x:Name="ButtonCopyBtoA" Click="ButtonCopyBtoA_Click" Margin="5,0,0,0">
+                                <TextBlock>Kópia <Run FontWeight="SemiBold">B</Run></TextBlock>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
+                            <Button x:Name="ButtonTransposeA" Click="ButtonTransposeA_Click" Margin="0,0,5,0">Transponovaná</Button>
+                            <Button x:Name="ButtonInvertA" Click="ButtonInvertA_Click" ToolTipService.InitialShowDelay="0">Inverzná</Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
+                            <Button x:Name="ButtonDeterminantA" Click="ButtonDeterminantA_Click" ToolTipService.InitialShowDelay="0">Determinant</Button>
+                            <Button x:Name="ButtonMultiplyA" Click="ButtonMultiplyA_Click" Margin="5,0,0,0">Krát</Button>
+                            <TextBox TextAlignment="Center" MaxLength="10" Width="60"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="10,10,10,10">
+                        <Button x:Name="ButtonAdd" Click="ButtonAddSubstract_Click" ToolTipService.InitialShowDelay="0" >
+                            <TextBlock><Run FontWeight="SemiBold">A</Run> + <Run FontWeight="SemiBold">B</Run></TextBlock>
+                        </Button>
+                        <Button x:Name="ButtonSubstract" Click="ButtonAddSubstract_Click" Margin="0,5,0,5" ToolTipService.InitialShowDelay="0" >
+                            <TextBlock><Run FontWeight="SemiBold">A</Run> - <Run FontWeight="SemiBold">B</Run></TextBlock>
+                        </Button>
+                        <Button x:Name="ButtonMultiply" Click="ButtonMultiply_Click" ToolTipService.InitialShowDelay="0" >
+                            <TextBlock><Run FontWeight="SemiBold">A</Run> × <Run FontWeight="SemiBold">B</Run></TextBlock>
+                        </Button>
+                    </StackPanel>
+
+                    <Grid Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center">
+                             Matica <Run FontWeight="SemiBold">B</Run>
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="0" FontSize="16" Text="riadky"/>
+                        <TextBlock Grid.Row="1" Grid.Column="2" FontSize="16" Text="stľpce"/>
+                        <local:TextBoxInputMatrixSize Grid.Row="2" Grid.Column="0" Width="35" Height="30" Text="3"
+                            x:Name="TextBoxInputMatrixBRow" TextChanged="TextBoxInputMatrixBRow_TextChanged" Valid="True"/>
+                        <TextBlock Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Bottom" Margin="-3,0,-3,-1" FontSize="30" Text="×"/>
+                        <local:TextBoxInputMatrixSize Grid.Row="2" Grid.Column="2" Width="35" Height="30" Text="3"
+                            x:Name="TextBoxInputMatrixBColumn" TextChanged="TextBoxInputMatrixBColumn_TextChanged" Valid="True"/>
+                    </Grid>
+
+                    <local:InputMatrix Grid.Row="1" Grid.Column="2" x:Name="inputMatrix2" HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center" Margin="0,20,0,20"/>
+
+                    <StackPanel Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="ButtonClearB" Click="ButtonClearB_Click">Vymazať</Button>
+                            <Button x:Name="ButtonRandomB" Click="ButtonRandomB_Click" Margin="5,0,0,0">Náhodná</Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
+                            <Button x:Name="ButtonIdentityB" Click="ButtonIdentityB_Click">Jednotková</Button>
+                            <Button x:Name="ButtonCopyAtoB" Click="ButtonCopyAtoB_Click" Margin="5,0,0,0">
+                                <TextBlock>Kópia <Run FontWeight="SemiBold">A</Run></TextBlock>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
+                            <Button x:Name="ButtonTransposeB" Click="ButtonTransposeB_Click" Margin="0,0,5,0">Transponovaná</Button>
+                            <Button x:Name="ButtonInvertB" Click="ButtonInvertB_Click" ToolTipService.InitialShowDelay="0">Inverzná</Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
+                            <Button x:Name="ButtonDeterminantB" Click="ButtonDeterminantB_Click" ToolTipService.InitialShowDelay="0">Determinant</Button>
+                            <Button x:Name="ButtonMultiplyB" Click="ButtonMultiplyB_Click" Margin="5,0,0,0">Krát</Button>
+                            <TextBox TextAlignment="Center" MaxLength="10" Width="60"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+
+                </Grid>
+            </ScrollViewer>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <StackPanel Margin="0,0,0,5">
+                    <TextBlock FontSize="26">
+                        Výsledok
+                    </TextBlock>
+
+                    <TextBlock x:Name="errorTextBlock" Foreground="Red" Visibility="Collapsed"/>
+
+                    <Grid HorizontalAlignment="Left" x:Name="outputPanel1" Margin="0,10,0,0" Visibility="Collapsed" d:Visibility="Visible">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock x:Name="outputTextAdd" VerticalAlignment="Center" Margin="0,0,10,0" Visibility="Collapsed">
+                            <Run FontWeight="SemiBold">A</Run> + <Run FontWeight="SemiBold">B</Run> =
+                        </TextBlock>
+
+                        <TextBlock x:Name="outputTextSubstract" VerticalAlignment="Center" Margin="0,0,10,0" Visibility="Collapsed">
+                            <Run FontWeight="SemiBold">A</Run> - <Run FontWeight="SemiBold">B</Run> =
+                        </TextBlock>
+
+                        <TextBlock x:Name="outputTextMultiply" VerticalAlignment="Center" Margin="0,0,10,0" Visibility="Collapsed">
+                            <Run FontWeight="SemiBold">A</Run> × <Run FontWeight="SemiBold">B</Run> =
+                        </TextBlock>
+
+                        <TextBlock x:Name="outputTextTransposed" VerticalAlignment="Center" Margin="0,0,10,0" Visibility="Collapsed">
+                            <Run x:Name="outputTextTransposedMatrixName" FontWeight="SemiBold"/><Run BaselineAlignment="TextTop" FontWeight="SemiBold" FontSize="14" Text="T" FontStyle="Italic"/> =
+                        </TextBlock>
+
+                        <TextBlock x:Name="outputTextInverted" VerticalAlignment="Center" Margin="0,0,10,0" Visibility="Collapsed">
+                            <Run x:Name="outputTextInvertedMatrixName" FontWeight="SemiBold"/><Run Text="-1" BaselineAlignment="TextTop" FontSize="14"/> =
+                        </TextBlock>
+
+                        <TextBlock x:Name="outputTextMultiplied" VerticalAlignment="Center" Margin="0,0,10,0" Visibility="Collapsed">
+                            <Run x:Name="outputTextMultipliedMatrixName" FontWeight="SemiBold"/> · <Run x:Name="multipliedBy"/> =
+                        </TextBlock>
+
+                        <local:OutputMatrix Grid.Row="0" Grid.Column="1" x:Name="outputMatrix" HorizontalAlignment="Center"/>
+
+                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                            <TextBlock>Kopírovať do</TextBlock>
+                            <Button Width="40" Margin="5,0,5,0">
+                                <TextBlock><Run FontWeight="SemiBold">A</Run></TextBlock>
+                            </Button>
+                            <Button Width="40">
+                                <TextBlock><Run FontWeight="SemiBold">B</Run></TextBlock>
+                            </Button>
+                        </StackPanel>
+                            
+                    </Grid>
+
+                    <StackPanel Orientation="Horizontal" x:Name="outputPanel2" Visibility="Collapsed" d:Visibility="Visible">
+                        <TextBlock Margin="0,0,5,0">
+                            |<Run FontWeight="SemiBold" d:Text="A"/>| =
+                        </TextBlock>
+                        <TextBox IsReadOnly="True" Margin="0,2,0,0" d:Width="30"/>
+                    </StackPanel>
+                    
+                </StackPanel>
+            </ScrollViewer>
+        </StackPanel>
+    </Border>
 </UserControl>

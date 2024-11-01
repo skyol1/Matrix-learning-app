@@ -30,7 +30,7 @@
                     je matica typu <Italic>m</Italic>×<Italic>n</Italic>. 
                     Maticu B = (<Italic>b<Run BaselineAlignment="Subscript" Text="ij" FontSize="14" /></Italic>) 
                     typu <Italic>m</Italic>×<Italic>n</Italic> 
-                    nazývame k-násobok matice <Run FontWeight="SemiBold">A</Run>, píšeme 
+                    nazývame <Italic>k</Italic>-násobok matice <Run FontWeight="SemiBold">A</Run>, píšeme 
                     <Run FontWeight="SemiBold">B</Run> = <Italic>k</Italic> · <Run FontWeight="SemiBold">A</Run>, 
                     ak <Italic>b<Run BaselineAlignment="Subscript" Text="ij" FontSize="14" /></Italic> = 
                     <Italic>ka<Run BaselineAlignment="Subscript" Text="ij" FontSize="14" /></Italic> pre každé 
@@ -129,7 +129,7 @@
                     </TextBlock>
                     <TextBlock Grid.Row="5" Grid.Column="1" TextWrapping="Wrap">
                         <Run FontWeight="SemiBold">Násobenie opačným číslom:</Run> <LineBreak/>
-                        Vynásobením matice číslom -1 dostaneme opačnú maticu, kde 
+                        Vynásobením matice číslom (-1) dostaneme opačnú maticu, kde 
                         každý prvok je nahradený svojím opačným číslom. <LineBreak/>
                         (-1) ⋅ <Run FontWeight="SemiBold">A</Run> = -<Run FontWeight="SemiBold">A</Run>
                     </TextBlock>

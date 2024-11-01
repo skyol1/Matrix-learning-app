@@ -23,6 +23,19 @@ namespace MaticeApp
         public UCInverznaMatica()
         {
             InitializeComponent();
+            SetMatrices();
+        }
+
+        private void SetMatrices()
+        {
+            string[,] matrixData =
+            {
+                { "D_11_", "D_21_", "...", "D_n1_",  },
+                { "D_12_", "D_22_", "...", "D_n2_",  },
+                { "⋮", "⋮", "⋱", "⋮"},
+                { "D_1n_", "D_2n_", "...", "D_nn_",  },
+            };
+            matrix1.SetMatrix(matrixData);
         }
     }
 }

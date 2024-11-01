@@ -35,47 +35,30 @@
                     = <Italic>a<Run BaselineAlignment="Subscript" Text="ij" FontSize="14" /></Italic> 
                     - <Italic>b<Run BaselineAlignment="Subscript" Text="ij" FontSize="14" /></Italic> 
                     pre každé <Italic>i</Italic> = 1,..., <Italic>m</Italic> a <Italic>j</Italic> = 1,..., <Italic>n</Italic>. <LineBreak/>
-                    Príklad:
+                    <Run Text="Príklad" FontWeight="SemiBold"/>:
                 </TextBlock>
 
-                <Grid HorizontalAlignment="Left" Margin="0,10,0,10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">
-                    <Run FontWeight="SemiBold" >A</Run> =
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                    <TextBlock VerticalAlignment="Center" Margin="0,0,5,0">
+                        <Run FontWeight="SemiBold" >A</Run> =
                     </TextBlock>
-                    <local:Matrix Grid.Column="1" x:Name="matrix1"/>
-                    <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="30,0,10,0">
-                    <Run FontWeight="SemiBold" >B</Run> =
+                    <local:Matrix x:Name="matrix1"/>
+                    <TextBlock VerticalAlignment="Center" Margin="20,0,5,0">
+                        <Run FontWeight="SemiBold" >B</Run> =
                     </TextBlock>
-                    <local:Matrix Grid.Column="3" x:Name="matrix2"/>
-                </Grid>
-                
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">
-                    <Run FontWeight="SemiBold" >C</Run> = <Run FontWeight="SemiBold" >A</Run> - <Run FontWeight="SemiBold" >B</Run> =
+                    <local:Matrix x:Name="matrix2"/>
+                    <TextBlock VerticalAlignment="Center" Margin="20,0,5,0">
+                        <Run FontWeight="SemiBold" >C</Run> = <Run FontWeight="SemiBold" >A</Run> - <Run FontWeight="SemiBold" >B</Run> =
                     </TextBlock>
-                    <local:Matrix Grid.Column="1" x:Name="matrix3"/>
-                    <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="10,0,10,0">
-                    =
-                    </TextBlock>
-                    <local:Matrix Grid.Column="3" x:Name="matrix4"/>
-                </Grid>
-                
+                    <local:Matrix x:Name="matrix3"/>
+                    <TextBlock Text="=" VerticalAlignment="Center" Margin="5,0,5,0"/>
+                    <local:Matrix x:Name="matrix4"/>
+                </StackPanel>
+
                 <TextBlock FontSize="24" Margin="0,30,0,10">
                     <Bold>Vlástnosti:</Bold>
                 </TextBlock>
-                
+
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -114,7 +97,7 @@
                     </TextBlock>
                     <TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,10">
                         <Run FontWeight="SemiBold">Asociatívnosť</Run> <Italic><Run FontWeight="SemiBold">neplatí</Run></Italic>: <LineBreak/>
-                        Pri odčítaní viacerých matíc nemôžeme meniť poradie operácií, pretože by to zmenilo výsledok. <LineBreak/>
+                        Pri odčítaní viacerých matíc nemôžeme meniť poradie operácií. <LineBreak/>
                         (<Run FontWeight="SemiBold">A</Run> - <Run FontWeight="SemiBold">B</Run>) - <Run FontWeight="SemiBold">C</Run> ≠
                         <Run FontWeight="SemiBold">A</Run> - (<Run FontWeight="SemiBold">B</Run> - <Run FontWeight="SemiBold">C</Run>)
                     </TextBlock>
@@ -123,7 +106,7 @@
                     </TextBlock>
                     <TextBlock Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,10">
                         <Run FontWeight="SemiBold">Neutrálny prvok:</Run> <LineBreak/>
-                        Ak odpočítame nulovú maticu od ľubovoľnej matice, výsledkom bude pôvodná matica. <LineBreak/>
+                        Ak odpočítame nulovú maticu od ľubovoľnej matice, dostaneme pôvodnú maticu. <LineBreak/>
                         <Run FontWeight="SemiBold">A</Run> - <Run FontWeight="SemiBold">0</Run> = <Run FontWeight="SemiBold">A</Run>
                     </TextBlock>
                     <TextBlock Grid.Row="4" Grid.Column="0" Margin="0,0,10,0">
@@ -131,14 +114,12 @@
                     </TextBlock>
                     <TextBlock Grid.Row="4" Grid.Column="1" TextWrapping="Wrap">
                         <Run FontWeight="SemiBold">Distributívnosť skalára:</Run> <LineBreak/>
-                        Skalár <Italic>k</Italic> sa môže distribuovať na rozdiel dvoch matíc. 
                         Násobenie rozdielu matíc skalárom je ekvivalentné násobeniu každej 
                         matice tým istým skalárom a následnému odčítaniu. <LineBreak/>
                         <Italic>k</Italic>(<Run FontWeight="SemiBold">A</Run> - <Run FontWeight="SemiBold">B</Run>) = 
                         <Italic>k</Italic><Run FontWeight="SemiBold">A</Run> - <Italic>k</Italic><Run FontWeight="SemiBold">B</Run>
                     </TextBlock>
                 </Grid>
-                <local:MatrixCalculator x:Name="matrixCalculator"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

@@ -26,6 +26,8 @@ namespace MaticeApp
             SetMatrices();
         }
 
+        
+
         private void SetMatrices()
         {
             string[,] matrixData =
@@ -103,7 +105,7 @@ namespace MaticeApp
             {
                 { "b_11_", "0", "0", "...", "0"},
                 { "b_21_", "b_22_", "0", "...", "0"},
-                { "b_31_", "B_32_", "b_33_", "...", "0"},
+                { "b_31_", "b_32_", "b_33_", "...", "0"},
                 { "⋮", "⋮", "⋮", "⋱", "⋮"},
                 { "b_n1_", "b_n2_", "b_n3_", "...", "b_nn_"}
             };

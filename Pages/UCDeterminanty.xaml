@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MaticeApp"
              mc:Ignorable="d" 
              d:Background="#FFE6E6E6"
-             d:DesignHeight="2000" d:DesignWidth="800">
+             d:DesignHeight="4000" d:DesignWidth="800">
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="8,10,10,50">
@@ -16,7 +16,7 @@
                 </TextBlock>
 
                 <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
-                    Determinant je skalarová hodnota, ktorá je priradená k štvorcovej matici 
+                    Determinant je skalárna hodnota, ktorá je priradená ku štvorcovej matici 
                     a poskytuje dôležité informácie o tejto matici, ako aj o lineárnej transformácii, 
                     ktorú matica reprezentuje. Determinant môže byť použitý na zisťovanie inverzibility matice, 
                     objem transformácie a riešenie sústav lineárnych rovníc.
@@ -36,6 +36,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -47,7 +48,7 @@
                     </TextBlock>
 
                     <TextBlock Grid.Row="0" Grid.Column="1">
-                        ak <Italic>n</Italic> = 1, tak |<Run FontWeight="SemiBold">A</Run>| =
+                        <Italic>n</Italic> = 1: |<Run FontWeight="SemiBold">A</Run>| =
                         <Italic>a</Italic><Run BaselineAlignment="Subscript" FontSize="14">11</Run>
                     </TextBlock>
 
@@ -56,15 +57,472 @@
                     </TextBlock>
 
                     <TextBlock Grid.Row="1" Grid.Column="1">
-                        ak <Italic>n</Italic> > 1, tak
-                        |<Run FontWeight="SemiBold">A</Run>| =
-                        <Italic>a</Italic><Run BaselineAlignment="Subscript" FontSize="14">11</Run>|<Run FontWeight="SemiBold">A</Run>|<Run BaselineAlignment="Subscript" FontSize="14">11</Run> -
-                        <Italic>a</Italic><Run BaselineAlignment="Subscript" FontSize="14">12</Run>|<Run FontWeight="SemiBold">A</Run>|<Run BaselineAlignment="Subscript" FontSize="14">12</Run> +
-                        <Italic>a</Italic><Run BaselineAlignment="Subscript" FontSize="14">13</Run>|<Run FontWeight="SemiBold">A</Run>|<Run BaselineAlignment="Subscript" FontSize="14">13</Run>
-                        - ... +
-                        (-1)<Run BaselineAlignment="TextTop" FontStyle="Italic" FontSize="14">n</Run><Run BaselineAlignment="TextTop" FontSize="14">+1</Run>
-                        <Italic>a</Italic><Run BaselineAlignment="Subscript" FontSize="14">1</Run><Run BaselineAlignment="Subscript" FontStyle="Italic" FontSize="14">n</Run>|<Run FontWeight="SemiBold">A</Run>|<Run BaselineAlignment="Subscript" FontSize="14">1</Run><Run BaselineAlignment="Subscript" FontStyle="Italic" FontSize="14">n</Run>
+                        <Italic>n</Italic> = 2: |<Run FontWeight="SemiBold">A</Run>| =
+                        <Italic>a</Italic><Run BaselineAlignment="Subscript" FontSize="14">11</Run> ⋅
+                        <Italic>a</Italic><Run BaselineAlignment="Subscript" FontSize="14">22</Run> -
+                        <Italic>a</Italic><Run BaselineAlignment="Subscript" FontSize="14">12</Run> ⋅
+                        <Italic>a</Italic><Run BaselineAlignment="Subscript" FontSize="14">21</Run>
                     </TextBlock>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,0,10,0">
+                        3.
+                    </TextBlock>
+
+                    <StackPanel Grid.Row="2" Grid.Column="1">
+                        <TextBlock>
+                            <Italic>n</Italic> > 1:
+                        </TextBlock>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,10,0" Text="3.1."/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,0,0,5">
+                                Rozvoj podľa 1-ho riadku: <LineBreak/>
+                                <InlineUIContainer>
+                                    <Grid Margin="0,0,0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,3">
+                                            |<Run FontWeight="SemiBold">A</Run>| =
+                                        </TextBlock>
+                                        <Grid Grid.Column="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" HorizontalAlignment="Center" FontSize="16" FontStyle="Italic" Text="n" Margin="0,0,0,-5"/>
+                                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontSize="25" FontWeight="Light" Text="∑">
+                                                <TextBlock.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform ScaleX="2" ScaleY="1.5"/>
+                                                        <TranslateTransform X="-8" Y="-11"/>
+                                                    </TransformGroup>
+                                                </TextBlock.RenderTransform>
+                                            </TextBlock>
+                                            <TextBlock Grid.Row="2" FontSize="16" HorizontalAlignment="Center" Margin="0,1,0,0">
+                                                <Italic>j</Italic>=1
+                                            </TextBlock>
+                                        </Grid>
+                                        <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="5,0,0,0">
+                                            (-1)<Run Text="1+" BaselineAlignment="TextTop" FontSize="14"/><Run Text="j" BaselineAlignment="TextTop" FontSize="14" FontStyle="Italic"/> ⋅
+                                            <Italic>a</Italic><Run Text="1" BaselineAlignment="Subscript" FontSize="14"/><Run Text="j" BaselineAlignment="Subscript" FontSize="14" FontStyle="Italic"/> ⋅
+                                            |<Run FontWeight="SemiBold">A</Run><Run Text="1" BaselineAlignment="Subscript" FontSize="14"/><Run Text="j" BaselineAlignment="Subscript" FontStyle="Italic" FontSize="14"/>| =
+                                        </TextBlock>
+                                    </Grid>
+                                </InlineUIContainer> <LineBreak/>
+                                = <Italic>a</Italic><Run BaselineAlignment="Subscript" FontSize="14">11</Run>|<Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="Subscript" FontSize="14">11</Run>| -
+                                <Italic>a</Italic><Run BaselineAlignment="Subscript" FontSize="14">12</Run>|<Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="Subscript" FontSize="14">12</Run>| +
+                                <Italic>a</Italic><Run BaselineAlignment="Subscript" FontSize="14">13</Run>|<Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="Subscript" FontSize="14">13</Run>|
+                                - ... +
+                                (-1)<Run BaselineAlignment="TextTop" FontStyle="Italic" FontSize="14">n</Run><Run BaselineAlignment="TextTop" FontSize="14">+1</Run>
+                                <Italic>a</Italic><Run BaselineAlignment="Subscript" FontSize="14">1</Run><Run BaselineAlignment="Subscript" FontStyle="Italic" FontSize="14">n</Run>|<Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="Subscript" FontSize="14">1</Run><Run BaselineAlignment="Subscript" FontStyle="Italic" FontSize="14">n</Run>|
+                            </TextBlock>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,10,0" Text="3.2."/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,0,0,5">
+                                Rozvoj podľa <Italic>i</Italic>-teho riadku: <LineBreak/>
+                                <InlineUIContainer>
+                                    <Grid Margin="0,0,0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,3">
+                                            |<Run FontWeight="SemiBold">A</Run>| =
+                                        </TextBlock>
+                                        <Grid Grid.Column="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" HorizontalAlignment="Center" FontSize="16" FontStyle="Italic" Text="n" Margin="0,0,0,-5"/>
+                                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontSize="25" FontWeight="Light" Text="∑">
+                                                <!-- Change the size and move using rendering -->
+                                                <TextBlock.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform ScaleX="2" ScaleY="1.5"/>
+                                                        <TranslateTransform X="-8" Y="-11"/>
+                                                    </TransformGroup>
+                                                </TextBlock.RenderTransform>
+                                            </TextBlock>
+                                            <TextBlock Grid.Row="2" FontSize="16" HorizontalAlignment="Center" Margin="0,1,0,0">
+                                                <Italic>j</Italic>=1
+                                            </TextBlock>
+                                        </Grid>
+                                        <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="5,0,0,0">
+                                            (-1)<Run BaselineAlignment="TextTop" FontSize="14" FontStyle="Italic">i+j</Run> ⋅
+                                            <Italic>a<Run BaselineAlignment="Subscript" Text="ij" FontSize="14" /></Italic> ⋅
+                                            |<Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="Subscript" Text="ij" FontStyle="Italic" FontSize="14" />| =
+                                        </TextBlock>
+                                    </Grid>
+                                </InlineUIContainer> <LineBreak/>
+                                = (-1)<Run BaselineAlignment="TextTop" FontSize="14" FontStyle="Italic">i</Run><Run BaselineAlignment="TextTop" FontSize="14">+1</Run> ⋅
+                                <Italic>a<Run BaselineAlignment="Subscript" Text="i" FontSize="14" /></Italic><Run BaselineAlignment="Subscript" Text="1" FontSize="14" /> ⋅
+                                |<Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="Subscript" Text="i" FontStyle="Italic" FontSize="14" /><Run BaselineAlignment="Subscript" Text="1" FontSize="14" />| +
+                                (-1)<Run BaselineAlignment="TextTop" FontSize="14" FontStyle="Italic">i</Run><Run BaselineAlignment="TextTop" FontSize="14">+2</Run> ⋅
+                                <Italic>a<Run BaselineAlignment="Subscript" Text="i" FontSize="14" /></Italic><Run BaselineAlignment="Subscript" Text="2" FontSize="14" /> ⋅
+                                |<Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="Subscript" Text="i" FontStyle="Italic" FontSize="14" /><Run BaselineAlignment="Subscript" Text="2" FontSize="14" />| + ... +
+                                (-1)<Run BaselineAlignment="TextTop" FontSize="14" FontStyle="Italic">i+j</Run> ⋅
+                                <Italic>a<Run BaselineAlignment="Subscript" Text="ij" FontSize="14" /></Italic> ⋅
+                                |<Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="Subscript" Text="ij" FontStyle="Italic" FontSize="14" />|
+                            </TextBlock>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,0,10,0" Text="3.3."/>
+                            <TextBlock Grid.Row="2" Grid.Column="1">
+                                Rozvoj podľa <Italic>j</Italic>-teho stĺpca: <LineBreak/>
+                                <InlineUIContainer>
+                                    <Grid Margin="0,0,0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,3">
+                                            |<Run FontWeight="SemiBold">A</Run>| =
+                                        </TextBlock>
+                                        <Grid Grid.Column="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" HorizontalAlignment="Center" FontSize="16" FontStyle="Italic" Text="n" Margin="0,0,0,-5"/>
+                                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontSize="25" FontWeight="Light" Text="∑">
+                                                <!-- Change the size and move using rendering -->
+                                                <TextBlock.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform ScaleX="2" ScaleY="1.5"/>
+                                                        <TranslateTransform X="-8" Y="-11"/>
+                                                    </TransformGroup>
+                                                </TextBlock.RenderTransform>
+                                            </TextBlock>
+                                            <TextBlock Grid.Row="2" FontSize="16" HorizontalAlignment="Center" Margin="0,1,0,0">
+                                                <Italic>i</Italic>=1
+                                            </TextBlock>
+                                        </Grid>
+                                        <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="5,0,0,0">
+                                            (-1)<Run BaselineAlignment="TextTop" FontSize="14" FontStyle="Italic">i+j</Run> ⋅
+                                            <Italic>a<Run BaselineAlignment="Subscript" Text="ij" FontSize="14" /></Italic> ⋅
+                                            |<Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="Subscript" Text="ij" FontStyle="Italic" FontSize="14" />| =
+                                        </TextBlock>
+                                    </Grid>
+                                </InlineUIContainer> <LineBreak/>
+                                = (-1)<Run BaselineAlignment="TextTop" FontSize="14">1</Run><Run BaselineAlignment="TextTop" FontStyle="Italic" FontSize="14">+j</Run> ⋅
+                                <Italic>a</Italic><Run BaselineAlignment="Subscript" Text="1" FontSize="14"/><Run BaselineAlignment="Subscript" FontStyle="Italic" Text="j" FontSize="14" /> ⋅
+                                |<Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="Subscript" Text="1" FontSize="14" /><Run BaselineAlignment="Subscript" FontStyle="Italic" Text="j" FontSize="14" />| +
+                                (-1)<Run Text="2" BaselineAlignment="TextTop" FontSize="14"/><Run Text="+j" BaselineAlignment="TextTop" FontStyle="Italic" FontSize="14"/> ⋅
+                                <Italic>a</Italic><Run BaselineAlignment="Subscript" Text="2" FontSize="14"/><Run BaselineAlignment="Subscript" FontStyle="Italic" Text="j" FontSize="14" /> ⋅
+                                |<Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="Subscript" Text="2" FontSize="14" /><Run BaselineAlignment="Subscript" FontStyle="Italic" Text="j" FontSize="14" />| + ... +
+                                (-1)<Run BaselineAlignment="TextTop" FontSize="14" FontStyle="Italic">i+j</Run> ⋅
+                                <Italic>a<Run BaselineAlignment="Subscript" Text="ij" FontSize="14" /></Italic> ⋅
+                                |<Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="Subscript" Text="ij" FontStyle="Italic" FontSize="14" />|
+                            </TextBlock>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock FontWeight="Bold" FontSize="24" Margin="0,10,0,0">
+                    Príklad:
+                </TextBlock>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="1." Grid.Row="0" Grid.Column="0" Margin="0,0,10,0"/>
+
+                    <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,0,0,10">
+                        <Italic>n</Italic> = 1: <LineBreak/>
+                        <Run Text="A" FontWeight="SemiBold"/> =
+                        <InlineUIContainer BaselineAlignment="Center">
+                            <local:Matrix x:Name="matrix1" Margin="3,5,15,0"/>
+                        </InlineUIContainer>
+                        |<Run Text="A" FontWeight="SemiBold"/>| = a<Run Text="11" BaselineAlignment="Subscript" FontSize="14"/> = 5
+                    </TextBlock>
+
+                    <TextBlock Text="2." Grid.Row="1" Grid.Column="0" Margin="0,0,10,0"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,0,0,10">
+                        <Italic>n</Italic> = 2: <LineBreak/>
+                        <Run Text="A" FontWeight="SemiBold"/> =
+                        <InlineUIContainer BaselineAlignment="Center">
+                            <local:Matrix x:Name="matrix2" Margin="3,5,15,0"/>
+                        </InlineUIContainer>
+                        |<Run Text="A" FontWeight="SemiBold"/>| =
+                        (a<Run Text="11" BaselineAlignment="Subscript" FontSize="14"/> ⋅ a<Run Text="22" BaselineAlignment="Subscript" FontSize="14"/>) -
+                        (a<Run Text="12" BaselineAlignment="Subscript" FontSize="14"/> ⋅ a<Run Text="21" BaselineAlignment="Subscript" FontSize="14"/>) =
+                        (1 ⋅ 4) - (2 ⋅ 3) = -2
+                    </TextBlock>
+                    
+                    <TextBlock Text="3." Grid.Row="2" Grid.Column="0" Margin="0,0,10,0"/>
+
+                    <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,0,0,10">
+                        <TextBlock>
+                            <Italic>n</Italic> = 3 (jednoduchý spôsob - platí len pre 3×3):
+                        </TextBlock>
+                        <Grid Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock VerticalAlignment="Center" Margin="5,0,10,0">
+                                <Run Text="A" FontWeight="SemiBold"/> =
+                            </TextBlock>
+                            <local:Matrix Grid.Column="1" x:Name="matrix3_0"/>
+                            <TextBlock Grid.Column="2" Margin="20,0,0,0" TextWrapping="Wrap">
+                                Prvé dva riadky skopírujeme pod matricu. <LineBreak/>
+                                Sčítame násobky prvkov na troch hlavných diagonálach <LineBreak/>
+                                A odpočítame násobky prvkov na troch vedľajších diagonálach.
+                            </TextBlock>
+                        </Grid>
+                        <Grid Margin="0,10,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">
+                                |<Run Text="A" FontWeight="SemiBold"/>| =
+                            </TextBlock>
+                            <local:Matrix Grid.Row="0" Grid.Column="1" x:Name="matrix3_1"/>
+                            <local:Matrix Grid.Row="1" Grid.Column="1" x:Name="matrix3_2" HorizontalAlignment="Center"/>
+                            <Canvas Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" x:Name="Canvas3"/>
+                            <TextBlock Text="=" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                            <Grid Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Margin="50,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="1">
+                                    {[1⋅3⋅(-4)] + [1⋅5⋅5] + [(-2)⋅(-1)⋅3]}
+                                </TextBlock>
+                                <TextBlock Text="-" Grid.Row="0" Grid.Column="2" Margin="5,0,0,0"/>
+                                <TextBlock Text="-" Grid.Row="1" Grid.Column="0" Margin="0,0,5,0"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1">
+                                    {[5⋅3⋅(-2)] + [3⋅5⋅1] + [(-4)⋅(-1)⋅1]}
+                                </TextBlock>
+                                <TextBlock Text="= 30" Grid.Row="1" Grid.Column="2" Margin="5,0,0,0"/>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+
+                    <TextBlock Text="4." Grid.Row="3" Grid.Column="0" Margin="0,0,10,0"/>
+
+                    <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,0,0,10">
+                        <TextBlock>
+                            <Italic>n</Italic> = 4 (rozvoj podľa 1-ho riadku):
+                        </TextBlock>
+                        <Grid Margin="0,10,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0">
+                                <Run Text="A" FontWeight="SemiBold"/> =
+                            </TextBlock>
+                            <local:Matrix Grid.Column="1" x:Name="matrix4_0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="15,0,0,0" TextWrapping="Wrap">
+                                Každý prvok <Italic>a</Italic><Run Text="1" BaselineAlignment="Subscript" FontSize="14"/><Run 
+                                    Text="j" BaselineAlignment="Subscript" FontStyle="Italic" FontSize="14"/> 
+                                v prvom riadku vynásobíme determinantom podmatice 
+                                <Run Text="A" FontWeight="SemiBold"/><Run Text="1" BaselineAlignment="Subscript" FontSize="14"/><Run 
+                                    Text="j" BaselineAlignment="Subscript" FontStyle="Italic" FontSize="14"/> 
+                                ktorú získame z pôvodnej matice <Run Text="A" FontWeight="SemiBold"/> odstránením riadku a stĺpca, 
+                                v ktorom sa vybraný prvok nachádza
+                                (<Italic>R</Italic><Run Text="1" BaselineAlignment="Subscript" FontSize="16"/><Run 
+                                    Text="j" BaselineAlignment="Subscript" FontStyle="Italic" FontSize="14"/>).
+                                <LineBreak/> Nezabúdame na striedavé znamienka.
+                            </TextBlock>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,8,0,0">
+                                |<Run Text="A" FontWeight="SemiBold"/>| =
+                            </TextBlock>
+                            <local:Matrix Grid.Row="1" Grid.Column="1" x:Name="matrix4_1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                            <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,8,0,0">
+                                = 1⋅|<Run Text="A" FontWeight="SemiBold"/><Run Text="11" BaselineAlignment="Subscript" FontSize="14"/>| -
+                                5⋅|<Run Text="A" FontWeight="SemiBold"/><Run Text="12" BaselineAlignment="Subscript" FontSize="14"/>| +
+                                2⋅|<Run Text="A" FontWeight="SemiBold"/><Run Text="13" BaselineAlignment="Subscript" FontSize="14"/>| -
+                                3⋅|<Run Text="A" FontWeight="SemiBold"/><Run Text="14" BaselineAlignment="Subscript" FontSize="14"/>| =
+                                30
+                            </TextBlock>
+                        </Grid>
+                    </StackPanel>
+                    
+                    <TextBlock Text="5." Grid.Row="4" Grid.Column="0" Margin="0,0,10,0"/>
+
+                    <StackPanel Grid.Row="4" Grid.Column="1" Margin="0,0,0,10">
+                        <TextBlock>
+                            <Italic>n</Italic> = 4 (rozvoj podľa <Italic>i</Italic>-teho riadku):
+                        </TextBlock>
+                        <Grid Margin="0,10,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0">
+                                <Run Text="A" FontWeight="SemiBold"/> =
+                            </TextBlock>
+                            <local:Matrix Grid.Column="1" x:Name="matrix5_0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="15,0,0,0" TextWrapping="Wrap">
+                                Podobný spôsob ako pri rozvoje podľa 1-ho riadku. <LineBreak/>
+                                Znamienka sa tiež striedajú, ale už nemusia začínať plusom. <LineBreak/>
+                                Ak by nejaký prvok v riadku bol nulový, potom môžeme nepočítať determinant podmatice, 
+                                pretože po vynásobení z nulou dostaneme 0. Preto v tomto príklade si zvolíme riadok 3, v ktorom 
+                                <Italic>a</Italic><Run Text="32" BaselineAlignment="Subscript" FontSize="14"/> = 0.
+                            </TextBlock>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,8,0,0">
+                                |<Run Text="A" FontWeight="SemiBold"/>| =
+                            </TextBlock>
+                            <local:Matrix Grid.Row="1" Grid.Column="1" x:Name="matrix5_1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                            <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,8,0,0">
+                                = (-1)<Run BaselineAlignment="TextTop" FontSize="14" FontStyle="Italic">i+j</Run>⋅2⋅|<Run
+                                    Text="A" FontWeight="SemiBold"/><Run Text="11" BaselineAlignment="Subscript" FontSize="14"/>| -
+                                0⋅|<Run Text="A" FontWeight="SemiBold"/><Run Text="12" BaselineAlignment="Subscript" FontSize="14"/>| +
+                                12⋅|<Run Text="A" FontWeight="SemiBold"/><Run Text="13" BaselineAlignment="Subscript" FontSize="14"/>| -
+                                (-10)⋅|<Run Text="A" FontWeight="SemiBold"/><Run Text="14" BaselineAlignment="Subscript" FontSize="14"/>| = 30
+                            </TextBlock>
+                        </Grid>
+                    </StackPanel>
+                    
+                    <TextBlock Text="6." Grid.Row="5" Grid.Column="0" Margin="0,0,10,0"/>
+
+                    <StackPanel Grid.Row="5" Grid.Column="1">
+                        <TextBlock>
+                            <Italic>n</Italic> = 4 (rozvoj podľa <Italic>j</Italic>-teho stľpca + 
+                            zjednodušenie pomocou riadkových úprav):
+                        </TextBlock>
+                        <Grid Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0">
+                                <Run Text="A" FontWeight="SemiBold"/> =
+                            </TextBlock>
+                            <local:Matrix Grid.Column="1" x:Name="matrix6_0" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" Margin="10,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap">
+                                Podobný spôsob ako pri rozvoje podľa <Italic>i</Italic>-teho riadku, 
+                                ale už počítame podľa prvkov z vybraného stĺpca. <LineBreak/>
+                                Podľa vety, ak k riadku pripočítate násobok iného riadku, determinant sa nezmení. <LineBreak/>
+                                Preto môžeme maticu zjednodušiť: pomocou riadkových operácií necháme vo vybranom stĺpci iba jeden nenulový prvok. 
+                                Potom môžeme vypočítať iba determinant podmatice pre tento prvok, pretože všetky ostatné po vynásobení budú dávať nulu.
+                            </TextBlock>
+                        </Grid>
+                        <WrapPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,15,10,0">
+                                <local:Matrix x:Name="matrix6_1"/>
+                                <TextBlock Text="≈" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,15,10,0">
+                                <local:Matrix x:Name="matrix6_2"/>
+                                <TextBlock Text="≈" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,15,10,0">
+                                <local:Matrix x:Name="matrix6_3"/>
+                                <TextBlock Text="≈" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <local:Matrix x:Name="matrix6_4" VerticalAlignment="Bottom" Margin="0,15,0,0"/>
+                        </WrapPanel>
+                        <TextBlock Margin="0,10,0,0">
+                            <Run Text="Možnosť 1" FontWeight="SemiBold"/> - počítame podľa 1-ho stľpca:
+                        </TextBlock>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,8,10,0">
+                                |<Run Text="A" FontWeight="SemiBold"/>| =
+                            </TextBlock>
+                            <local:Matrix Grid.Column="1" x:Name="matrix6_5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                            <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,8,0,0">
+                                = (-1)<Run BaselineAlignment="TextTop" FontSize="14">1+1</Run>⋅1⋅|<Run
+                                    Text="A" FontWeight="SemiBold"/><Run Text="11" BaselineAlignment="Subscript" FontSize="14"/>| -
+                                0⋅|<Run Text="A" FontWeight="SemiBold"/><Run Text="21" BaselineAlignment="Subscript" FontSize="14"/>| +
+                                0⋅|<Run Text="A" FontWeight="SemiBold"/><Run Text="31" BaselineAlignment="Subscript" FontSize="14"/>| -
+                                0⋅|<Run Text="A" FontWeight="SemiBold"/><Run Text="41" BaselineAlignment="Subscript" FontSize="14"/>| = 30
+                            </TextBlock>
+                        </Grid>
+                        <TextBlock Margin="0,10,0,0" TextWrapping="Wrap">
+                            <Run Text="Možnosť 2" FontWeight="SemiBold"/> - pokračujeme v riadkových operáciach: <LineBreak/>
+                            Podľa vety, determinant trojuholníkovej matice sa rovná súčinu prvkov na jej hlavnej diagonále.
+                        </TextBlock>
+                        <WrapPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,15,10,0">
+                                <local:Matrix x:Name="matrix6_6"/>
+                                <TextBlock Text="≈" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,15,10,0">
+                                <local:Matrix x:Name="matrix6_7"/>
+                                <TextBlock Text="≈" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,15,10,0">
+                                <local:Matrix x:Name="matrix6_8"/>
+                                <TextBlock Text="≈" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                            </StackPanel>
+                            <local:Matrix x:Name="matrix6_9" VerticalAlignment="Bottom" Margin="0,15,0,0"/>
+                        </WrapPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,8,10,0">
+                                |<Run Text="A" FontWeight="SemiBold"/>| =
+                            </TextBlock>
+                            <local:Matrix Grid.Column="1" x:Name="matrix6_10" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                            <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,8,0,0">
+                                = 1 ⋅ 2 ⋅ 3 ⋅ 5 = 30
+                            </TextBlock>
+                        </Grid>
+                    </StackPanel>
                 </Grid>
 
                 <TextBlock FontSize="24" Margin="0,30,0,10">
@@ -176,13 +634,13 @@
                     <TextBlock Grid.Row="7" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,10">
                         <Run FontWeight="SemiBold">Zmena riadku:</Run> <LineBreak/>
                         Ak vymeníte ľubovoľné dva riadky, determinant zmení svoj znak. <LineBreak/>
-                        Ak (<Italic>R<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic> ↔
-                        <Italic>R<Run BaselineAlignment="Subscript" FontSize="17">j</Run></Italic>)
+                        Ak (<Italic>R<Run BaselineAlignment="Subscript" FontSize="17">i</Run> ↔
+                        R<Run BaselineAlignment="Subscript" FontSize="17">j</Run></Italic>)
                         tak |<Run FontWeight="SemiBold">A</Run><Run FontWeight="ExtraBold">′</Run>| =
                         -|<Run FontWeight="SemiBold">A</Run>| <LineBreak/>
                         kde <Run FontWeight="SemiBold">A</Run> je pôvodná matica, 
                         <Run FontWeight="SemiBold">A</Run><Run FontWeight="ExtraBold">′</Run>
-                        je matica s vymenenými riadkami.
+                        je výsledná matica (po výmene riadkov).
                     </TextBlock>
 
                     <TextBlock Grid.Row="8" Grid.Column="0" Margin="0,0,10,0">
@@ -191,8 +649,8 @@
                     <TextBlock Grid.Row="8" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,10">
                         <Run FontWeight="SemiBold">Násobenie riadku:</Run> <LineBreak/>
                         Ak vynásobíte riadok číslom <Italic>k</Italic>, determinant sa vynásobí týmto číslom. <LineBreak/>
-                        Ak (<Italic>R<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic> →
-                        <Italic>kR<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic>)
+                        Ak (<Italic>R<Run BaselineAlignment="Subscript" FontSize="17">i</Run> →
+                        kR<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic>)
                         tak |<Run FontWeight="SemiBold">A</Run><Run FontWeight="ExtraBold">′</Run>| =
                         <Italic>k</Italic>|<Run FontWeight="SemiBold">A</Run>|
                     </TextBlock>
@@ -203,9 +661,9 @@
                     <TextBlock Grid.Row="9" Grid.Column="1" TextWrapping="Wrap">
                         <Run FontWeight="SemiBold">Súčet riadkov:</Run> <LineBreak/>
                         Ak k riadku pripočítate násobok iného riadku, determinant sa nezmení. <LineBreak/>
-                        Ak (<Italic>R<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic> →
-                        <Italic>R<Run BaselineAlignment="Subscript" FontSize="17">i</Run></Italic> +
-                        <Italic>kR<Run BaselineAlignment="Subscript" FontSize="17">j</Run></Italic>)
+                        Ak (<Italic>R<Run BaselineAlignment="Subscript" FontSize="17">i</Run> →
+                        R<Run BaselineAlignment="Subscript" FontSize="17">i</Run> +
+                        kR<Run BaselineAlignment="Subscript" FontSize="17">j</Run></Italic>)
                         tak |<Run FontWeight="SemiBold">A</Run><Run FontWeight="ExtraBold">′</Run>| =
                         |<Run FontWeight="SemiBold">A</Run>|
                     </TextBlock>

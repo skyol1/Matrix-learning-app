@@ -18,7 +18,7 @@ namespace MaticeApp.Highlighters
             connectedHighlighter.ClearHighlight();
             isHighlighted = false;
         }
-        public void Highlight(uint row, uint column)
+        public void Highlight(int row, int column)
         {
             if (isHighlighted || connectedHighlighter.isHighlighted) return;
             connectedHighlighter.Highlight(column,row);

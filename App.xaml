@@ -9,5 +9,15 @@
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="20"/>
         </Style>
+        
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="InlineUIContainer">
+            <Setter Property="BaselineAlignment" Value="Bottom"/>
+        </Style>
+
     </Application.Resources>
 </Application>

@@ -19,9 +19,9 @@
                     Násobenie matíc je zložitejšia operácia než sčítanie alebo odčítanie. 
                     Aby bolo možné vynásobiť dve matice, musia spĺňať špecifické rozmery. 
                     Ak chceme násobiť maticu <Run FontWeight="SemiBold">A</Run> rozmerov 
-                    <Italic>m</Italic>×<Italic>n</Italic> a maticu <Run FontWeight="SemiBold">B</Run> 
-                    rozmerov <Italic>n</Italic>×<Italic>p</Italic>, výsledná matica <Run FontWeight="SemiBold">C</Run> 
-                    bude mať rozmery <Italic>m</Italic>×<Italic>p</Italic>. 
+                    <Italic>m</Italic>×<Italic>p</Italic> a maticu <Run FontWeight="SemiBold">B</Run> 
+                    rozmerov <Italic>p</Italic>×<Italic>n</Italic>, výsledná matica <Run FontWeight="SemiBold">C</Run> 
+                    bude mať rozmery <Italic>m</Italic>×<Italic>n</Italic>. 
                     Násobenie matíc sa vykonáva na základe súčtu súčinov zodpovedajúcich prvkov 
                     riadkov prvej matice a stĺpcov druhej matice.
                 </TextBlock>
@@ -87,37 +87,26 @@
                 </Grid>
                 
                 <TextBlock Margin="0,5,0,10">
-                    Príklad:
+                    <Run Text="Príklad" FontWeight="SemiBold"/>:
                 </TextBlock>
 
-                <Grid Margin="0,0,0,10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock VerticalAlignment="Center" Margin="5,0,5,0">
                         <Run FontWeight="SemiBold">A</Run> =
                     </TextBlock>
-                    <local:Matrix Grid.Column="1" x:Name="matrix1"/>
-                    <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="20,0,10,0">
+                    <local:Matrix x:Name="matrix1"/>
+                    <TextBlock VerticalAlignment="Center" Margin="20,0,5,0">
                         <Run FontWeight="SemiBold">B</Run> =
                     </TextBlock>
-                    <local:Matrix Grid.Column="3" x:Name="matrix2"/>
-                    <TextBlock Grid.Column="4" VerticalAlignment="Center" Margin="20,0,10,0">
+                    <local:Matrix x:Name="matrix2"/>
+                    <TextBlock VerticalAlignment="Center" Margin="20,0,5,0">
                         <Run FontWeight="SemiBold">C</Run> =
                     </TextBlock>
-                    <local:Matrix Grid.Column="5" x:Name="matrix3"/>
-                    <TextBlock Grid.Column="6" VerticalAlignment="Center" Margin="10,0,10,0">
-                        =
-                    </TextBlock>
-                    <local:Matrix Grid.Column="7" x:Name="matrix4"/>
-                </Grid>
+                    <local:Matrix x:Name="matrix3"/>
+                    <TextBlock Text="=" VerticalAlignment="Center" Margin="5,0,5,0"/>
+                    <local:Matrix x:Name="matrix4"/>
+                </StackPanel>
+                
                 <TextBlock FontSize="24" Margin="0,30,0,10">
                     <Bold>Vlástnosti:</Bold>
                 </TextBlock>
@@ -198,7 +187,6 @@
                         <Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="TextTop" FontWeight="SemiBold" FontSize="14" FontStyle="Italic">T</Run>
                     </TextBlock>
                 </Grid>
-                <local:MatrixCalculator x:Name="matrixCalculator"></local:MatrixCalculator>
             </StackPanel>
         </ScrollViewer>
     </Grid>

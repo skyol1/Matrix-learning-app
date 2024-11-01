@@ -5,13 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaticeApp"
         mc:Ignorable="d"
-        Title="MainWindow" 
-        Height="600" Width="800" 
+        Title="MatrixLearningApp" 
+        Height="700" Width="1300" 
         d:DesignHeight="2100" d:DesignWidth="800"
         MinHeight="600" MinWidth="800"
         Background="#FFE6E6E6">
     <Grid>
-
         <Border x:Name="PanelOpenMenu" Background="#FF974EDA" Width="40" Height="40" 
                 VerticalAlignment="Top" HorizontalAlignment="Left" 
                 CornerRadius="0,5,5,0" MouseEnter="PanelOpenMenu_MouseEnter" Panel.ZIndex="1">
@@ -20,18 +19,19 @@
 
         <StackPanel x:Name="PanelMenu" Width="250" VerticalAlignment="Top" HorizontalAlignment="Left" 
                     Visibility="Collapsed" MouseLeave="MenuList_MouseLeave" Panel.ZIndex="1">
-            <local:ButtonMenu ButtonText="Matice"               UserControlName="UCMatice"              HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
-            <local:ButtonMenu ButtonText="Súčet matíc"          UserControlName="UCSucetMatic"          HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
-            <local:ButtonMenu ButtonText="Rozdiel matíc"        UserControlName="UCRozdielMatic"        HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
-            <local:ButtonMenu ButtonText="Súčin matice a čísla" UserControlName="UCNasobokMatice"       HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
-            <local:ButtonMenu ButtonText="Súčin matíc"          UserControlName="UCSucinMatic"          HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
-            <local:ButtonMenu ButtonText="Inverzná matica"      UserControlName="UCInverznaMatica"      HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
-            <local:ButtonMenu ButtonText="Transponovaná matica" UserControlName="UCTransponovanaMatica" HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
-            <local:ButtonMenu ButtonText="Riadkové operácie"    UserControlName="UCRiadkoveOperacie"    HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
-            <local:ButtonMenu ButtonText="Determinanty"         UserControlName="UCDeterminanty"        HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
+            <local:ButtonMenu ButtonText="Matice"               UserControlName="UCMatice"              HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked" Margin="0,0,0,-1"/>
+            <local:ButtonMenu ButtonText="Súčet matíc"          UserControlName="UCSucetMatic"          HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked" Margin="0,0,0,-1"/>
+            <local:ButtonMenu ButtonText="Rozdiel matíc"        UserControlName="UCRozdielMatic"        HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked" Margin="0,0,0,-1"/>
+            <local:ButtonMenu ButtonText="Súčin matice a čísla" UserControlName="UCNasobokMatice"       HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked" Margin="0,0,0,-1"/>
+            <local:ButtonMenu ButtonText="Súčin matíc"          UserControlName="UCSucinMatic"          HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked" Margin="0,0,0,-1"/>
+            <local:ButtonMenu ButtonText="Inverzná matica"      UserControlName="UCInverznaMatica"      HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked" Margin="0,0,0,-1"/>
+            <local:ButtonMenu ButtonText="Transponovaná matica" UserControlName="UCTransponovanaMatica" HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked" Margin="0,0,0,-1"/>
+            <local:ButtonMenu ButtonText="Riadkové operácie"    UserControlName="UCRiadkoveOperacie"    HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked" Margin="0,0,0,-1"/>
+            <local:ButtonMenu ButtonText="Determinanty"         UserControlName="UCDeterminanty"        HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked" Margin="0,0,0,-1"/>
+            <local:ButtonMenu ButtonText="Kalkulačka"           UserControlName="Calculator"            HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
         </StackPanel>
 
-        <local:UCMatice                 x:Name="UCMatice"               Visibility="Visible"/>
+        <local:UCMatice                 x:Name="UCMatice"               Visibility="Collapsed"/>
         <local:UCSucetMatic             x:Name="UCSucetMatic"           Visibility="Collapsed"/>
         <local:UCRozdielMatic           x:Name="UCRozdielMatic"         Visibility="Collapsed"/>
         <local:UCNasobokMatice          x:Name="UCNasobokMatice"        Visibility="Collapsed"/>
@@ -40,6 +40,7 @@
         <local:UCTransponovanaMatica    x:Name="UCTransponovanaMatica"  Visibility="Collapsed"/>
         <local:UCRiadkoveOperacie       x:Name="UCRiadkoveOperacie"     Visibility="Collapsed"/>
         <local:UCDeterminanty           x:Name="UCDeterminanty"         Visibility="Collapsed"/>
+        <local:MatrixCalculator         x:Name="Calculator"             Visibility="Visible"/>
 
     </Grid>
 </Window>

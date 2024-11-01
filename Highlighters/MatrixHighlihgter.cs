@@ -10,7 +10,7 @@ namespace MaticeApp.Highlighters
 
         public MatrixHighlihgter(IMatrix dstMatrix, Color color): base(color) { this.dstMatrix = dstMatrix; }
 
-        public override void Highlight(uint row, uint column)
+        public override void Highlight(int row, int column)
         {
             foreach (var highlighter in dstMatrix.highlighters)
                 if (!highlighter.isHighlighted)
@@ -24,7 +24,7 @@ namespace MaticeApp.Highlighters
                     highlighter.ClearHighlight();
         }
 
-        protected void AddHighlight(uint rowA, uint colA, uint rowB, uint colB, Color color)
+        protected void AddHighlight(int rowA, int colA, int rowB, int colB, Color color)
         {
             if (_highlightRectangle != null) return;
 

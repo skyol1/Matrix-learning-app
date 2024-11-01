@@ -10,218 +10,433 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using MaticeApp.Highlighters;
+using static MaticeApp.Static;
+using MathNet.Numerics.LinearAlgebra.Double;
+using MathNet.Numerics.Providers.LinearAlgebra;
 
 namespace MaticeApp
 {
     public partial class MatrixCalculator : UserControl
     {
-        public enum Operation
-        {
-            Add,
-            Subtract,
-            Multiply
-        }
-        private Operation selectedOperation;
-        private uint matrixARows = 3;
-        private uint matrixAColumns = 3;
-        private uint matrixBRows = 3;
-        private uint matrixBColumns = 3;
+        
+        private int matrixARows = 3;
+        private int matrixAColumns = 3;
+        private int matrixBRows = 3;
+        private int matrixBColumns = 3;
+
+        private bool AddSubstractPossible = true;
+        private bool MultiplyPossible = true;
+        private bool InvertDeterminantAPossible = true;
+        private bool InvertDeterminantBPossible = true;
+
+        private Brush Button2MatrixOperationsBackgroundNormal = new SolidColorBrush(Color.FromArgb(255, 135, 240, 255));
+        private Brush ButtonMatrixFillBackgroundNormal = new SolidColorBrush(Color.FromArgb(255, 135, 160, 255));
+        private Brush Button1MatrixOperationBackgroundNormal = new SolidColorBrush(Color.FromArgb(255, 165, 135, 255));
+        private Brush ButtonBackgroundError = new SolidColorBrush(Color.FromArgb(90, 255, 0, 0));
+
+        private TextBlock _lastOutputTextBlock;
+
         public MatrixCalculator()
         {
             InitializeComponent();
+
+            inputMatrix1.Resize(matrixARows, matrixAColumns);
+            inputMatrix1.RedrawBrackets(matrixARows);
+            inputMatrix2.Resize(matrixBRows, matrixBColumns);
+            inputMatrix2.RedrawBrackets(matrixBRows);
+
+            inputMatrix1.InputMatrixSizeChanged += CheckOperationButtons1;
+            inputMatrix2.InputMatrixSizeChanged += CheckOperationButtons2;
+
+            _lastOutputTextBlock = outputTextAdd;
+
+            ButtonAdd.Background = Button2MatrixOperationsBackgroundNormal;
+            ButtonSubstract.Background = Button2MatrixOperationsBackgroundNormal;
+            ButtonMultiply.Background = Button2MatrixOperationsBackgroundNormal;
+
+            ButtonClearA.Background = ButtonMatrixFillBackgroundNormal;
+            ButtonClearB.Background = ButtonMatrixFillBackgroundNormal;
+            ButtonRandomA.Background = ButtonMatrixFillBackgroundNormal;
+            ButtonRandomB.Background = ButtonMatrixFillBackgroundNormal;
+            ButtonIdentityA.Background = ButtonMatrixFillBackgroundNormal;
+            ButtonIdentityB.Background = ButtonMatrixFillBackgroundNormal;
+            ButtonCopyBtoA.Background = ButtonMatrixFillBackgroundNormal;
+            ButtonCopyAtoB.Background = ButtonMatrixFillBackgroundNormal;
+
+            ButtonTransposeA.Background = Button1MatrixOperationBackgroundNormal;
+            ButtonTransposeB.Background = Button1MatrixOperationBackgroundNormal;
+            ButtonInvertA.Background = Button1MatrixOperationBackgroundNormal;
+            ButtonInvertB.Background = Button1MatrixOperationBackgroundNormal;
+            ButtonDeterminantA.Background = Button1MatrixOperationBackgroundNormal;
+            ButtonDeterminantB.Background = Button1MatrixOperationBackgroundNormal;
+            ButtonMultiplyA.Background = Button1MatrixOperationBackgroundNormal;
+            ButtonMultiplyB.Background = Button1MatrixOperationBackgroundNormal;
         }
-        public void SetupCalculator(Operation selectedOperation)
+
+        private bool IsNewSizeValueValid(TextBoxInputMatrixSize textBox, out int newSize)
         {
-            matrix1.highlighters.Clear();
-            matrix2.highlighters.Clear();
-            matrix3.highlighters.Clear();
-            if (matrix1.onInputChanged==null)
-                matrix1.onInputChanged += onInputChanged;
-            if (matrix2.onInputChanged == null)
-                matrix2.onInputChanged += onInputChanged;
-            this.selectedOperation = selectedOperation;
-            CheckMatrixSizes();
-            switch (selectedOperation)
+            if (int.TryParse(textBox.Text, out newSize) && newSize > 0 && newSize < 10)
             {
-                case Operation.Add:
-                case Operation.Subtract:
-                    SetupAddSubtract();
-                    break;
-                case Operation.Multiply:
-                    SetupMultiply();
-                    break;
+                textBox.Tag = "1";
+                textBox.Background= Brushes.White;
+                return true;
             }
-        }
-        private void SetupAddSubtract()
-        {
-            matrix1.SetMatrix(matrixAColumns, matrixARows);
-            matrix2.SetMatrix(matrixAColumns, matrixARows);
-
-            matrix1.highlighters.Add(new SingleElementHighlighter(matrix2, Color.FromArgb(40, 255, 0, 0)));
-            matrix2.highlighters.Add(new SingleElementHighlighter(matrix3, Color.FromArgb(40, 0, 0, 255)));
-            matrix3.highlighters.Add(new SingleElementHighlighter(matrix1, Color.FromArgb(40, 255, 0, 0)));
-
-            RightRows.IsReadOnly = true;
-            RightColumns.IsReadOnly = true;
-
-            string[,] matrixData = new string[matrixAColumns, matrixARows];
-            for (int i = 0; i < matrixAColumns; i++)
-                for (int j = 0; j < matrixARows; j++)
-                    matrixData[i, j] = "0";
-            matrix3.SetMatrix(matrixData);
-
-            switch (selectedOperation)
+            else
             {
-                case Operation.Add:
-                    OperationSymbol.Text = "+";
-                    break;
-                case Operation.Subtract:
-                    OperationSymbol.Text = "-";
-                    break;
+                textBox.Tag = "0";
+                textBox.Background = new SolidColorBrush(Color.FromArgb(60, 255, 0, 0));
+                return false;
             }
         }
-        private void SetupMultiply()
+
+        private void CheckAddSubstractMultiply()
         {
-            matrix1.SetMatrix(matrixAColumns, matrixARows);
-            matrix2.SetMatrix(matrixBColumns, matrixBRows);
-
-            RightRows.IsReadOnly = true;
-            RightColumns.IsReadOnly = false;
-
-            string[,] matrixData = new string[matrixAColumns, matrixBRows];
-            for (int i = 0; i < matrixAColumns; i++)
-                for (int j = 0; j < matrixBRows; j++)
-                    matrixData[i, j] = "0";
-            matrix3.SetMatrix(matrixData);
-
-            OperationSymbol.Text = "*";
-            matrix1.highlighters.Add(new RowHighlighter(matrix2, Color.FromArgb(50, 0, 0, 255)));
-            matrix2.highlighters.Add(new SingleElementHighlighter(matrix3, Color.FromArgb(50, 255, 0, 0)));
-            matrix3.highlighters.Add(new ColumnHighlighter(matrix1, Color.FromArgb(50, 0, 255, 0)));
-        }
-        private void onInputChanged()
-        {
-            double[,] input1 = new double[matrixAColumns, matrixARows];
-            double[,] input2 = new double[matrixBColumns, matrixBRows];
-            for (int i = 0; i < matrixAColumns; i++)
-                for (int j = 0; j < matrixARows; j++)
-                    input1[i, j] = double.Parse(((matrix1.MatrixGrid.Children[i * (int)matrixARows + j] as Border).Child as TextBox).Text);
-            for (int i = 0; i < matrixBColumns; i++)
-                for (int j = 0; j < matrixBRows; j++)
-                    input2[i, j] = double.Parse(((matrix2.MatrixGrid.Children[i * (int)matrixBRows + j] as Border).Child as TextBox).Text);
-            double[,] result= null;
-            switch (selectedOperation) {
-                case Operation.Add:
-                    result = AddMatrix(input1, input2); break;
-                case Operation.Subtract:
-                    result = SubtractMatrix(input1, input2); break;
-                case Operation.Multiply:
-                    result = MultiplyMatrix(input1, input2); break;
+            if (matrixARows == matrixBRows && matrixAColumns == matrixBColumns)
+            {
+                AddSubstractPossible = true;
+                ButtonAdd.ToolTip = null;
+                ButtonSubstract.ToolTip = null;
+                ButtonAdd.Background = Button2MatrixOperationsBackgroundNormal;
+                ButtonSubstract.Background = Button2MatrixOperationsBackgroundNormal;
             }
-            matrix3.SetMatrix(ToStringData(result));
+            else
+            {
+                AddSubstractPossible = false;
+                ButtonAdd.ToolTip = "Matice musia byť rovnakého typu";
+                ButtonSubstract.ToolTip = "Matice musia byť rovnakého typu";
+                ButtonAdd.Background = ButtonBackgroundError;
+                ButtonSubstract.Background = ButtonBackgroundError;
+            }
+
+            if (matrixAColumns == matrixBRows)
+            {
+                MultiplyPossible = true;
+                ButtonMultiply.ToolTip = null;
+                ButtonMultiply.Background = Button2MatrixOperationsBackgroundNormal;
+            }
+            else
+            {
+                MultiplyPossible = false;
+                ButtonMultiply.Background = ButtonBackgroundError;
+                ButtonMultiply.ToolTip = "Počet stĺpcov matice A a\npočet riadkov matice B\nmusia byť rovnaké";
+            }
         }
 
-        private double[,] AddMatrix(double[,] matrixA, double[,] matrixB)
+        private void CheckOperationButtons1()
         {
-            double[,] result = new double[matrixAColumns, matrixARows];
-            for (int i = 0; i<matrixAColumns; i++)
-                for(int j = 0;j < matrixARows; j++)
-                    result[i,j] = matrixA[i,j] + matrixB[i,j];
-            return result;
+            CheckAddSubstractMultiply();
+
+            if (matrixARows == matrixAColumns)
+            {
+                InvertDeterminantAPossible = true;
+                ButtonInvertA.ToolTip = null;
+                ButtonDeterminantA.ToolTip = null;
+                ButtonInvertA.Background = Button1MatrixOperationBackgroundNormal;
+                ButtonDeterminantA.Background = Button1MatrixOperationBackgroundNormal;
+            }
+            else
+            {
+                InvertDeterminantAPossible = false;
+                ButtonInvertA.Background = ButtonBackgroundError;
+                ButtonDeterminantA.Background = ButtonBackgroundError;
+                ButtonInvertA.ToolTip = "Matica nie je štvorcová";
+                ButtonDeterminantA.ToolTip = "Matica nie je štvorcová";
+            }
         }
-        private double[,] SubtractMatrix(double[,] matrixA, double[,] matrixB)
+
+        private void CheckOperationButtons2()
         {
-            double[,] result = new double[matrixAColumns, matrixARows];
-            for (int i = 0; i < matrixAColumns; i++)
-                for (int j = 0; j < matrixARows; j++)
-                    result[i, j] = matrixA[i, j] - matrixB[i, j];
-            return result;
+            CheckAddSubstractMultiply();
+
+            if (matrixBRows == matrixBColumns)
+            {
+                InvertDeterminantBPossible = true;
+                ButtonInvertB.ToolTip = null;
+                ButtonDeterminantB.ToolTip = null;
+                ButtonInvertB.Background = Button1MatrixOperationBackgroundNormal;
+                ButtonDeterminantB.Background = Button1MatrixOperationBackgroundNormal;
+            }
+            else
+            {
+                InvertDeterminantBPossible = false;
+                ButtonInvertB.Background = ButtonBackgroundError;
+                ButtonDeterminantB.Background = ButtonBackgroundError;
+                ButtonInvertB.ToolTip = "Matica nie je štvorcová";
+                ButtonDeterminantB.ToolTip = "Matica nie je štvorcová";
+            }
         }
-        private double[,] MultiplyMatrix(double[,] matrixA, double[,] matrixB)
+
+        private void TextBoxInputMatrixARow_TextChanged(object sender, TextChangedEventArgs e)
         {
-            double[,] result = new double[matrixAColumns, matrixBRows];
-            for (int i = 0; i < matrixAColumns; i++)
-                for (int j = 0; j < matrixBRows; j++)
+            if(IsNewSizeValueValid(TextBoxInputMatrixARow, out int newSize))
+            {
+                if (newSize != matrixARows && TextBoxInputMatrixAColumn.Valid)
                 {
-                    result[i, j] = 0;
-                    for (int k = 0; k < matrixARows; k++)
-                        result[i, j] += matrixA[i, k] * matrixB[k,j];
+                    matrixARows = newSize;
+                    inputMatrix1.Resize(newSize, matrixAColumns);
                 }
-            return result;
-        }
-
-        private string[,] ToStringData(double[,] doubles)
-        {
-            string[,] result = new string[doubles.GetUpperBound(0)+1, doubles.GetUpperBound(1) + 1];
-            for (int i = 0;i < doubles.GetUpperBound(0)+1; i++)
-                for( int j = 0; j < doubles.GetUpperBound(1)+1; j++)
-                    result[i,j]=doubles[i,j].ToString();
-            return result;
-        }
-        private void RandomizeLeftButton_Click(object sender, RoutedEventArgs e)
-        {
-            matrix1.Randomize();
-            onInputChanged();
-        }
-
-        private void RandomizeRightButton_Click(object sender, RoutedEventArgs e)
-        {
-            matrix2.Randomize();
-            onInputChanged();
-        }
-
-        private void ClearButton_Click(object sender, RoutedEventArgs e)
-        {
-            matrix1.Clear();
-            matrix2.Clear();
-            onInputChanged();
-        }
-
-        private void LeftColumns_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (OperationSymbol == null) return;
-            if (!uint.TryParse((sender as TextBox).Text, out matrixARows))return;
-            CheckMatrixSizes();
-            SetupCalculator(selectedOperation);
-        }
-        private void LeftRows_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (OperationSymbol == null) return;
-            if (!uint.TryParse((sender as TextBox).Text, out matrixAColumns)) return;
-            CheckMatrixSizes();
-            SetupCalculator(selectedOperation);
-        }
-        private void RightColumns_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (OperationSymbol == null) return;
-            if (!uint.TryParse((sender as TextBox).Text, out matrixBRows)) return;
-            CheckMatrixSizes();
-            SetupCalculator(selectedOperation);
-        }
-        private void RightRows_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (OperationSymbol == null) return;
-            if (!uint.TryParse((sender as TextBox).Text, out matrixBColumns)) return;
-            CheckMatrixSizes();
-            SetupCalculator(selectedOperation);
-        }
-
-        private void CheckMatrixSizes()
-        {
-            switch (selectedOperation){
-                case Operation.Subtract:
-                case Operation.Add:
-                    matrixBRows = matrixARows;
-                    RightColumns.Text=matrixBRows.ToString();
-                    matrixBColumns = matrixAColumns;
-                    RightRows.Text=matrixBColumns.ToString();
-                    break;
-                case Operation.Multiply:
-                    matrixBColumns = matrixARows;
-                    RightRows.Text = matrixBColumns.ToString();
-                    break;
             }
+        }
+        private void TextBoxInputMatrixAColumn_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (IsNewSizeValueValid(TextBoxInputMatrixAColumn, out int newSize))
+            {
+                if (newSize != matrixAColumns && TextBoxInputMatrixARow.Valid)
+                {
+                    matrixAColumns = newSize;
+                    inputMatrix1.Resize(matrixARows, newSize);
+                }
+            }
+        }
+        private void TextBoxInputMatrixBRow_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (IsNewSizeValueValid(TextBoxInputMatrixBRow, out int newSize))
+            {
+                if (newSize != matrixBRows && TextBoxInputMatrixBColumn.Valid)
+                {
+                    matrixBRows = newSize;
+                    inputMatrix2.Resize(newSize, matrixBColumns);
+                }
+            }
+        }
+        private void TextBoxInputMatrixBColumn_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (IsNewSizeValueValid(TextBoxInputMatrixBColumn, out int newSize))
+            {
+                if (newSize != matrixBColumns && TextBoxInputMatrixBRow.Valid)
+                {
+                    matrixBColumns = newSize;
+                    inputMatrix2.Resize(matrixBRows, newSize);
+                }
+            }
+        }
+
+        private void ButtonClearA_Click(object sender, RoutedEventArgs e)
+        {
+            inputMatrix1.Clear();
+        }
+
+        private void ButtonClearB_Click(object sender, RoutedEventArgs e)
+        {
+            inputMatrix2.Clear();
+        }
+
+        private void ButtonRandomA_Click(object sender, RoutedEventArgs e)
+        {
+            inputMatrix1.Randomize();
+        }
+
+        private void ButtonRandomB_Click(object sender, RoutedEventArgs e)
+        {
+            inputMatrix2.Randomize();
+        }
+
+        private void ButtonIdentityA_Click(object sender, RoutedEventArgs e)
+        {
+            inputMatrix1.MakeIdentity();
+        }
+
+        private void ButtonIdentityB_Click(object sender, RoutedEventArgs e)
+        {
+            inputMatrix2.MakeIdentity();
+        }
+        
+        private void ButtonCopyBtoA_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                inputMatrix1.ResizeSet(matrixBRows, matrixBColumns, inputMatrix2.GetStrings());
+                matrixARows = matrixBRows;
+                matrixAColumns = matrixBColumns;
+            } catch (Exception ex)
+            {
+                ShowMessage(ex.Message);
+            }
+        }
+
+        private void ButtonCopyAtoB_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                inputMatrix2.ResizeSet(matrixARows, matrixAColumns, inputMatrix1.GetStrings());
+                matrixBRows = matrixARows;
+                matrixBColumns = matrixAColumns;
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(ex.Message);
+            }
+        }
+
+        private void SetNewOutputText(TextBlock textBlock)
+        {
+            try
+            {
+                _lastOutputTextBlock.Visibility = Visibility.Collapsed;
+                textBlock.Visibility = Visibility.Visible;
+                _lastOutputTextBlock = textBlock;
+
+                outputPanel1.Visibility = Visibility.Visible;
+                outputPanel2.Visibility = Visibility.Collapsed;
+                errorTextBlock.Visibility = Visibility.Collapsed;
+            } catch (Exception ex) { ShowMessage(ex.Message); }
+        }
+        
+        private void ButtonAddSubstract_Click(object sender, RoutedEventArgs e)
+        {
+            if (!AddSubstractPossible || !inputMatrix1.IsInputValid || !inputMatrix2.IsInputValid) return;
+
+            bool operation = (sender as Button).Name == "ButtonAdd";
+
+            int rows = matrixARows;
+            int columns = matrixAColumns;
+
+            double[,] inputA = inputMatrix1.GetNumbers();
+            double[,] inputB = inputMatrix2.GetNumbers();
+
+            double[,] output = new double[rows, columns];
+
+            for (int i = 0; i < rows; i++)
+                for (int j = 0; j < columns; j++)
+                    output[i, j] = operation ? (inputA[i, j] + inputB[i, j]) : (inputA[i, j] - inputB[i, j]);
+
+            outputMatrix.Set(rows, columns, ConvertDoublesStrings(output, rows, columns));
+            SetNewOutputText(operation ? outputTextAdd : outputTextSubstract);
+        }
+
+        private void ButtonMultiply_Click(object sender, RoutedEventArgs e)
+        {
+            if (!MultiplyPossible || !inputMatrix1.IsInputValid || !inputMatrix2.IsInputValid) return;
+
+            int rowsA = matrixARows;
+            int columnsA = matrixAColumns;
+            int columnsB = matrixBColumns;
+
+            double[,] inputA = inputMatrix1.GetNumbers();
+            double[,] inputB = inputMatrix2.GetNumbers();
+
+            double[,] output = new double[rowsA, columnsB];
+
+            for (int i = 0; i < matrixARows; i++)
+                for (int j = 0; j < matrixBColumns; j++)
+                {
+                    output[i, j] = 0;
+                    for (int k = 0; k < matrixAColumns; k++)
+                        output[i, j] += inputA[i, k] * inputB[k, j];
+                }
+
+            outputMatrix.Set(matrixARows, matrixBColumns, ConvertDoublesStrings(output, matrixARows, matrixBColumns));
+            SetNewOutputText(outputTextMultiply);
+        }
+
+        private void ButtonTransposeA_Click(object sender, RoutedEventArgs e)
+        {
+            if (!inputMatrix1.IsInputValid) return;
+
+            string[,] input = inputMatrix1.GetStrings();
+            string[,] transposed = new string[matrixAColumns, matrixARows];
             
+            for (int i = 0; i < matrixARows; i++)
+                for (int j = 0; j < matrixAColumns; j++)
+                    transposed[j, i] = input[i, j];
+
+            outputMatrix.Set(matrixAColumns, matrixARows, transposed);
+            SetNewOutputText(outputTextTransposed);
+            outputTextTransposedMatrixName.Text = "A";
+        }
+
+        private void ButtonTransposeB_Click(object sender, RoutedEventArgs e)
+        {
+            if (!inputMatrix2.IsInputValid) return;
+
+            string[,] input = inputMatrix2.GetStrings();
+            string[,] transposed = new string[matrixBColumns, matrixBRows];
+
+            for (int i = 0; i < matrixBRows; i++)
+                for (int j = 0; j < matrixBColumns; j++)
+                    transposed[j, i] = input[i, j];
+
+            outputMatrix.Set(matrixBColumns, matrixBRows, transposed);
+            SetNewOutputText(outputTextTransposed);
+            outputTextTransposedMatrixName.Text = "B";
+        }
+
+        private void ButtonInvertA_Click(object sender, RoutedEventArgs e)
+        {
+            if (!inputMatrix1.IsInputValid || !InvertDeterminantAPossible) return;
+            try
+            {
+                var matrix = DenseMatrix.OfArray(inputMatrix1.GetNumbers()).Inverse();
+                if (double.IsFinite(matrix.Determinant()))
+                {
+                    outputMatrix.Set(matrixARows, matrixAColumns, ConvertDoublesStrings(matrix.ToArray(), matrixARows, matrixAColumns));
+                    SetNewOutputText(outputTextInverted);
+                    outputTextInvertedMatrixName.Text = "A";
+                } else
+                {
+                    errorTextBlock.Visibility = Visibility.Visible;
+                    errorTextBlock.Text = "Matica A je singulárna a nemá inverznú maticu.";
+                }
+            } catch (Exception ex) { ShowMessage(ex.Message); }
+        }
+
+        private void ButtonInvertB_Click(object sender, RoutedEventArgs e)
+        {
+            if (!inputMatrix2.IsInputValid || !InvertDeterminantBPossible) return;
+            try
+            {
+                var matrix = DenseMatrix.OfArray(inputMatrix2.GetNumbers()).Inverse();
+                if (double.IsFinite(matrix.Determinant()))
+                {
+                    outputMatrix.Set(matrixBRows, matrixBColumns, ConvertDoublesStrings(matrix.ToArray(), matrixBRows, matrixBColumns));
+                    SetNewOutputText(outputTextInverted);
+                    outputTextInvertedMatrixName.Text = "B";
+                }
+                else
+                {
+                    errorTextBlock.Visibility = Visibility.Visible;
+                    errorTextBlock.Text = "Matica B je singulárna a nemá inverznú maticu.";
+                }
+            }
+            catch (Exception ex) { ShowMessage(ex.Message); }
+        }
+
+        private void ButtonDeterminantA_Click(object sender, RoutedEventArgs e)
+        {
+            if (!inputMatrix1.IsInputValid) return;
+
+        }
+
+        private void ButtonDeterminantB_Click(object sender, RoutedEventArgs e)
+        {
+            if (!inputMatrix2.IsInputValid) return;
+
+        }
+
+        private void ButtonMultiplyA_Click(object sender, RoutedEventArgs e)
+        {
+            if (!inputMatrix1.IsInputValid) return;
+
+        }
+
+        private void ButtonMultiplyB_Click(object sender, RoutedEventArgs e)
+        {
+            if (!inputMatrix2.IsInputValid) return;
+
+        }
+
+
+        public static string[,] ConvertDoublesStrings(double[,] doubles, int rows, int columns)
+        {
+            string[,] strings = new string[rows, columns];
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    strings[i, j] = doubles[i, j].ToString();
+                }
+            }
+            return strings;
         }
     }
 }

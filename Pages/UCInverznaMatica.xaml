@@ -16,20 +16,14 @@
                 </TextBlock>
 
                 <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
-                    Inverzná matica je matica, ktorá v kombinácii s pôvodnou maticou vedie k jednotkovej matici. 
-                    Ak je <Run FontWeight="SemiBold">A</Run> štvorcová matica, jej inverznú maticu označujeme ako 
-                    <Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="TextTop" FontSize="14">-1</Run>, a platí: <LineBreak/>
-                    <Run FontWeight="SemiBold">A</Run> · <Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="TextTop" FontSize="14">-1</Run> =
-                    <Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="TextTop" FontSize="14">-1</Run>  · <Run FontWeight="SemiBold">A</Run> = 
-                    <Run FontWeight="SemiBold">E</Run><Run BaselineAlignment="Subscript" FontSize="17" FontStyle="Italic">n</Run> <LineBreak/>
-                    kde <Run FontWeight="SemiBold">E</Run> je jednotková matica. 
+                    Inverzná matica je matica, ktorá v kombinácii s pôvodnou maticou vedie k jednotkovej matici.
                     Inverzná matica existuje len pre štvorcové matice, ktoré sú regulárne (t.j. majú nenulový determinant).
                 </TextBlock>
                 
                 <TextBlock FontSize="24" Margin="0,10,0,10">
                     <Bold>Definícia</Bold>
                 </TextBlock>
-                
+
                 <TextBlock TextWrapping="Wrap">
                     Nech <Run FontWeight="SemiBold">A</Run> je štvorcová matica typu <Italic>n</Italic>×<Italic>n</Italic>. 
                     Potom maticu <Run FontWeight="SemiBold">A</Run><Run BaselineAlignment="TextTop" FontSize="14">-1</Run>
@@ -39,11 +33,30 @@
                     <Run FontWeight="SemiBold">E</Run><Run BaselineAlignment="Subscript" FontSize="17" FontStyle="Italic">n</Run> <LineBreak/>
                     kde <Run FontWeight="SemiBold">E</Run><Run BaselineAlignment="Subscript" FontSize="17" FontStyle="Italic">n</Run> je jednotková matica
                     rovnakého rozmeru <Italic>n</Italic>×<Italic>n</Italic>. <LineBreak/>
-                    <Bold>Podmienka existencie inverznej matice:</Bold> <LineBreak/>
-                    Inverzná matica existuje iba pre štvorcové matice, ktoré majú nenulový determinant. 
-                    Ak je determinant matice <Run FontWeight="SemiBold">A</Run> nulový, tak je singulárna a nemá inverznú maticu. 
+                    <Run Text="Podmienka existencie inverznej matice:" FontWeight="SemiBold"/> <LineBreak/>
+                    Inverzná matica existuje iba pre štvorcové matice, ktoré majú nenulový determinant. <LineBreak/>
+                    Ak je determinant matice <Run FontWeight="SemiBold">A</Run> nulový, tak je singulárna a nemá inverznú maticu. <LineBreak/>
                     Naopak, ak je determinant matice <Run FontWeight="SemiBold">A</Run> nenulový, tak je regulárna a inverznú maticu má.
                 </TextBlock>
+                <TextBlock Text="Výpočet" FontWeight="SemiBold" Margin="0,10,0,0"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center">
+                        <Run Text="A" FontWeight="SemiBold"/><Run Text="-1" BaselineAlignment="TextTop" FontSize="14"/> =
+                    </TextBlock>
+                    <StackPanel Grid.Column="1" Margin="5,3,8,0" VerticalAlignment="Center">
+                        <TextBlock Text="1" HorizontalAlignment="Center" Margin="0,0,0,-3"/>
+                        <Rectangle Width="Auto" Height="2" Fill="Black" Margin="0,0,0,-3"/>
+                        <TextBlock>
+                            |<Run Text="A" FontWeight="SemiBold"/>|
+                        </TextBlock>
+                    </StackPanel>
+                    <local:Matrix x:Name="matrix1"/>
+                    <TextBlock VerticalAlignment="Center" Margin="30,0,0,0">
+                        kde D<Run Text="ij" BaselineAlignment="Subscript" FontSize="14" FontStyle="Italic"/> =
+                        (-1)<Run Text="i+j" BaselineAlignment="TextTop" FontSize="14" FontStyle="Italic"/> · 
+                        |<Run Text="A" FontWeight="SemiBold"/><Run Text="ij" BaselineAlignment="Subscript" FontSize="14" FontStyle="Italic"/>|
+                    </TextBlock>
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
     </Grid>

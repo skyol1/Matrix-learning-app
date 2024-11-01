@@ -60,12 +60,14 @@ namespace MaticeApp
             };
             matrix4.SetMatrix(matrixData);
 
+
+            /*
             matrix1.highlighters.Add(new RowHighlighter(matrix2, Color.FromArgb(50, 0, 0, 255)));
             matrix2.highlighters.Add(new SingleElementHighlighter(matrix3, Color.FromArgb(50, 255, 0, 0)));
             matrix3.highlighters.Add(new SingleElementHighlighter(matrix4, Color.FromArgb(50, 255, 0, 0)));
             matrix4.highlighters.Add(new ColumnHighlighter(matrix1, Color.FromArgb(50, 0, 255, 0)));
-
-            matrixCalculator.SetupCalculator(MatrixCalculator.Operation.Multiply);
+            */
+            //matrixCalculator.SetupCalculator(MatrixCalculator.Operation.Multiply);
         }
     }
 }

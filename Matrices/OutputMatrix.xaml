@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="MaticeApp.InputMatrix"
+﻿<UserControl x:Class="MaticeApp.OutputMatrix"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,13 +6,12 @@
              xmlns:local="clr-namespace:MaticeApp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-
-    <Grid>
+    <Grid x:Name="mainGrid">
         <!-- Define a grid for the layout of the brackets and the matrix -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <!-- Bracket on the left -->
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
             <!-- Matrix in the center -->
             <ColumnDefinition Width="Auto"/>
             <!-- Bracket on the right -->
@@ -38,7 +37,7 @@
         </Viewbox>
 
         <!-- Matrix Grid in the Center -->
-        <Grid x:Name="MatrixGrid" Grid.Column="1" MouseMove="MatrixGrid_MouseMove" MouseLeave="MatrixGrid_MouseLeave"/>
+        <Grid x:Name="MatrixGrid" Grid.Column="1"/>
 
         <!-- Canvas for Highlight -->
         <Canvas x:Name="HighlightCanvas" Grid.Column="1" IsHitTestVisible="False"/>
@@ -55,6 +54,6 @@
                 </Path.Data>
             </Path>
         </Viewbox>
-        
+
     </Grid>
 </UserControl>

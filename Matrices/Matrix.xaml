@@ -5,62 +5,36 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaticeApp"
              mc:Ignorable="d"
-             d:Background="#FFE6E6E6"
-             d:DesignHeight="200" d:DesignWidth="200"
-             Height="90" Width="181">
+             Height="90" Width="150"
+             Background="Bisque"
+             d:DesignHeight="200" d:DesignWidth="200">
 
-    <Grid>
+    <Grid x:Name="mainGrid">
         <!-- Define a grid for the layout of the brackets and the matrix -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <!-- Bracket on the left -->
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
             <!-- Matrix in the center -->
             <ColumnDefinition Width="Auto"/>
             <!-- Bracket on the right -->
+            <ColumnDefinition Width="Auto"/>
+            <!-- Canvas after the matrix to draw row operations -->
         </Grid.ColumnDefinitions>
 
         <!-- Left Bracket -->
-        <Viewbox Grid.Column="0" x:Name="LeftBracket" VerticalAlignment="Center" SizeChanged="LeftBracket_SizeChanged">
-            <Viewbox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="-1"/>
-                    <TranslateTransform x:Name="translateTransformLeftBracket"/>
-                </TransformGroup>
-            </Viewbox.RenderTransform>
-            <Path Stroke="Black"  StrokeThickness="1">
-                <Path.Data>
-                    <PathGeometry>
-                        <PathFigure StartPoint="0,0">
-                            <ArcSegment x:Name="LeftArc" 
-                                        Point="0,0" 
-                                        SweepDirection="Clockwise" />
-                        </PathFigure>
-                    </PathGeometry>
-                </Path.Data>
-            </Path>
-        </Viewbox>
+        <Viewbox Grid.Column="0" x:Name="LeftBracket"/>
 
         <!-- Matrix Grid in the Center -->
-        <Grid x:Name="MatrixGrid" Grid.Column="1" Margin="1,0,0,0" MouseMove="MatrixGrid_MouseMove" MouseLeave="MatrixGrid_MouseLeave"/>
+        <Grid x:Name="MatrixGrid" Grid.Column="1" Margin="0,0,0,0" MouseMove="MatrixGrid_MouseMove" MouseLeave="MatrixGrid_MouseLeave"/>
 
         <!-- Canvas for Highlight -->
         <Canvas x:Name="HighlightCanvas" Grid.Column="1" IsHitTestVisible="False"/>
 
         <!-- Right Bracket -->
-        <Viewbox Grid.Column="2" x:Name="RightBracket" VerticalAlignment="Center" Margin="1,0,0,0">
-            <Path Stroke="Black" StrokeThickness="1">
-                <Path.Data>
-                    <PathGeometry>
-                        <PathFigure StartPoint="0,0">
-                            <ArcSegment x:Name="RightArc" 
-                                        Point="0,0" 
-                                        SweepDirection="Clockwise" />
-                        </PathFigure>
-                    </PathGeometry>
-                </Path.Data>
-            </Path>
-        </Viewbox>
-        
+        <Viewbox Grid.Column="2" x:Name="RightBracket"/>
+
+        <Canvas Grid.Column="3" x:Name="CanvasRowOperations"/>
+
     </Grid>
 </UserControl>

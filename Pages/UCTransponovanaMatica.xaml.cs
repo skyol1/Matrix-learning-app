@@ -62,8 +62,11 @@ namespace MaticeApp
             };
             matrix4.SetMatrix(matrixData);
 
+
+            /*
             matrix3.highlighters.Add(new TransposeHighlightConnector(new SingleElementHighlighter(matrix4, Color.FromArgb(40, 255, 0, 0))));
             matrix4.highlighters.Add(new TransposeHighlightConnector(new SingleElementHighlighter(matrix3, Color.FromArgb(40, 255, 0, 0))));
+            */
         }
     }
 }

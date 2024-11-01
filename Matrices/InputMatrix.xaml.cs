@@ -5,53 +5,58 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using MaticeApp.Highlighters;
+using static MaticeApp.Static;
+using System.Globalization;
 
 namespace MaticeApp
 {
-    public partial class InputMatrix : IMatrix
+    public partial class InputMatrix : UserControl
     {
         public List<IHighlightable> highlighters { get; set; }
-        public int RowHeight { get; set; } = 30;
-        public int CellWidth { get; set; } = 70;
-        public uint RowsCount {  get;private set; }
-        public uint ColumnsCount { get; private set; }
-        public Action onInputChanged;
-        private const int MaxInput= 10;
+
+        private TextBoxInputMatrix[,] TextBoxes;
+
+        private Border[,] MatrixCells;
+        public double RowHeight { get; set; } = 30;
+        public double MinCellWidth { get; set; } = 50;
+
+        public const int Rows = 9;
+
+        public const int Columns = 9;
+        public int RowsVisible { get; private set; } = 0;
+        public int ColumnsVisible { get; private set; } = 0;
+        public bool IsInputValid {  get; private set; } = true; // zero matrix is created
+
+        private const int MaxInputLength = 15;
+
+        public event Action InputMatrixSizeChanged;
+
+        
 
         public InputMatrix()
         {
             InitializeComponent();
             highlighters = new List<IHighlightable>();
+            MatrixCells = new Border[Rows, Columns];
+            TextBoxes = new TextBoxInputMatrix[Rows, Columns];
+            SetMatrix();
         }
         public Canvas GetHighlightCanvas()
         {
             return HighlightCanvas;
         }
-        public void SetMatrix(uint rows, uint columns)
+        private void SetMatrix()
         {
-            MatrixGrid.Children.Clear();
-            MatrixGrid.RowDefinitions.Clear();
-            MatrixGrid.ColumnDefinitions.Clear();
-            this.RowsCount = rows;
-            this.ColumnsCount = columns;
             // Define rows and columns for the matrix grid
-            for (int i = 0; i < rows; i++)
-            {
-                MatrixGrid.RowDefinitions.Add(new RowDefinition { });
-            }
-
-            for (int j = 0; j < columns; j++)
-            {
+            for (int i = 0; i < Rows; i++)
+                MatrixGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            for (int j = 0; j < Columns; j++)
                 MatrixGrid.ColumnDefinitions.Add(new ColumnDefinition { });
-            }
 
-            Height = rows * RowHeight;
-            MatrixGrid.Width = columns * CellWidth;
-
-            // Set the values in the grid
-            for (int i = 0; i < rows; i++)
+            // Create TextBoxes
+            for (int i = 0; i < Rows; i++)
             {
-                for (int j = 0; j < columns; j++)
+                for (int j = 0; j < Columns; j++)
                 {
                     Border border = new Border
                     {
@@ -59,16 +64,22 @@ namespace MaticeApp
                         BorderThickness = new Thickness(1),
                         CornerRadius = new CornerRadius(5),
                         Margin = new Thickness(1),
-                        Background= new SolidColorBrush(Color.FromArgb(10, 0, 0, 0))
+                        Background= new SolidColorBrush(Color.FromArgb(10, 0, 0, 0)),
+                        Visibility = Visibility.Collapsed,
+                        Height = RowHeight - 2
+                    };
+                    MatrixCells[i, j] = border;
+
+                    TextBoxInputMatrix textBox = new TextBoxInputMatrix
+                    {
+                        MaxLength = MaxInputLength,
+                        MinWidth = MinCellWidth,
+                        Row = i,
+                        Column = j,
+                        Valid = true
                     };
 
-                    TextBox textBox = new TextBox
-                    {
-                        Text = 0.ToString(),
-                        FontSize = 18,
-                        TextAlignment= TextAlignment.Center,
-                        MaxLength = 6
-                    };
+                    TextBoxes[i, j] = textBox;
                     textBox.TextChanged += OnInputTextChanged;
                     border.Child = textBox;
                     Grid.SetRow(border, i);
@@ -77,35 +88,27 @@ namespace MaticeApp
                 }
             }
 
-            // Calculate and set the UserControl's height based on the number of rows
-            Height = rows * RowHeight;
-            Width = columns * CellWidth+10;
-
-            // Update the arc sizes for the brackets
-            double arcSize = (Height * 0.45);
-            double arcHeight = (Height * 0.75);
-
-            // Set the properties for the arcs
-            LeftArc.Size = new Size(arcSize, arcHeight);
-            LeftArc.Point = new Point(0, Height / 2);
-            RightArc.Size = new Size(arcSize, arcHeight);
-            RightArc.Point = new Point(0, Height / 2);
-
-            Width = 2 * LeftBracket.Width + MatrixGrid.Width;
+            Width = Double.NaN;
         }
 
-        private void LeftBracket_SizeChanged(object sender, SizeChangedEventArgs e)
+        public void RedrawBrackets(int rows)
         {
-            translateTransformLeftBracket.X = LeftBracket.ActualWidth;
+            double height = rows * RowHeight;
+            Size newSize = new Size(15 + height * 0.1, height * 0.75);
+            Point end = new Point(0, height);
+            LeftArc.Point = end;
+            LeftArc.Size = newSize;
+            RightArc.Point = end;
+            RightArc.Size = newSize;
         }
 
         private void MatrixGrid_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            for (uint i = 0; i < RowsCount; i++)
+            for (int i = 0; i < Rows; i++)
             {
-                for (uint j = 0; j < ColumnsCount; j++)
+                for (int j = 0; j < Columns; j++)
                 {
-                    if (MatrixGrid.Children[(int)((i * ColumnsCount) + j)].IsMouseOver)
+                    if (MatrixGrid.Children[(i * Columns) + j].IsMouseOver)
                     {
                         foreach (var highlighter in highlighters)
                         {
@@ -124,28 +127,169 @@ namespace MaticeApp
                 highlighter.ClearHighlight();
             }
         }
+
         private void OnInputTextChanged(object sender, TextChangedEventArgs e)
         {
-            double tmp;
-            foreach (var textbox in MatrixGrid.Children)
+            try
             {
-                if (!double.TryParse(((textbox as Border).Child as TextBox).Text, out tmp)) return;
-            }
-            if (onInputChanged != null)
+                var textBox = (sender as TextBoxInputMatrix);
+                double tmp;
+                if (double.TryParse(textBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out tmp) || string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    textBox.Valid = true;
+                    textBox.Background = Brushes.White;
+                    CheckValidity();
+                } else
+                {
+                    textBox.Valid = false;
+                    textBox.Background = new SolidColorBrush(Color.FromArgb(60, 255, 0, 0));
+                    IsInputValid = false;
+                }
+            } catch (Exception ex)
             {
-                onInputChanged();
+                ShowMessage(ex.Message);
             }
         }
+
+        public void CheckValidity()
+        {
+            for (int i = 0; i < RowsVisible; i++)
+            {
+                for (int j = 0; j < ColumnsVisible; j++)
+                {
+                    if (TextBoxes[i, j].Valid == false) return;
+                }
+            }
+            IsInputValid = true;
+        }
+
         public void Randomize()
         {
             var rnd = new Random();
-            foreach (var textbox in MatrixGrid.Children)
-                ((textbox as Border).Child as TextBox).Text = (rnd.Next()%MaxInput).ToString();
+            for (int i = 0; i < RowsVisible; i++)
+            {
+                for (int j = 0; j < ColumnsVisible; j++)
+                {
+                    TextBoxes[i, j].Text = rnd.Next(-10, 11).ToString();
+                    TextBoxes[i, j].MakeNormal();
+                }
+            }
         }
+
         public void Clear()
         {
-            foreach (var textbox in MatrixGrid.Children)
-                ((textbox as Border).Child as TextBox).Text = "0";
+            for (int i = 0; i < RowsVisible; i++)
+            {
+                for (int j = 0; j < ColumnsVisible; j++)
+                {
+                    TextBoxes[i, j].MakeDefault0();
+                }
+            }
+        }
+
+        public void MakeIdentity()
+        {
+            for (int i = 0; i < RowsVisible; i++)
+            {
+                for (int j = 0; j < ColumnsVisible; j++)
+                {
+                    TextBoxes[i, j].Text = (i == j) ? "1" : "0";
+                    TextBoxes[i, j].MakeNormal();
+                }
+            }
+        }
+
+        public void Resize(int rows, int columns)
+        {
+            try
+            {
+                if (rows < 1 || rows > Rows || columns < 1 || columns > Columns)
+                    throw new ArgumentOutOfRangeException("Visualization range out of bounds");
+
+                for (int i = 0; i < Rows; i++)
+                {
+                    for(int j = 0; j < Columns; j++)
+                    {
+                        MatrixCells[i, j].Visibility = (i < rows && j < columns) ? Visibility.Visible : Visibility.Collapsed;
+                    }
+                }
+
+                if (rows != RowsVisible)
+                    this.RedrawBrackets(rows);
+
+                RowsVisible = rows;
+                ColumnsVisible = columns;
+
+                InputMatrixSizeChanged?.Invoke();
+
+            } catch (Exception ex)
+            {
+                ShowMessage("Error in Resize(): " + ex.Message);
+            }
+        }
+
+        public void ResizeSet(int rows, int columns, string[,] strings)
+        {
+            try {
+                this.Resize(rows, columns);
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < columns; j++)
+                    {
+                        TextBoxes[i, j].Text = strings[i, j];
+                        TextBoxes[i, j].MakeNormal();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowMessage("Error in ResizeSet(): " + ex.Message);
+            }
+
+        }
+
+        public string[,] GetStrings()
+        {
+            try {
+                string[,] strings = new string[RowsVisible, ColumnsVisible];
+                for (int i = 0; i < RowsVisible; i++)
+                {
+                    for (int j = 0; j < ColumnsVisible; j++)
+                    {
+                        strings[i, j] = TextBoxes[i, j].Text;
+                    }
+                }
+                return strings;
+            } catch (Exception ex)
+            {
+                ShowMessage("Error in GetStrings(): " + ex.Message);
+                return new string[0, 0];
+            }
+        }
+
+        public double[,] GetNumbers()
+        {
+            if (IsInputValid)
+            {
+                double[,] numbers = new double[RowsVisible, ColumnsVisible];
+                for (int i = 0; i < RowsVisible; i++)
+                {
+                    for (int j = 0; j < ColumnsVisible; j++)
+                    {
+                        numbers[i, j] = double.Parse(TextBoxes[i, j].Text);
+                    }
+                }
+                return numbers;
+            } else
+            {
+                return new double[0, 0];
+            }
+            
+        }
+
+        private void LeftBracket_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            translateTransformLeftBracket.X = LeftBracket.ActualWidth;
         }
     }
 }

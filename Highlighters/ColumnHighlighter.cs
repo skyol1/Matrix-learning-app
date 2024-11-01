@@ -10,7 +10,7 @@ namespace MaticeApp.Highlighters
     class ColumnHighlighter: MatrixHighlihgter
     {
         public ColumnHighlighter(IMatrix dstMatrix, Color highlightColor) : base(dstMatrix, highlightColor) { }
-        public override void Highlight(uint row, uint column)
+        public override void Highlight(int row, int column)
         {
             AddHighlight(row,0, row, dstMatrix.ColumnsCount-1, highlightColor);
             base.Highlight(row, column);

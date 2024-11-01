@@ -7,13 +7,13 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="ButtonMenu.xaml.cs">
+    <Compile Update="Matrices\OutputMatrix.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Other\ButtonMenu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Matrices\MatrixCalculator.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Matrices\MatrixSLR.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\UCDeterminanty.xaml.cs">
@@ -43,18 +43,21 @@
     <Compile Update="Pages\UCTransponovanaMatica.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Other\PopupPanelControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="ButtonMenu.xaml">
+    <Page Update="Matrices\OutputMatrix.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Other\ButtonMenu.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Matrices\MatrixCalculator.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Matrices\MatrixSLR.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\UCDeterminanty.xaml">
@@ -82,6 +85,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\UCTransponovanaMatica.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Other\PopupPanelControl.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
