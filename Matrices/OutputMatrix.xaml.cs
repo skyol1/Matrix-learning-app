@@ -41,6 +41,7 @@ namespace MaticeApp
 
             MatrixCells = new Border[Rows, Columns];
             TextBlocks = new TextBlock[Rows, Columns];
+
             SetMatrix();
         }
 
@@ -90,7 +91,7 @@ namespace MaticeApp
         }
 
 
-        public void RedrawBrackets(int rows)
+        private void RedrawBrackets(int rows)
         {
             double height = rows * RowHeight;
             Size newSize = new Size(15 + height * 0.1, height * 0.75);
@@ -101,7 +102,7 @@ namespace MaticeApp
             RightArc.Size = newSize;
         }
 
-        public void Resize(int rows, int columns)
+        private void Resize(int rows, int columns)
         {
             try
             {
@@ -139,6 +140,25 @@ namespace MaticeApp
                     for (int j = 0; j < columns; j++)
                     {
                         TextBlocks[i, j].Text = strings[i, j];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowMessage("Error in Set(): " + ex.Message);
+            }
+        }
+
+        public void Set(int rows, int columns, double[,] values)
+        {
+            try
+            {
+                this.Resize(rows, columns);
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < columns; j++)
+                    {
+                        TextBlocks[i, j].Text = values[i, j].ToString();
                     }
                 }
             }

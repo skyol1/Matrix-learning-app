@@ -16,8 +16,6 @@ namespace MaticeApp
 
         public TextBoxInputMatrixSize()
         {
-            
-
             this.VerticalContentAlignment = VerticalAlignment.Center;
             this.TextAlignment = TextAlignment.Center;
             this.FontSize = 18;

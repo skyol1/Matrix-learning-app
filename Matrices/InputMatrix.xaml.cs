@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using System.Windows.Input;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using MaticeApp.Highlighters;
@@ -29,9 +30,7 @@ namespace MaticeApp
 
         private const int MaxInputLength = 15;
 
-        public event Action InputMatrixSizeChanged;
-
-        
+        public event Action ?InputMatrixSizeChanged;
 
         public InputMatrix()
         {
@@ -74,8 +73,6 @@ namespace MaticeApp
                     {
                         MaxLength = MaxInputLength,
                         MinWidth = MinCellWidth,
-                        Row = i,
-                        Column = j,
                         Valid = true
                     };
 
@@ -91,18 +88,8 @@ namespace MaticeApp
             Width = Double.NaN;
         }
 
-        public void RedrawBrackets(int rows)
-        {
-            double height = rows * RowHeight;
-            Size newSize = new Size(15 + height * 0.1, height * 0.75);
-            Point end = new Point(0, height);
-            LeftArc.Point = end;
-            LeftArc.Size = newSize;
-            RightArc.Point = end;
-            RightArc.Size = newSize;
-        }
 
-        private void MatrixGrid_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        private void MatrixGrid_MouseMove(object sender, MouseEventArgs e)
         {
             for (int i = 0; i < Rows; i++)
             {
@@ -119,8 +106,7 @@ namespace MaticeApp
                 }
             }
         }
-
-        private void MatrixGrid_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        private void MatrixGrid_MouseLeave(object sender, MouseEventArgs e)
         {
             foreach (var highlighter in highlighters)
             {
@@ -128,39 +114,36 @@ namespace MaticeApp
             }
         }
 
+
+        private void CheckValidity()
+        {
+            for (int i = 0; i < RowsVisible; i++)
+                for (int j = 0; j < ColumnsVisible; j++)
+                    if (TextBoxes[i, j].Valid == false) 
+                    { IsInputValid = false; return; }
+            IsInputValid = true;
+        }
         private void OnInputTextChanged(object sender, TextChangedEventArgs e)
         {
             try
             {
                 var textBox = (sender as TextBoxInputMatrix);
-                double tmp;
-                if (double.TryParse(textBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out tmp) || string.IsNullOrWhiteSpace(textBox.Text))
+                if (textBox == null) return;
+                if (ParseDouble(textBox.Text, out double tmp) ||
+                    string.IsNullOrWhiteSpace(textBox.Text))
                 {
                     textBox.Valid = true;
                     textBox.Background = Brushes.White;
-                    CheckValidity();
-                } else
+                    if (!IsInputValid) CheckValidity();
+                } 
+                else
                 {
                     textBox.Valid = false;
                     textBox.Background = new SolidColorBrush(Color.FromArgb(60, 255, 0, 0));
                     IsInputValid = false;
                 }
-            } catch (Exception ex)
-            {
-                ShowMessage(ex.Message);
-            }
-        }
-
-        public void CheckValidity()
-        {
-            for (int i = 0; i < RowsVisible; i++)
-            {
-                for (int j = 0; j < ColumnsVisible; j++)
-                {
-                    if (TextBoxes[i, j].Valid == false) return;
-                }
-            }
-            IsInputValid = true;
+            } 
+            catch (Exception ex) { ShowMessage(ex.Message); }
         }
 
         public void Randomize()
@@ -199,6 +182,16 @@ namespace MaticeApp
             }
         }
 
+        private void RedrawBrackets(int rows)
+        {
+            double height = rows * RowHeight;
+            Size newSize = new Size(15 + height * 0.1, height * 0.75);
+            Point end = new Point(0, height);
+            LeftArc.Point = end;
+            LeftArc.Size = newSize;
+            RightArc.Point = end;
+            RightArc.Size = newSize;
+        }
         public void Resize(int rows, int columns)
         {
             try
@@ -221,16 +214,13 @@ namespace MaticeApp
                 ColumnsVisible = columns;
 
                 InputMatrixSizeChanged?.Invoke();
-
-            } catch (Exception ex)
-            {
-                ShowMessage("Error in Resize(): " + ex.Message);
-            }
+            } 
+            catch (Exception ex) { ShowMessage("Error in Resize(): " + ex.Message); }
         }
-
-        public void ResizeSet(int rows, int columns, string[,] strings)
+        public void ResizeSet(string[,] strings, int rows, int columns)
         {
-            try {
+            try 
+            {
                 this.Resize(rows, columns);
                 for (int i = 0; i < rows; i++)
                 {
@@ -241,26 +231,22 @@ namespace MaticeApp
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                ShowMessage("Error in ResizeSet(): " + ex.Message);
-            }
-
+            catch (Exception ex) { ShowMessage("Error in ResizeSet(): " + ex.Message); }
         }
 
         public string[,] GetStrings()
         {
-            try {
+            try 
+            {
                 string[,] strings = new string[RowsVisible, ColumnsVisible];
+
                 for (int i = 0; i < RowsVisible; i++)
-                {
                     for (int j = 0; j < ColumnsVisible; j++)
-                    {
                         strings[i, j] = TextBoxes[i, j].Text;
-                    }
-                }
+
                 return strings;
-            } catch (Exception ex)
+            } 
+            catch (Exception ex)
             {
                 ShowMessage("Error in GetStrings(): " + ex.Message);
                 return new string[0, 0];
@@ -284,7 +270,6 @@ namespace MaticeApp
             {
                 return new double[0, 0];
             }
-            
         }
 
         private void LeftBracket_SizeChanged(object sender, SizeChangedEventArgs e)

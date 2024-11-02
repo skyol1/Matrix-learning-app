@@ -12,8 +12,6 @@ namespace MaticeApp
 {
     public class TextBoxInputMatrix : TextBox
     {
-        public int Row { get; set; }
-        public int Column { get; set; }
         public bool Valid { get; set; }
 
         private bool IsDefault0;
@@ -22,14 +20,13 @@ namespace MaticeApp
 
         public TextBoxInputMatrix()
         {
-            
-
             this.GotFocus += TextBoxInputMatrix_GotFocus;
             this.LostFocus += TextBoxInputMatrix_LostFocus;
             //this.TextChanged += TextBoxInputMatrix_TextChanged;
 
             DefaultForeground = this.Foreground;
 
+            this.VerticalContentAlignment = VerticalAlignment.Center;
             this.VerticalAlignment = VerticalAlignment.Center;
             this.TextAlignment = TextAlignment.Center;
             this.FontSize = 18;
@@ -37,20 +34,6 @@ namespace MaticeApp
             this.Text = "0";
             this.Foreground = Brushes.DarkGray;
             IsDefault0 = true;
-        }
-
-        private void TextBoxInputMatrix_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!this.IsKeyboardFocusWithin)
-            {
-                if(string.IsNullOrWhiteSpace(this.Text))
-                {
-                    this.MakeDefault0();
-                } else
-                {
-                    this.MakeNormal();
-                }
-            } 
         }
 
         private void TextBoxInputMatrix_GotFocus(object sender, RoutedEventArgs e)

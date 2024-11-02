@@ -60,7 +60,7 @@
                 <TextBlock FontSize="24" Margin="0,30,0,10">
                     <Bold>Vlástnosti:</Bold>
                 </TextBlock>
-                
+
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -120,10 +120,6 @@
                         <Italic>k</Italic><Run FontWeight="SemiBold">A</Run> + <Italic>k</Italic><Run FontWeight="SemiBold">B</Run>
                     </TextBlock>
                 </Grid>
-                <TextBlock Foreground="Red" Margin="0,20,0,0">
-                    Momentálne nefunguje
-                </TextBlock>
-                <local:MatrixCalculator x:Name="matrixCalculator"></local:MatrixCalculator>
             </StackPanel>
         </ScrollViewer>
     </Grid>

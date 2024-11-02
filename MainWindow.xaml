@@ -40,7 +40,7 @@
         <local:UCTransponovanaMatica    x:Name="UCTransponovanaMatica"  Visibility="Collapsed"/>
         <local:UCRiadkoveOperacie       x:Name="UCRiadkoveOperacie"     Visibility="Collapsed"/>
         <local:UCDeterminanty           x:Name="UCDeterminanty"         Visibility="Collapsed"/>
-        <local:MatrixCalculator         x:Name="Calculator"             Visibility="Visible"/>
+        <local:MatrixCalculator         x:Name="Calculator"             Visibility="Visible"  HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
