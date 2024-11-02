@@ -31,7 +31,7 @@
             <local:ButtonMenu ButtonText="Kalkulačka"           UserControlName="Calculator"            HorizontalAlignment="Left" ButtonClicked="ButtonMenu_ButtonClicked"/>
         </StackPanel>
 
-        <local:UCMatice                 x:Name="UCMatice"               Visibility="Collapsed"/>
+        <local:UCMatice                 x:Name="UCMatice"               Visibility="Visible"/>
         <local:UCSucetMatic             x:Name="UCSucetMatic"           Visibility="Collapsed"/>
         <local:UCRozdielMatic           x:Name="UCRozdielMatic"         Visibility="Collapsed"/>
         <local:UCNasobokMatice          x:Name="UCNasobokMatice"        Visibility="Collapsed"/>
@@ -40,7 +40,7 @@
         <local:UCTransponovanaMatica    x:Name="UCTransponovanaMatica"  Visibility="Collapsed"/>
         <local:UCRiadkoveOperacie       x:Name="UCRiadkoveOperacie"     Visibility="Collapsed"/>
         <local:UCDeterminanty           x:Name="UCDeterminanty"         Visibility="Collapsed"/>
-        <local:MatrixCalculator         x:Name="Calculator"             Visibility="Visible"  HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <local:MatrixCalculator         x:Name="Calculator"             Visibility="Collapsed"  HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

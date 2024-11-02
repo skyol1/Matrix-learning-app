@@ -574,24 +574,13 @@ namespace MaticeApp
 
         private void ButtonCopyOutputToA_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                int rows = outputMatrix.RowsVisible;
-                int columns = outputMatrix.ColumnsVisible;
-                inputMatrix1.ResizeSet(outputMatrix.GetStrings(), rows, columns);
-            }
-            catch (Exception ex) { ShowMessage(ex.Message); }
+            inputMatrix1.ResizeSet(outputMatrix.GetStrings(), outputMatrix.RowsVisible, outputMatrix.ColumnsVisible);
+
         }
 
         private void ButtonCopyOutputToB_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                int rows = outputMatrix.RowsVisible;
-                int columns = outputMatrix.ColumnsVisible;
-                inputMatrix2.ResizeSet(outputMatrix.GetStrings(), rows, columns);
-            }
-            catch (Exception ex) { ShowMessage(ex.Message); }
+            inputMatrix2.ResizeSet(outputMatrix.GetStrings(), outputMatrix.RowsVisible, outputMatrix.ColumnsVisible);
         }
 
         private void ButtonCopyOutputToClipboard1_Click(object sender, RoutedEventArgs e)

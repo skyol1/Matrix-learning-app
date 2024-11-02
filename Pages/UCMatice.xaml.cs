@@ -78,7 +78,7 @@ namespace MaticeApp
                 { "c_1_" },
                 { "c_2_" },
                 { "⋮" },
-                { "c_n_" },
+                { "c_m_" },
             };
             matrix9.SetMatrix(matrixData);
 

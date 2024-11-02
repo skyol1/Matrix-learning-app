@@ -420,10 +420,10 @@
                             <local:Matrix Grid.Row="1" Grid.Column="1" x:Name="matrix5_1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0"/>
                             <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,8,0,0">
                                 = (-1)<Run BaselineAlignment="TextTop" FontSize="14" FontStyle="Italic">i+j</Run>⋅2⋅|<Run
-                                    Text="A" FontWeight="SemiBold"/><Run Text="11" BaselineAlignment="Subscript" FontSize="14"/>| -
-                                0⋅|<Run Text="A" FontWeight="SemiBold"/><Run Text="12" BaselineAlignment="Subscript" FontSize="14"/>| +
-                                12⋅|<Run Text="A" FontWeight="SemiBold"/><Run Text="13" BaselineAlignment="Subscript" FontSize="14"/>| -
-                                (-10)⋅|<Run Text="A" FontWeight="SemiBold"/><Run Text="14" BaselineAlignment="Subscript" FontSize="14"/>| = 30
+                                    Text="A" FontWeight="SemiBold"/><Run Text="31" BaselineAlignment="Subscript" FontSize="14"/>| -
+                                0⋅|<Run Text="A" FontWeight="SemiBold"/><Run Text="32" BaselineAlignment="Subscript" FontSize="14"/>| +
+                                12⋅|<Run Text="A" FontWeight="SemiBold"/><Run Text="33" BaselineAlignment="Subscript" FontSize="14"/>| -
+                                (-10)⋅|<Run Text="A" FontWeight="SemiBold"/><Run Text="34" BaselineAlignment="Subscript" FontSize="14"/>| = 30
                             </TextBlock>
                         </Grid>
                     </StackPanel>
