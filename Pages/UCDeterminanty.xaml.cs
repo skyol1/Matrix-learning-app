@@ -30,7 +30,7 @@ namespace MaticeApp
         {
             string[,] matrixData =
             {
-                { "5" }
+                { "-5" }
             };
             matrix1.SetMatrix(matrixData);
 

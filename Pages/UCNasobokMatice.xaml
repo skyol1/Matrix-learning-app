@@ -28,7 +28,8 @@
                     Nech <Italic>k</Italic> je reálne císlo a nech <Run FontWeight="SemiBold">A</Run> = 
                     (<Italic>a<Run BaselineAlignment="Subscript" Text="ij" FontSize="14" /></Italic>)
                     je matica typu <Italic>m</Italic>×<Italic>n</Italic>. 
-                    Maticu B = (<Italic>b<Run BaselineAlignment="Subscript" Text="ij" FontSize="14" /></Italic>) 
+                    Maticu <Run Text="B" FontWeight="SemiBold"/>  =
+                    (<Italic>b<Run BaselineAlignment="Subscript" Text="ij" FontSize="14" /></Italic>) 
                     typu <Italic>m</Italic>×<Italic>n</Italic> 
                     nazývame <Italic>k</Italic>-násobok matice <Run FontWeight="SemiBold">A</Run>, píšeme 
                     <Run FontWeight="SemiBold">B</Run> = <Italic>k</Italic> · <Run FontWeight="SemiBold">A</Run>, 
@@ -93,7 +94,7 @@
                     </TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,10">
                         <Run FontWeight="SemiBold">Distributívnosť voči sčítaniu matíc:</Run> <LineBreak/>
-                        Ak skalár násobí súčet matíc, môžeme násobiť každú maticu 
+                        Ak skalárom násobíme súčet matíc, môžeme násobiť každú maticu 
                         zvlášť tým istým skalárom a následne sčítať výsledky. <LineBreak/>
                         <Italic>c</Italic>(<Run FontWeight="SemiBold">A</Run> + <Run FontWeight="SemiBold">B</Run>) =
                         <Italic>c</Italic><Run FontWeight="SemiBold">A</Run> + <Italic>c</Italic><Run FontWeight="SemiBold">B</Run>

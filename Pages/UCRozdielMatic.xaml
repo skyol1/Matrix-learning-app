@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MaticeApp"
              mc:Ignorable="d" 
              d:Background="#FFE6E6E6"
-             d:DesignHeight="2000" d:DesignWidth="800">
+             d:DesignWidth="800">
     <Grid>
         <ScrollViewer>
             <StackPanel Margin="8,10,10,50">
@@ -88,7 +88,7 @@
                     </TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,10">
                         <Run FontWeight="SemiBold">Komutatívnosť</Run> <Italic><Run FontWeight="SemiBold">neplatí</Run></Italic>: <LineBreak/>
-                        Na rozdiel od sčítania, pri odčítaní matíc záleží na poradí operácií. <LineBreak/>
+                        Na rozdiel od sčítania, pri odčítaní matíc záleží na poradí matíc. <LineBreak/>
                         <Run FontWeight="SemiBold">A</Run> - <Run FontWeight="SemiBold">B</Run> ≠
                         <Run FontWeight="SemiBold">B</Run> - <Run FontWeight="SemiBold">A</Run>
                     </TextBlock>
@@ -97,7 +97,7 @@
                     </TextBlock>
                     <TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,10">
                         <Run FontWeight="SemiBold">Asociatívnosť</Run> <Italic><Run FontWeight="SemiBold">neplatí</Run></Italic>: <LineBreak/>
-                        Pri odčítaní viacerých matíc nemôžeme meniť poradie operácií. <LineBreak/>
+                        Pri odčítaní troch (alebo viacerých) matíc nemôžeme meniť poradie operácií. <LineBreak/>
                         (<Run FontWeight="SemiBold">A</Run> - <Run FontWeight="SemiBold">B</Run>) - <Run FontWeight="SemiBold">C</Run> ≠
                         <Run FontWeight="SemiBold">A</Run> - (<Run FontWeight="SemiBold">B</Run> - <Run FontWeight="SemiBold">C</Run>)
                     </TextBlock>
