@@ -6,9 +6,9 @@ namespace MaticeApp.Highlighters
 {
     public class MatrixHighlihgter:BaseHighlighter
     {
-        protected IMatrix dstMatrix;
+        protected Matrix dstMatrix;
 
-        public MatrixHighlihgter(IMatrix dstMatrix, Color color): base(color) { this.dstMatrix = dstMatrix; }
+        public MatrixHighlihgter(Matrix dstMatrix, Color color): base(color) { this.dstMatrix = dstMatrix; }
 
         public override void Highlight(int row, int column)
         {
@@ -40,9 +40,9 @@ namespace MaticeApp.Highlighters
             }
 
             // Calculate the position and size of the rectangle
-            double top = rowA * dstMatrix.RowHeight;
+            double top = rowA * Matrix.RowHeight;
             double left = colA * dstMatrix.CellWidth;
-            double height = (rowB - rowA + 1) * dstMatrix.RowHeight;
+            double height = (rowB - rowA + 1) * Matrix.RowHeight;
             double width = (colB - colA + 1) * dstMatrix.CellWidth;
 
             // Create the rectangle for highlighting
