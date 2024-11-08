@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static MaticeApp.Static;
 
 namespace MaticeApp
 {
@@ -24,18 +25,23 @@ namespace MaticeApp
         {
             InitializeComponent();
             SetMatrices();
+            SetPopups();
         }
 
-        
+        private void SetPopups()
+        {
+            popupC1.SetTriggerElement(matrix1);
+            //popupC1.SetPlacementTarget(textblMatica);
+        }
 
         private void SetMatrices()
         {
             string[,] matrixData =
             {
-                { "a_11_", "a_12_", "...", "a_1n_"},
-                { "a_21_", "a_22_", "...", "a_2n_"},
-                { "⋮", "⋮", "⋱", "⋮"},
-                { "a_m1_", "a_m2_", "...", "a_mn_"}
+                { "a_11_", "a_12_", "...", "a_1n_" },
+                { "a_21_", "a_22_", "...", "a_2n_" },
+                { "⋮", "⋮", "⋱", "⋮" },
+                { "a_m1_", "a_m2_", "...", "a_mn_" }
             };
             matrix1.SetMatrix(matrixData);
 
@@ -120,6 +126,25 @@ namespace MaticeApp
                 { "0", "0", "0", "...", "1"}
             };
             matrix13.SetMatrix(matrixData);
+        }
+
+        private void Matrix_Initialized(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Matrix_Loaded(object sender, RoutedEventArgs e)
+        {
+            Matrix ?matrix = (sender as Matrix);
+            if (matrix == null || matrix.Tag == null) return;
+            if (matrix.Tag.ToString() == "1")
+            {
+                string[,] values =
+                {
+                    { "1" }
+                };
+                matrix.SetMatrix(values);
+            }
         }
     }
 }

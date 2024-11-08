@@ -76,6 +76,14 @@ namespace MaticeApp
             matrix1.SetMatrix(matrixData);
             matrix1.MakeSLR();
 
+            matrixData = new string[,]
+            {
+                { "2", "+4", "-2", "2"  },
+                { "4", "+9", "-3", "8"  },
+                { "-2", "-3", "+7", "10"  }
+            };
+            SLR1.SetValues(matrixData);
+
             matrix1_0.SetMatrix(matrixData);
             matrix1_0.MakeSLR();
             matrix1_0.RowAddMultiplied(0, 1, "-2");
@@ -111,6 +119,17 @@ namespace MaticeApp
 
             matrix1_4.SetMatrix(matrixData);
             matrix1_4.MakeSLR();
+
+            matrixData = new string[,]
+            {
+                { "2", "+4", "-2", "2"  },
+                { "0", "+1", "+1", "4"  },
+                { "0", "+0", "+4", "8"  }
+            };
+            SLR2.SetValues(matrixData);
+            string[] indexes = { "1", "2", "3" };
+            string[] values = { "-1", "2", "2" };
+            SLR2.Extend(indexes, values);
 
             matrix2_0.SetMatrix(matrixData);
             matrix2_0.MakeSLR();
@@ -167,6 +186,15 @@ namespace MaticeApp
 
             matrix2_6.SetMatrix(matrixData);
             matrix2_6.MakeSLR();
+
+            matrixData = new string[,]
+            {
+                { "1", "+0", "+0", "-1"  },
+                { "0", "+1", "+0", "2"  },
+                { "0", "+0", "+1", "2"  }
+            };
+            SLR3.SetValues(matrixData);
+            SLR3.Extend(indexes, values);
         }
     }
 }

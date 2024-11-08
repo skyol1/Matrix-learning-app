@@ -542,7 +542,10 @@ namespace MaticeApp
 
                 for (int i = 0; i < RowsA; i++)
                     for (int j = 0; j < ColumnsA; j++)
+                    {
                         output[i, j] *= value;
+                        if (output[i, j] == 0) output[i, j] = 0;
+                    }
 
                 outputMatrix.Set(RowsA, ColumnsA, output);
                 SetNewOutputTextBlock(outputTextMultiplied);
@@ -562,7 +565,10 @@ namespace MaticeApp
 
                 for (int i = 0; i < RowsB; i++)
                     for (int j = 0; j < ColumnsB; j++)
+                    {
                         output[i, j] *= value;
+                        if (output[i, j] == 0) output[i, j] = 0;
+                    }
 
                 outputMatrix.Set(RowsB, ColumnsB, output);
                 SetNewOutputTextBlock(outputTextMultiplied);

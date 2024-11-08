@@ -10,6 +10,7 @@ using System.Windows.Media.Media3D;
 using System.Net;
 using System.Numerics;
 using System.Security.Cryptography.Xml;
+using System.Collections.Generic;
 
 namespace MaticeApp
 {
@@ -33,7 +34,10 @@ namespace MaticeApp
         public bool AutoWidth { get; set; } = true;
         public int RowsCount {  get; private set; }
         public int ColumnsCount { get; private set; }
+
         public bool IsSet { get; private set; } = false;
+        public bool IsSLR { get; private set; } = false;
+        public bool IsRowOperationAdded { get; private set; } = false;
         
 
         public Matrix()
@@ -48,23 +52,24 @@ namespace MaticeApp
 
         public void SetMatrix(string[,] matrixValues)
         {
-            this.RowsCount = matrixValues.GetLength(0);
-            this.ColumnsCount = matrixValues.GetLength(1);
+            if (IsSet) return;
+
+            RowsCount = matrixValues.GetLength(0);
+            ColumnsCount = matrixValues.GetLength(1);
+
+            if (RowsCount < 1 || ColumnsCount < 1) return;
 
             // Define rows and columns for the matrix grid
             for (int i = 0; i < RowsCount; i++)
-            {
                 MatrixGrid.RowDefinitions.Add(new RowDefinition { });
-            }
-
             for (int j = 0; j < ColumnsCount; j++)
-            {
                 MatrixGrid.ColumnDefinitions.Add(new ColumnDefinition { });
-            }
 
             Height = RowsCount * RowHeight;
-            
-            if(AutoWidth)
+            Width = Double.NaN;
+            Background = Brushes.Transparent;
+
+            if (AutoWidth)
                 MatrixGrid.Width = ColumnsCount * CellWidth;
 
 
@@ -83,9 +88,7 @@ namespace MaticeApp
                         MinWidth = 20
                     };
 
-                    TextBlock textBlock = CreateRichText(matrixValues[i, j]);
-
-                    border.Child = textBlock;
+                    border.Child = CreateTextBox(matrixValues[i, j]);
 
                     Grid.SetRow(border, i);
                     Grid.SetColumn(border, j);
@@ -98,11 +101,10 @@ namespace MaticeApp
             if(CreateRightBracket)
                 CreateBracket(RightBracket, false);
 
-            Width = Double.NaN;
-            Background = Brushes.Transparent;
+            IsSet = true;
         }
 
-        private TextBlock CreateRichText(string text)
+        private TextBlock CreateTextBox(string text)
         {
             TextBlock textBlock = new TextBlock
             {
@@ -219,59 +221,64 @@ namespace MaticeApp
             IsSet = true;
         }
 
+        // Creates a straight line before the last column
         public void MakeSLR()
         {
-            if (IsSet && ColumnsCount > 1 && RowsCount > 0)
+            if (!IsSet || IsSLR || ColumnsCount < 2) return;
+
+            MatrixGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            int lastColumn = ColumnsCount - 1;
+            for (int i = 0; i < RowsCount; i++)
             {
-                // This section creates a straight line before the last column
-                MatrixGrid.ColumnDefinitions.Add(new ColumnDefinition());
-                int lastColumn = ColumnsCount - 1;
-                for (int i = 0; i < RowsCount; i++)
+                if (MatrixGrid.Children[i * ColumnsCount + lastColumn] is Border border)
                 {
-                    if (MatrixGrid.Children[i * ColumnsCount + lastColumn] is Border border)
-                    {
-                        Grid.SetColumn(border, ColumnsCount);
-                    }
+                    Grid.SetColumn(border, ColumnsCount);
                 }
-                MatrixGrid.ColumnDefinitions[ColumnsCount - 1].Width = new GridLength(2);
-                Rectangle rectangle = new Rectangle
-                {
-                    Width = 2,
-                    Height = this.Height,
-                    Fill = Brushes.Black
-                };
-                Grid.SetRow(rectangle, 0);
-                Grid.SetRowSpan(rectangle, RowsCount);
-                Grid.SetColumn(rectangle, ColumnsCount - 1);
-                MatrixGrid.Children.Add(rectangle);
             }
+            MatrixGrid.ColumnDefinitions[ColumnsCount - 1].Width = new GridLength(2);
+            Rectangle rectangle = new Rectangle
+            {
+                Width = 2,
+                Height = this.Height,
+                Fill = Brushes.Black
+            };
+            Grid.SetRow(rectangle, 0);
+            Grid.SetRowSpan(rectangle, RowsCount);
+            Grid.SetColumn(rectangle, ColumnsCount - 1);
+            MatrixGrid.Children.Add(rectangle);
+
+            IsSLR = true;
         }
 
         public void RowSwap(int row1, int row2)
         {
-            if (row1 != row2)
+            if ((row1 < 0) || (row1 > RowsCount - 1) || (row2 < 0) || (row2 > RowsCount - 1)
+                || (row1 == row2) || !IsSet || IsRowOperationAdded) return;
+
+            if (row1 > row2)
             {
-                if (row1 > row2)
-                {
-                    row2 += row1;
-                    row1 = row2 - row1;
-                    row2 -= row1;
-                }
-                int halfRowHeight = RowHeight / 2;
-
-                CanvasRowOperations.Children.Add(CanvasCreateArrowPath(row1 * RowHeight));
-                CanvasRowOperations.Children.Add(CanvasCreateArrowPath(row2 * RowHeight));
-
-                CanvasRowOperations.Children.Add(CanvasCreateLine(10, (row1 * RowHeight + halfRowHeight), 20, (row1 * RowHeight + halfRowHeight)));
-                CanvasRowOperations.Children.Add(CanvasCreateLine(10, (row2 * RowHeight + halfRowHeight), 20, (row2 * RowHeight + halfRowHeight)));
-                CanvasRowOperations.Children.Add(CanvasCreateLine(20, (row1 * RowHeight + halfRowHeight), 20, (row2 * RowHeight + halfRowHeight)));
-
-                CanvasRowOperations.Width = 20;
+                row2 += row1;
+                row1 = row2 - row1;
+                row2 -= row1;
             }
+            int halfRowHeight = RowHeight / 2;
+
+            CanvasRowOperations.Children.Add(CanvasCreateArrowPath(row1 * RowHeight));
+            CanvasRowOperations.Children.Add(CanvasCreateArrowPath(row2 * RowHeight));
+
+            CanvasRowOperations.Children.Add(CanvasCreateLine(10, (row1 * RowHeight + halfRowHeight), 20, (row1 * RowHeight + halfRowHeight)));
+            CanvasRowOperations.Children.Add(CanvasCreateLine(10, (row2 * RowHeight + halfRowHeight), 20, (row2 * RowHeight + halfRowHeight)));
+            CanvasRowOperations.Children.Add(CanvasCreateLine(20, (row1 * RowHeight + halfRowHeight), 20, (row2 * RowHeight + halfRowHeight)));
+
+            CanvasRowOperations.Width = 20;
+
+            IsRowOperationAdded = true;
         }
 
         public void RowMultiply(int row, string value)
         {
+            if ((row < 0) || (row > RowsCount - 1) || !IsSet || IsRowOperationAdded) return;
+
             TextBlock textBlockMultiplySymbol = new TextBlock
             {
                 FontSize = 30,
@@ -294,10 +301,15 @@ namespace MaticeApp
             {
                 CanvasRowOperations.Width = 11 + textBlockValue.ActualWidth;
             };
+
+            IsRowOperationAdded = true;
         }
 
         public void RowAddMultiplied(int rowStart, int rowEnd, string value)
         {
+            if ((rowStart < 0) || (rowStart > RowsCount - 1) || (rowEnd < 0) || (rowEnd > RowsCount - 1)
+                || (rowStart == rowEnd) || !IsSet || IsRowOperationAdded) return;
+
             TextBlock textBlockMultiplySymbol = new TextBlock
             {
                 FontSize = 30,
@@ -332,6 +344,8 @@ namespace MaticeApp
 
                 CanvasRowOperations.Width = 11 + textBlockValue.ActualWidth;
             };
+
+            IsRowOperationAdded = true;
         }
 
         private Path CanvasCreateArrowPath(int y)

@@ -11,9 +11,17 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="8,10,10,50">
 
-                <TextBlock FontSize="30" HorizontalAlignment="Left" Width="770" TextAlignment="Center">
+                <TextBlock FontSize="30" HorizontalAlignment="Left" Width="770" TextAlignment="Center" x:Name="textblMatica">
                     <Bold>Matica</Bold>
                 </TextBlock>
+
+                <local:PopupControl x:Name="popupC1">
+                    <local:PopupControl.PanelContent>
+                        <Grid>
+                            <local:Matrix Tag="1" Loaded="Matrix_Loaded"/>
+                        </Grid>
+                    </local:PopupControl.PanelContent>
+                </local:PopupControl>
 
                 <TextBlock Margin="0,10,0,0" TextWrapping="Wrap">
                     Matica je obdĺžnikové usporiadanie prvkov (napríklad reálnych čísel) v ridkoch a stĺpcoch. <LineBreak/>

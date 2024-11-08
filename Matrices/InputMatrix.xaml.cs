@@ -85,6 +85,7 @@ namespace MaticeApp
                 }
             }
 
+            Height = Double.NaN;
             Width = Double.NaN;
         }
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Interop;
 
 namespace MaticeApp
 {
@@ -158,5 +159,18 @@ namespace MaticeApp
             if (double.TryParse(text.Replace(',', '.'), NumberStyles.Number, CultureInfo.InvariantCulture, out value)) { return true; }
             else { return false; }
         }
+
+
+        public static (double dpiX, double dpiY) GetDpi()
+        {
+            var hwndSource = PresentationSource.FromVisual(Application.Current.MainWindow) as HwndSource;
+            if (hwndSource != null)
+            {
+                var dpi = hwndSource.CompositionTarget.TransformToDevice;
+                return (dpi.M11 * 96, dpi.M22 * 96); // 96 is the default DPI
+            }
+            return (96, 96);
+        }
+
     }
 }

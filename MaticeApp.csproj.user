@@ -10,6 +10,9 @@
     <Compile Update="Matrices\OutputMatrix.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Matrices\SLR.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Other\ButtonMenu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -43,12 +46,15 @@
     <Compile Update="Pages\UCTransponovanaMatica.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Other\PopupPanelControl.xaml.cs">
+    <Compile Update="Other\PopupControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Matrices\OutputMatrix.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Matrices\SLR.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Other\ButtonMenu.xaml">
@@ -87,7 +93,7 @@
     <Page Update="Pages\UCTransponovanaMatica.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Other\PopupPanelControl.xaml">
+    <Page Update="Other\PopupControl.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

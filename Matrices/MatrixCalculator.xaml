@@ -49,8 +49,8 @@
                                     x:Name="TextBoxInputMatrixAColumn" TextChanged="TextBoxInputMatrixAColumn_TextChanged" Valid="True"/>
                         </Grid>
 
-                        <local:InputMatrix Grid.Row="1" Grid.Column="0" x:Name="inputMatrix1" HorizontalAlignment="Center" 
-                                            VerticalAlignment="Center" Margin="0,20,0,20"/>
+                        <local:InputMatrix x:Name="inputMatrix1" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center" Margin="0,20,0,20"/>
 
                         <Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
                             <Grid.RowDefinitions>
@@ -84,17 +84,17 @@
                                     Grid.Row="1" Grid.Column="0">Jednotková</Button>
                             <Button x:Name="ButtonRandomA" Click="ButtonRandomA_Click" Margin="2.5,5,0,0" Grid.Row="1" Grid.Column="1" 
                                     ToolTipService.InitialShowDelay="1000" ToolTip="[-10, 10]">Náhodná</Button>
-                            <Button x:Name="ButtonTransposeA" Click="ButtonTransposeA_Click" Margin="0,5,2.5,0"
-                                    Grid.Row="2" Grid.Column="0">Transponovaná</Button>
+                            <Button x:Name="ButtonDeterminantA" Click="ButtonDeterminantA_Click" Margin="0,5,2.5,0"
+                                    Grid.Row="2" Grid.Column="0">Determinant</Button>
                             <Button x:Name="ButtonInvertA" Click="ButtonInvertA_Click" Margin="2.5,5,0,0"
                                     Grid.Row="2" Grid.Column="1">Inverzná</Button>
-                            <Button x:Name="ButtonDeterminantA" Click="ButtonDeterminantA_Click" Margin="0,5,2.5,0"
-                                    Grid.Row="3" Grid.Column="0">Determinant</Button>
+                            <Button x:Name="ButtonTransposeA" Click="ButtonTransposeA_Click" Margin="0,5,2.5,0"
+                                    Grid.Row="3" Grid.Column="0">Transponovaná</Button>
                             <Button x:Name="ButtonMultiplyA" Click="ButtonMultiplyA_Click" Margin="2.5,5,0,0" Width="65"
                                     Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left">Krát</Button>
                             <local:TextBoxInputMatrix x:Name="multiplyAby" TextChanged="MultiplyABby_InputTextChanged" 
-                                                      Valid="True" MaxLength="10" Height="27" Margin="67.5,5,0,0"
-                                                      Grid.Row="3" Grid.Column="1"/>
+                                                      Valid="True" MaxLength="10" Margin="67.5,5,0,0"
+                                                      Grid.Row="3" Grid.Column="1" VerticalAlignment="Stretch"/>
                         </Grid>
 
                         <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="10,10,10,10">
@@ -167,17 +167,17 @@
                                     Grid.Row="1" Grid.Column="0">Jednotková</Button>
                             <Button x:Name="ButtonRandomB" Click="ButtonRandomB_Click" Margin="2.5,5,0,0" Grid.Row="1" Grid.Column="1"
                                     ToolTipService.InitialShowDelay="1000" ToolTip="[-10, 10]">Náhodná</Button>
-                            <Button x:Name="ButtonTransposeB" Click="ButtonTransposeB_Click" Margin="0,5,2.5,0"
-                                    Grid.Row="2" Grid.Column="0">Transponovaná</Button>
+                            <Button x:Name="ButtonDeterminantB" Click="ButtonDeterminantB_Click" Margin="0,5,2.5,0"
+                                    Grid.Row="2" Grid.Column="0">Determinant</Button>
                             <Button x:Name="ButtonInvertB" Click="ButtonInvertB_Click" Margin="2.5,5,0,0"
                                     Grid.Row="2" Grid.Column="1">Inverzná</Button>
-                            <Button x:Name="ButtonDeterminantB" Click="ButtonDeterminantB_Click" Margin="0,5,2.5,0"
-                                    Grid.Row="3" Grid.Column="0">Determinant</Button>
+                            <Button x:Name="ButtonTransposeB" Click="ButtonTransposeB_Click" Margin="0,5,2.5,0"
+                                    Grid.Row="3" Grid.Column="0">Transponovaná</Button>
                             <Button x:Name="ButtonMultiplyB" Click="ButtonMultiplyB_Click" Margin="2.5,5,0,0" Width="65"
                                     Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left">Krát</Button>
                             <local:TextBoxInputMatrix x:Name="multiplyBby" TextChanged="MultiplyABby_InputTextChanged"
-                                                      Valid="True" MaxLength="10" Height="27" Margin="67.5,5,0,0"
-                                                      Grid.Row="3" Grid.Column="1"/>
+                                                      Valid="True" MaxLength="10" Margin="67.5,5,0,0"
+                                                      Grid.Row="3" Grid.Column="1" VerticalAlignment="Stretch"/>
                         </Grid>
 
                     </Grid>
