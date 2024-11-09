@@ -23,7 +23,7 @@ namespace MaticeApp
     {
         private TextBlock[,] TextBlocks;
 
-        private Border[,] MatrixCells;
+        private Border[,] Cells;
 
         public const int Rows = 9;
 
@@ -39,7 +39,7 @@ namespace MaticeApp
         {
             InitializeComponent();
 
-            MatrixCells = new Border[Rows, Columns];
+            Cells = new Border[Rows, Columns];
             TextBlocks = new TextBlock[Rows, Columns];
 
             SetMatrix();
@@ -69,7 +69,7 @@ namespace MaticeApp
                         Height = RowHeight - 2,
                         MinWidth = MinCellWidth
                     };
-                    MatrixCells[i, j] = border;
+                    Cells[i, j] = border;
 
                     TextBlock textBlock = new TextBlock
                     {
@@ -113,7 +113,7 @@ namespace MaticeApp
                 {
                     for (int j = 0; j < Columns; j++)
                     {
-                        MatrixCells[i, j].Visibility = (i < rows && j < columns) ? Visibility.Visible : Visibility.Collapsed;
+                        Cells[i, j].Visibility = (i < rows && j < columns) ? Visibility.Visible : Visibility.Collapsed;
                     }
                 }
 

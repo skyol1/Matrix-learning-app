@@ -160,7 +160,7 @@ namespace MaticeApp
             else { return false; }
         }
 
-
+        // might need this for positioning the popup panel
         public static (double dpiX, double dpiY) GetDpi()
         {
             var hwndSource = PresentationSource.FromVisual(Application.Current.MainWindow) as HwndSource;

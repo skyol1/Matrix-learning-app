@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -18,13 +19,20 @@ using static MaticeApp.Static;
 namespace MaticeApp
 {
     /// <summary>
-    /// Interaction logic for PopupControl.xaml
+    /// Useful: SetTriggerElement(), SetPlacementTarget(), popupHorizontalAlignment
+    /// Trigger element can also be set in the designer
     /// </summary>
     public partial class PopupControl : UserControl
     {
 
         private UIElement ?triggerElement;
         private UIElement ?placementTargetElement;
+
+        public enum PopupHorizontalAlignment
+        {
+            Left, Right, Center
+        }
+        public PopupHorizontalAlignment popupHorizontalAlignment { get; set; } = PopupHorizontalAlignment.Center;
 
         public PopupControl()
         {
@@ -84,10 +92,44 @@ namespace MaticeApp
             }
         }
 
+        // Method to set a custom placement target
+        public void SetPlacementTarget(UIElement placementTarget)
+        {
+            placementTargetElement = placementTarget;
+            HoverPopup.PlacementTarget = placementTarget ?? triggerElement;
+        }
+
+        public void SetPlacementMode(PlacementMode placementMode)
+        {
+            HoverPopup.Placement = placementMode;
+        }
+
         // Event handler to show the popup on mouse enter
         private void OnTriggerElementMouseEnter(object sender, MouseEventArgs e)
         {
             HoverPopup.IsOpen = true;
+
+            var triggerElement = sender as FrameworkElement;
+            if (triggerElement == null) return;
+
+            if (HoverPopup.Placement == PlacementMode.Bottom || HoverPopup.Placement == PlacementMode.Top) 
+            { 
+                switch (popupHorizontalAlignment)
+                {
+                    case PopupHorizontalAlignment.Center:
+                        HoverPopup.HorizontalOffset = (triggerElement.ActualWidth - BorderContent.ActualWidth) / 2;
+                        break;
+                    case PopupHorizontalAlignment.Left:
+                        break;
+                    case PopupHorizontalAlignment.Right:
+                        HoverPopup.HorizontalOffset = triggerElement.ActualWidth - BorderContent.ActualWidth;
+                        break;
+                }
+            }
+            else
+            {
+                HoverPopup.HorizontalOffset = 0;
+            }
         }
 
         // Event handler to hide the popup on mouse leave
@@ -96,12 +138,6 @@ namespace MaticeApp
             HoverPopup.IsOpen = false;
         }
 
-        // Method to set a custom placement target
-        public void SetPlacementTarget(UIElement placementTarget)
-        {
-            placementTargetElement = placementTarget;
-            HoverPopup.PlacementTarget = placementTarget ?? triggerElement;
-        }
 
 
         /*

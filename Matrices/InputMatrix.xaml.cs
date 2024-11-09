@@ -17,7 +17,7 @@ namespace MaticeApp
 
         private TextBoxInputMatrix[,] TextBoxes;
 
-        private Border[,] MatrixCells;
+        private Border[,] Cells;
         public double RowHeight { get; set; } = 30;
         public double MinCellWidth { get; set; } = 50;
 
@@ -36,7 +36,7 @@ namespace MaticeApp
         {
             InitializeComponent();
             highlighters = new List<IHighlightable>();
-            MatrixCells = new Border[Rows, Columns];
+            Cells = new Border[Rows, Columns];
             TextBoxes = new TextBoxInputMatrix[Rows, Columns];
             SetMatrix();
         }
@@ -67,7 +67,7 @@ namespace MaticeApp
                         Visibility = Visibility.Collapsed,
                         Height = RowHeight - 2
                     };
-                    MatrixCells[i, j] = border;
+                    Cells[i, j] = border;
 
                     TextBoxInputMatrix textBox = new TextBoxInputMatrix
                     {
@@ -204,7 +204,7 @@ namespace MaticeApp
                 {
                     for(int j = 0; j < Columns; j++)
                     {
-                        MatrixCells[i, j].Visibility = (i < rows && j < columns) ? Visibility.Visible : Visibility.Collapsed;
+                        Cells[i, j].Visibility = (i < rows && j < columns) ? Visibility.Visible : Visibility.Collapsed;
                     }
                 }
 

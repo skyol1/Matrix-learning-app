@@ -56,8 +56,7 @@ namespace MaticeApp
                 { "1", "-1", "5" },
                 { "1", "3", "3" }
             };
-            matrix3_2.CreateLeftBracket = false;
-            matrix3_2.CreateRightBracket = false;
+            matrix3_2.CreateBrackets = false;
             matrix3_2.SetMatrix(matrixData);
 
             matrixData = new string[,]

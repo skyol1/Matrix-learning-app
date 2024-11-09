@@ -17,7 +17,8 @@
                Placement="Bottom"
                AllowsTransparency="True"
                StaysOpen="True">
-            <Border Background="AliceBlue" BorderBrush="Blue" BorderThickness="2" Padding="10" CornerRadius="10">
+            <Border Background="AliceBlue" BorderBrush="Blue" BorderThickness="2" Padding="10" 
+                    CornerRadius="10" x:Name="BorderContent">
                 <ContentPresenter Content="{Binding PanelContent, ElementName=popupControl}" />
             </Border>
         </Popup>

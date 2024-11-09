@@ -141,7 +141,10 @@ namespace MaticeApp
             {
                 string[,] values =
                 {
-                    { "1" }
+                    { "c_1_" },
+                    { "c_2_" },
+                    { "⋮" },
+                    { "c_m_" },
                 };
                 matrix.SetMatrix(values);
             }

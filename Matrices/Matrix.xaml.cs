@@ -25,15 +25,16 @@ namespace MaticeApp
             Straight
         }
         public Bracket BracketType { get; set; } = Bracket.Round;
-        public bool CreateLeftBracket { get; set; } = true;
-        public bool CreateRightBracket { get; set; } = true;
-        public List<IHighlightable> highlighters { get; set; }
+        public bool CreateBrackets { get; set; } = true;
+        public bool AutoWidth { get; set; } = true;
+
 
         public const int RowHeight = 30;
         public double CellWidth { get; set; } = 45 ;
-        public bool AutoWidth { get; set; } = true;
-        public int RowsCount {  get; private set; }
+        public int RowsCount { get; private set; }
         public int ColumnsCount { get; private set; }
+        public Border[,] Cells { get; private set; }
+        public List<IHighlightable> highlighters { get; set; }
 
         public bool IsSet { get; private set; } = false;
         public bool IsSLR { get; private set; } = false;
@@ -61,17 +62,18 @@ namespace MaticeApp
 
             // Define rows and columns for the matrix grid
             for (int i = 0; i < RowsCount; i++)
-                MatrixGrid.RowDefinitions.Add(new RowDefinition { });
+                MatrixGrid.RowDefinitions.Add(new RowDefinition());
             for (int j = 0; j < ColumnsCount; j++)
-                MatrixGrid.ColumnDefinitions.Add(new ColumnDefinition { });
+                MatrixGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
-            Height = RowsCount * RowHeight;
+            Cells = new Border[RowsCount, ColumnsCount];
+
             Width = Double.NaN;
+            Height = RowsCount * RowHeight;
             Background = Brushes.Transparent;
-
             if (AutoWidth)
                 MatrixGrid.Width = ColumnsCount * CellWidth;
-
+                
 
             // Set the values in the grid
             for (int i = 0; i < RowsCount; i++)
@@ -89,17 +91,18 @@ namespace MaticeApp
                     };
 
                     border.Child = CreateTextBox(matrixValues[i, j]);
-
+                    Cells[i, j] = border;
                     Grid.SetRow(border, i);
                     Grid.SetColumn(border, j);
                     MatrixGrid.Children.Add(border);
                 }
             }
 
-            if(CreateLeftBracket)
+            if (CreateBrackets)
+            {
                 CreateBracket(LeftBracket, true);
-            if(CreateRightBracket)
                 CreateBracket(RightBracket, false);
+            }
 
             IsSet = true;
         }
@@ -393,7 +396,7 @@ namespace MaticeApp
             {
                 for (int j = 0; j < ColumnsCount; j++)
                 {
-                    if (MatrixGrid.Children[(i * ColumnsCount) + j].IsMouseOver)
+                    if (Cells[i, j].IsMouseOver)
                     {
                         foreach (var highlighter in highlighters)
                         {
