@@ -16,11 +16,18 @@ namespace MaticeApp.Highlighters
         public DeterminantHighlighter(Matrix dstMatrix, Color highlightColor1, Color highlightColor2) : base(dstMatrix, highlightColor1) { this.highlightColor2 = highlightColor2; }
         public override void Highlight(int row, int column)
         {
-            AddHighlightMultiple(0, 0, row - 1, column - 1, highlightColor);// left up
-            AddHighlightMultiple(row+1, 0, dstMatrix.RowsCount-1, column - 1, highlightColor);// left down
 
-            AddHighlightMultiple(0, column+1, row - 1,dstMatrix.ColumnsCount-1, highlightColor);// right up
-            AddHighlightMultiple(row + 1, column+1, dstMatrix.RowsCount - 1, dstMatrix.ColumnsCount - 1, highlightColor);// right down
+            if (row!=0 && column!=0) 
+                AddHighlightMultiple(0, 0, row - 1, column - 1, highlightColor);// left up
+
+            if (row != dstMatrix.RowsCount-1 && column !=0)
+                AddHighlightMultiple(row+1, 0, dstMatrix.RowsCount-1, column - 1, highlightColor);// left down
+
+            if (row !=0 && column != dstMatrix.ColumnsCount-1)
+                AddHighlightMultiple(0, column+1, row - 1,dstMatrix.ColumnsCount-1, highlightColor);// right up
+
+            if ((row != dstMatrix.RowsCount - 1 && column != dstMatrix.ColumnsCount - 1)
+                AddHighlightMultiple(row + 1, column+1, dstMatrix.RowsCount - 1, dstMatrix.ColumnsCount - 1, highlightColor);// right down
 
             AddHighlightMultiple(row, column, row, column, highlightColor2); //center
 
